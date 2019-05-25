@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.great.mapper.system.LotteryBillHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.LotteryBillHistory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="game_code" jdbcType="INTEGER" property="gameCode" />
+    <result column="type_code" jdbcType="INTEGER" property="typeCode" />
+    <result column="happy8" jdbcType="INTEGER" property="happy8" />
+    <result column="round" jdbcType="VARCHAR" property="round" />
+    <result column="drop_money" jdbcType="DECIMAL" property="dropMoney" />
+    <result column="drop_content" jdbcType="VARCHAR" property="dropContent" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="valid_money" jdbcType="DECIMAL" property="validMoney" />
+    <result column="user_win" jdbcType="DECIMAL" property="userWin" />
+    <result column="user_cut" jdbcType="DECIMAL" property="userCut" />
+    <result column="user_rate" jdbcType="DECIMAL" property="userRate" />
+    <result column="xq_rate" jdbcType="VARCHAR" property="xqRate" />
+    <result column="count_pay" jdbcType="INTEGER" property="countPay" />
+    <result column="bet_ip" jdbcType="BIGINT" property="betIp" />
+    <result column="bet_time" jdbcType="TIMESTAMP" property="betTime" />
+    <result column="xq_de_id" jdbcType="INTEGER" property="xqDeId" />
+    <result column="count_status" jdbcType="BIT" property="countStatus" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userid, game_code, type_code, happy8, round, drop_money, drop_content, total, 
+    valid_money, user_win, user_cut, user_rate, xq_rate, count_pay, bet_ip, bet_time, 
+    xq_de_id, count_status, order_number
+  </sql>
+  
+</mapper>

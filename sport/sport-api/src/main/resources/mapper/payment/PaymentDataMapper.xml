@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.payment.PaymentDataMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.payment.PaymentDataEntity">
+        <id column="id" property="id" />
+        <result column="account_company" property="third_plat" />
+        <result column="url" property="pay_url" />
+        <result column="business_code" property="businessCode" />
+        <result column="baofooid" property="baofooid" />
+        <result column="pay_type" property="payType" />
+        <result column="status" property="status" />
+        <result column="type" property="type" />
+        <result column="total_money" property="totalMoney" />
+        <result column="total_time" property="totalTime" />
+        <result column="level_id" property="levelId" />
+        <result column="limit_min" property="min" />
+        <result column="limit_max" property="max" />
+        <result column="discount_rate" property="discount_rate" />
+        <result column="notes" property="notes" />
+        <result column="choose_bank" property="choose_bank" />
+        <result column="pay_bank" property="payBank" />
+        <result column="fees_rate" property="feesRate" />
+        <result column="server_admin" property="serverAdmin" />
+        <result column="business_pwd" property="businessPwd" />
+        <result column="key2" property="key2" />
+    </resultMap>
+
+    <select id="getOnlineChannel" resultMap="BaseResultMap">
+        select id,account_company,limit_min,limit_max,discount_rate,url,choose_bank from web_payment_data
+          where account_company = #{category_id} and level_id = #{levelId}
+    </select>
+</mapper>

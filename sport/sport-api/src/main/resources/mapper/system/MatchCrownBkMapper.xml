@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MatchCrownBkMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MatchCrownBk" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="m_start" property="mStart" jdbcType="TIMESTAMP" />
+    <result column="mb_team" property="mbTeam" jdbcType="VARCHAR" />
+    <result column="mb_team_tw" property="mbTeamTw" jdbcType="VARCHAR" />
+    <result column="mb_team_en" property="mbTeamEn" jdbcType="VARCHAR" />
+    <result column="m_league" property="mLeague" jdbcType="VARCHAR" />
+    <result column="m_league_tw" property="mLeagueTw" jdbcType="VARCHAR" />
+    <result column="m_league_en" property="mLeagueEn" jdbcType="VARCHAR" />
+    <result column="m_item" property="mItem" jdbcType="VARCHAR" />
+    <result column="m_item_tw" property="mItemTw" jdbcType="VARCHAR" />
+    <result column="m_item_en" property="mItemEn" jdbcType="VARCHAR" />
+    <result column="m_rate" property="mRate" jdbcType="DOUBLE" />
+    <result column="gid" property="gid" jdbcType="VARCHAR" />
+    <result column="mcount" property="mcount" jdbcType="INTEGER" />
+    <result column="mshow" property="mshow" jdbcType="CHAR" />
+    <result column="win" property="win" jdbcType="BIT" />
+    <result column="mshow2" property="mshow2" jdbcType="CHAR" />
+    <result column="uptime" property="uptime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="BIT" />
+    <result column="cancel" property="cancel" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mid, m_start, mb_team, mb_team_tw, mb_team_en, m_league, m_league_tw, m_league_en, 
+    m_item, m_item_tw, m_item_en, m_rate, gid, mcount, mshow, win, mshow2, uptime, score, 
+    cancel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_match_crown_bk
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_match_crown_bk
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.MatchCrownBk" >
+    insert into web_match_crown_bk (id, mid, m_start, 
+      mb_team, mb_team_tw, mb_team_en, 
+      m_league, m_league_tw, m_league_en, 
+      m_item, m_item_tw, m_item_en, 
+      m_rate, gid, mcount, 
+      mshow, win, mshow2, uptime, 
+      score, cancel)
+    values (#{id,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{mStart,jdbcType=TIMESTAMP}, 
+      #{mbTeam,jdbcType=VARCHAR}, #{mbTeamTw,jdbcType=VARCHAR}, #{mbTeamEn,jdbcType=VARCHAR}, 
+      #{mLeague,jdbcType=VARCHAR}, #{mLeagueTw,jdbcType=VARCHAR}, #{mLeagueEn,jdbcType=VARCHAR}, 
+      #{mItem,jdbcType=VARCHAR}, #{mItemTw,jdbcType=VARCHAR}, #{mItemEn,jdbcType=VARCHAR}, 
+      #{mRate,jdbcType=DOUBLE}, #{gid,jdbcType=VARCHAR}, #{mcount,jdbcType=INTEGER}, 
+      #{mshow,jdbcType=CHAR}, #{win,jdbcType=BIT}, #{mshow2,jdbcType=CHAR}, #{uptime,jdbcType=TIMESTAMP}, 
+      #{score,jdbcType=BIT}, #{cancel,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MatchCrownBk" >
+    insert into web_match_crown_bk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="mStart != null" >
+        m_start,
+      </if>
+      <if test="mbTeam != null" >
+        mb_team,
+      </if>
+      <if test="mbTeamTw != null" >
+        mb_team_tw,
+      </if>
+      <if test="mbTeamEn != null" >
+        mb_team_en,
+      </if>
+      <if test="mLeague != null" >
+        m_league,
+      </if>
+      <if test="mLeagueTw != null" >
+        m_league_tw,
+      </if>
+      <if test="mLeagueEn != null" >
+        m_league_en,
+      </if>
+      <if test="mItem != null" >
+        m_item,
+      </if>
+      <if test="mItemTw != null" >
+        m_item_tw,
+      </if>
+      <if test="mItemEn != null" >
+        m_item_en,
+      </if>
+      <if test="mRate != null" >
+        m_rate,
+      </if>
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="mcount != null" >
+        mcount,
+      </if>
+      <if test="mshow != null" >
+        mshow,
+      </if>
+      <if test="win != null" >
+        win,
+      </if>
+      <if test="mshow2 != null" >
+        mshow2,
+      </if>
+      <if test="uptime != null" >
+        uptime,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="cancel != null" >
+        cancel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mStart != null" >
+        #{mStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mbTeam != null" >
+        #{mbTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="mbTeamTw != null" >
+        #{mbTeamTw,jdbcType=VARCHAR},
+      </if>
+      <if test="mbTeamEn != null" >
+        #{mbTeamEn,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeague != null" >
+        #{mLeague,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeagueTw != null" >
+        #{mLeagueTw,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeagueEn != null" >
+        #{mLeagueEn,jdbcType=VARCHAR},
+      </if>
+      <if test="mItem != null" >
+        #{mItem,jdbcType=VARCHAR},
+      </if>
+      <if test="mItemTw != null" >
+        #{mItemTw,jdbcType=VARCHAR},
+      </if>
+      <if test="mItemEn != null" >
+        #{mItemEn,jdbcType=VARCHAR},
+      </if>
+      <if test="mRate != null" >
+        #{mRate,jdbcType=DOUBLE},
+      </if>
+      <if test="gid != null" >
+        #{gid,jdbcType=VARCHAR},
+      </if>
+      <if test="mcount != null" >
+        #{mcount,jdbcType=INTEGER},
+      </if>
+      <if test="mshow != null" >
+        #{mshow,jdbcType=CHAR},
+      </if>
+      <if test="win != null" >
+        #{win,jdbcType=BIT},
+      </if>
+      <if test="mshow2 != null" >
+        #{mshow2,jdbcType=CHAR},
+      </if>
+      <if test="uptime != null" >
+        #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=BIT},
+      </if>
+      <if test="cancel != null" >
+        #{cancel,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.MatchCrownBk" >
+    update web_match_crown_bk
+    <set >
+      <if test="mid != null" >
+        mid = #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mStart != null" >
+        m_start = #{mStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mbTeam != null" >
+        mb_team = #{mbTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="mbTeamTw != null" >
+        mb_team_tw = #{mbTeamTw,jdbcType=VARCHAR},
+      </if>
+      <if test="mbTeamEn != null" >
+        mb_team_en = #{mbTeamEn,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeague != null" >
+        m_league = #{mLeague,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeagueTw != null" >
+        m_league_tw = #{mLeagueTw,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeagueEn != null" >
+        m_league_en = #{mLeagueEn,jdbcType=VARCHAR},
+      </if>
+      <if test="mItem != null" >
+        m_item = #{mItem,jdbcType=VARCHAR},
+      </if>
+      <if test="mItemTw != null" >
+        m_item_tw = #{mItemTw,jdbcType=VARCHAR},
+      </if>
+      <if test="mItemEn != null" >
+        m_item_en = #{mItemEn,jdbcType=VARCHAR},
+      </if>
+      <if test="mRate != null" >
+        m_rate = #{mRate,jdbcType=DOUBLE},
+      </if>
+      <if test="gid != null" >
+        gid = #{gid,jdbcType=VARCHAR},
+      </if>
+      <if test="mcount != null" >
+        mcount = #{mcount,jdbcType=INTEGER},
+      </if>
+      <if test="mshow != null" >
+        mshow = #{mshow,jdbcType=CHAR},
+      </if>
+      <if test="win != null" >
+        win = #{win,jdbcType=BIT},
+      </if>
+      <if test="mshow2 != null" >
+        mshow2 = #{mshow2,jdbcType=CHAR},
+      </if>
+      <if test="uptime != null" >
+        uptime = #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=BIT},
+      </if>
+      <if test="cancel != null" >
+        cancel = #{cancel,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.MatchCrownBk" >
+    update web_match_crown_bk
+    set mid = #{mid,jdbcType=INTEGER},
+      m_start = #{mStart,jdbcType=TIMESTAMP},
+      mb_team = #{mbTeam,jdbcType=VARCHAR},
+      mb_team_tw = #{mbTeamTw,jdbcType=VARCHAR},
+      mb_team_en = #{mbTeamEn,jdbcType=VARCHAR},
+      m_league = #{mLeague,jdbcType=VARCHAR},
+      m_league_tw = #{mLeagueTw,jdbcType=VARCHAR},
+      m_league_en = #{mLeagueEn,jdbcType=VARCHAR},
+      m_item = #{mItem,jdbcType=VARCHAR},
+      m_item_tw = #{mItemTw,jdbcType=VARCHAR},
+      m_item_en = #{mItemEn,jdbcType=VARCHAR},
+      m_rate = #{mRate,jdbcType=DOUBLE},
+      gid = #{gid,jdbcType=VARCHAR},
+      mcount = #{mcount,jdbcType=INTEGER},
+      mshow = #{mshow,jdbcType=CHAR},
+      win = #{win,jdbcType=BIT},
+      mshow2 = #{mshow2,jdbcType=CHAR},
+      uptime = #{uptime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=BIT},
+      cancel = #{cancel,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

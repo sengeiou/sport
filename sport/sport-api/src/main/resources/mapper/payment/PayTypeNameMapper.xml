@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.payment.PayTypeNameMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cn.great.model.payment.PayTypeEntity" >
+    <id column="id" property="category_id" jdbcType="TINYINT" />
+    <result column="pay_name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+  </resultMap>
+
+  <select id="getPaymentType" resultMap="BaseResultMap">
+      select id,pay_name from web_pay_type_name where type = #{type}
+  </select>
+
+</mapper>

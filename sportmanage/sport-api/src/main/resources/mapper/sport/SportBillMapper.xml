@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.sport.SportBillMapper">
+
+    <resultMap id="sportBill" type="com.cn.great.model.sport.SportBillEntity">
+        <id column="id" property="id"></id>
+        <result column="userid" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="active" property="active"/>
+        <result column="mid" property="mid"/>
+        <result column="mleagueid" property="mLeagueId"/>
+        <result column="mtype" property="mType"/>
+        <result column="middle" property="middle"/>
+        <result column="linetype" property="lineType"/>
+        <result column="bettime" property="bettime"/>
+        <result column="gold" property="gold"/>
+        <result column="mdate" property="mDate"/>
+        <result column="mrate" property="mRate"/>
+        <result column="m_place" property="mPlace"/>
+        <result column="gwin" property="gwin"/>
+        <result column="m_result" property="mResult"/>
+        <result column="show_type" property="showType"/>
+        <result column="cancel" property="cancel"/>
+        <result column="type" property="type"/>
+        <result column="ptype" property="pType"/>
+        <result column="gtype" property="gType"/>
+        <result column="mb_ball" property="mbBall"/>
+        <result column="tg_ball" property="tgBall"/>
+        <result column="checked" property="checked"/>
+        <result column="confirmed" property="confirmed"/>
+        <result column="danger" property="danger"/>
+        <result column="score1" property="score1"/>
+        <result column="score2" property="score2"/>
+        <result column="last_bet_money" property="lastBetMoney"/>
+        <result column="agents_id" property="agentId"/>
+        <result column="betip" property="betIp"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="billVal" property="billVal"/>
+        <result column="billteam" property="billteam"/>
+        <result column="billTitle" property="billTitle"/>
+        <result column="mleague_name" property="mLeagueName"/>
+        <result column="event_name" property="eventName"/>
+
+    </resultMap>
+    <select id="countUserBetting" resultType="java.math.BigDecimal">
+      SELECT  sum(gold) from web_sports_bill where userid=#{userId}
+        <if test="startTime!=null">
+          and bettime>=#{startTime}
+        </if>
+    </select>
+</mapper>

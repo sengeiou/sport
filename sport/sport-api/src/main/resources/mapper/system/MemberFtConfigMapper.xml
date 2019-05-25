@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MemberFtConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MemberFtConfig" >
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+    <result column="ft_re_ftht_min" property="ftReFthtMin" jdbcType="INTEGER" />
+    <result column="ft_re_ftht_max" property="ftReFthtMax" jdbcType="INTEGER" />
+    <result column="ft_re_fthtlst_min" property="ftReFthtlstMin" jdbcType="INTEGER" />
+    <result column="ft_re_fthtlst_max" property="ftReFthtlstMax" jdbcType="INTEGER" />
+    <result column="ft_re_ah_min" property="ftReAhMin" jdbcType="INTEGER" />
+    <result column="ft_re_ah_max" property="ftReAhMax" jdbcType="INTEGER" />
+    <result column="ft_re_ahlst_min" property="ftReAhlstMin" jdbcType="INTEGER" />
+    <result column="ft_re_ahlst_max" property="ftReAhlstMax" jdbcType="INTEGER" />
+    <result column="ft_re_ou_min" property="ftReOuMin" jdbcType="INTEGER" />
+    <result column="ft_re_ou_max" property="ftReOuMax" jdbcType="INTEGER" />
+    <result column="ft_re_oulst_min" property="ftReOulstMin" jdbcType="INTEGER" />
+    <result column="ft_re_oulst_max" property="ftReOulstMax" jdbcType="INTEGER" />
+    <result column="ft_rb_ftht_min" property="ftRbFthtMin" jdbcType="INTEGER" />
+    <result column="ft_rb_ftht_max" property="ftRbFthtMax" jdbcType="INTEGER" />
+    <result column="ft_rb_fthtlst_min" property="ftRbFthtlstMin" jdbcType="INTEGER" />
+    <result column="ft_rb_fthtlst_max" property="ftRbFthtlstMax" jdbcType="INTEGER" />
+    <result column="ft_rb_ah_min" property="ftRbAhMin" jdbcType="INTEGER" />
+    <result column="ft_rb_ah_max" property="ftRbAhMax" jdbcType="INTEGER" />
+    <result column="ft_rb_ahlst_min" property="ftRbAhlstMin" jdbcType="INTEGER" />
+    <result column="ft_rb_ahlst_max" property="ftRbAhlstMax" jdbcType="INTEGER" />
+    <result column="ft_rb_ou_min" property="ftRbOuMin" jdbcType="INTEGER" />
+    <result column="ft_rb_ou_max" property="ftRbOuMax" jdbcType="INTEGER" />
+    <result column="ft_rb_oulst_min" property="ftRbOulstMin" jdbcType="INTEGER" />
+    <result column="ft_rb_oulst_max" property="ftRbOulstMax" jdbcType="INTEGER" />
+    <result column="ft_rb_oe_min" property="ftRbOeMin" jdbcType="INTEGER" />
+    <result column="ft_rb_oe_max" property="ftRbOeMax" jdbcType="INTEGER" />
+    <result column="ft_rb_oelst_min" property="ftRbOelstMin" jdbcType="INTEGER" />
+    <result column="ft_rb_oelst_max" property="ftRbOelstMax" jdbcType="INTEGER" />
+    <result column="ft_rb_cs_min" property="ftRbCsMin" jdbcType="INTEGER" />
+    <result column="ft_rb_cs_max" property="ftRbCsMax" jdbcType="INTEGER" />
+    <result column="ft_rb_tg_min" property="ftRbTgMin" jdbcType="INTEGER" />
+    <result column="ft_rb_tg_max" property="ftRbTgMax" jdbcType="INTEGER" />
+    <result column="ft_rb_tglst_min" property="ftRbTglstMin" jdbcType="INTEGER" />
+    <result column="ft_rb_tglst_max" property="ftRbTglstMax" jdbcType="INTEGER" />
+    <result column="ft_rb_hf_min" property="ftRbHfMin" jdbcType="INTEGER" />
+    <result column="ft_rb_hf_max" property="ftRbHfMax" jdbcType="INTEGER" />
+    <result column="ft_rb_fglg_min" property="ftRbFglgMin" jdbcType="INTEGER" />
+    <result column="ft_rb_fglg_max" property="ftRbFglgMax" jdbcType="INTEGER" />
+    <result column="ft_r_ftht_min" property="ftRFthtMin" jdbcType="INTEGER" />
+    <result column="ft_r_ftht_max" property="ftRFthtMax" jdbcType="INTEGER" />
+    <result column="ft_r_fthtlst_min" property="ftRFthtlstMin" jdbcType="INTEGER" />
+    <result column="ft_r_fthtlst_max" property="ftRFthtlstMax" jdbcType="INTEGER" />
+    <result column="ft_r_ah_min" property="ftRAhMin" jdbcType="INTEGER" />
+    <result column="ft_r_ah_max" property="ftRAhMax" jdbcType="INTEGER" />
+    <result column="ft_r_ahlst_min" property="ftRAhlstMin" jdbcType="INTEGER" />
+    <result column="ft_r_ahlst_max" property="ftRAhlstMax" jdbcType="INTEGER" />
+    <result column="ft_r_ou_min" property="ftROuMin" jdbcType="INTEGER" />
+    <result column="ft_r_ou_max" property="ftROuMax" jdbcType="INTEGER" />
+    <result column="ft_r_oulst_min" property="ftROulstMin" jdbcType="INTEGER" />
+    <result column="ft_r_oulst_max" property="ftROulstMax" jdbcType="INTEGER" />
+    <result column="ft_r_oe_min" property="ftROeMin" jdbcType="INTEGER" />
+    <result column="ft_r_oe_max" property="ftROeMax" jdbcType="INTEGER" />
+    <result column="ft_r_oelst_min" property="ftROelstMin" jdbcType="INTEGER" />
+    <result column="ft_r_oelst_max" property="ftROelstMax" jdbcType="INTEGER" />
+    <result column="ft_r_cs_min" property="ftRCsMin" jdbcType="INTEGER" />
+    <result column="ft_r_cs_max" property="ftRCsMax" jdbcType="INTEGER" />
+    <result column="ft_r_tg_min" property="ftRTgMin" jdbcType="INTEGER" />
+    <result column="ft_r_tg_max" property="ftRTgMax" jdbcType="INTEGER" />
+    <result column="ft_r_tglst_min" property="ftRTglstMin" jdbcType="INTEGER" />
+    <result column="ft_r_tglst_max" property="ftRTglstMax" jdbcType="INTEGER" />
+    <result column="ft_r_hf_min" property="ftRHfMin" jdbcType="INTEGER" />
+    <result column="ft_r_hf_max" property="ftRHfMax" jdbcType="INTEGER" />
+    <result column="ft_r_fglg_min" property="ftRFglgMin" jdbcType="INTEGER" />
+    <result column="ft_r_fglg_max" property="ftRFglgMax" jdbcType="INTEGER" />
+    <result column="ft_or_min" property="ftOrMin" jdbcType="INTEGER" />
+    <result column="ft_or_max" property="ftOrMax" jdbcType="INTEGER" />
+    <result column="ft_p3_min" property="ftP3Min" jdbcType="INTEGER" />
+    <result column="ft_p3_max" property="ftP3Max" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cn.great.model.system.MemberFtConfig" >
+    insert into web_member_ft_config (userid, type, server_admin, 
+      ft_re_ftht_min, ft_re_ftht_max, ft_re_fthtlst_min, 
+      ft_re_fthtlst_max, ft_re_ah_min, ft_re_ah_max, 
+      ft_re_ahlst_min, ft_re_ahlst_max, ft_re_ou_min, 
+      ft_re_ou_max, ft_re_oulst_min, ft_re_oulst_max, 
+      ft_rb_ftht_min, ft_rb_ftht_max, ft_rb_fthtlst_min, 
+      ft_rb_fthtlst_max, ft_rb_ah_min, ft_rb_ah_max, 
+      ft_rb_ahlst_min, ft_rb_ahlst_max, ft_rb_ou_min, 
+      ft_rb_ou_max, ft_rb_oulst_min, ft_rb_oulst_max, 
+      ft_rb_oe_min, ft_rb_oe_max, ft_rb_oelst_min, 
+      ft_rb_oelst_max, ft_rb_cs_min, ft_rb_cs_max, 
+      ft_rb_tg_min, ft_rb_tg_max, ft_rb_tglst_min, 
+      ft_rb_tglst_max, ft_rb_hf_min, ft_rb_hf_max, 
+      ft_rb_fglg_min, ft_rb_fglg_max, ft_r_ftht_min, 
+      ft_r_ftht_max, ft_r_fthtlst_min, ft_r_fthtlst_max, 
+      ft_r_ah_min, ft_r_ah_max, ft_r_ahlst_min, 
+      ft_r_ahlst_max, ft_r_ou_min, ft_r_ou_max, 
+      ft_r_oulst_min, ft_r_oulst_max, ft_r_oe_min, 
+      ft_r_oe_max, ft_r_oelst_min, ft_r_oelst_max, 
+      ft_r_cs_min, ft_r_cs_max, ft_r_tg_min, 
+      ft_r_tg_max, ft_r_tglst_min, ft_r_tglst_max, 
+      ft_r_hf_min, ft_r_hf_max, ft_r_fglg_min, 
+      ft_r_fglg_max, ft_or_min, ft_or_max, 
+      ft_p3_min, ft_p3_max)
+    values (#{userid,jdbcType=INTEGER}, #{type,jdbcType=BIT}, #{serverAdmin,jdbcType=VARCHAR}, 
+      #{ftReFthtMin,jdbcType=INTEGER}, #{ftReFthtMax,jdbcType=INTEGER}, #{ftReFthtlstMin,jdbcType=INTEGER}, 
+      #{ftReFthtlstMax,jdbcType=INTEGER}, #{ftReAhMin,jdbcType=INTEGER}, #{ftReAhMax,jdbcType=INTEGER}, 
+      #{ftReAhlstMin,jdbcType=INTEGER}, #{ftReAhlstMax,jdbcType=INTEGER}, #{ftReOuMin,jdbcType=INTEGER}, 
+      #{ftReOuMax,jdbcType=INTEGER}, #{ftReOulstMin,jdbcType=INTEGER}, #{ftReOulstMax,jdbcType=INTEGER}, 
+      #{ftRbFthtMin,jdbcType=INTEGER}, #{ftRbFthtMax,jdbcType=INTEGER}, #{ftRbFthtlstMin,jdbcType=INTEGER}, 
+      #{ftRbFthtlstMax,jdbcType=INTEGER}, #{ftRbAhMin,jdbcType=INTEGER}, #{ftRbAhMax,jdbcType=INTEGER}, 
+      #{ftRbAhlstMin,jdbcType=INTEGER}, #{ftRbAhlstMax,jdbcType=INTEGER}, #{ftRbOuMin,jdbcType=INTEGER}, 
+      #{ftRbOuMax,jdbcType=INTEGER}, #{ftRbOulstMin,jdbcType=INTEGER}, #{ftRbOulstMax,jdbcType=INTEGER}, 
+      #{ftRbOeMin,jdbcType=INTEGER}, #{ftRbOeMax,jdbcType=INTEGER}, #{ftRbOelstMin,jdbcType=INTEGER}, 
+      #{ftRbOelstMax,jdbcType=INTEGER}, #{ftRbCsMin,jdbcType=INTEGER}, #{ftRbCsMax,jdbcType=INTEGER}, 
+      #{ftRbTgMin,jdbcType=INTEGER}, #{ftRbTgMax,jdbcType=INTEGER}, #{ftRbTglstMin,jdbcType=INTEGER}, 
+      #{ftRbTglstMax,jdbcType=INTEGER}, #{ftRbHfMin,jdbcType=INTEGER}, #{ftRbHfMax,jdbcType=INTEGER}, 
+      #{ftRbFglgMin,jdbcType=INTEGER}, #{ftRbFglgMax,jdbcType=INTEGER}, #{ftRFthtMin,jdbcType=INTEGER}, 
+      #{ftRFthtMax,jdbcType=INTEGER}, #{ftRFthtlstMin,jdbcType=INTEGER}, #{ftRFthtlstMax,jdbcType=INTEGER}, 
+      #{ftRAhMin,jdbcType=INTEGER}, #{ftRAhMax,jdbcType=INTEGER}, #{ftRAhlstMin,jdbcType=INTEGER}, 
+      #{ftRAhlstMax,jdbcType=INTEGER}, #{ftROuMin,jdbcType=INTEGER}, #{ftROuMax,jdbcType=INTEGER}, 
+      #{ftROulstMin,jdbcType=INTEGER}, #{ftROulstMax,jdbcType=INTEGER}, #{ftROeMin,jdbcType=INTEGER}, 
+      #{ftROeMax,jdbcType=INTEGER}, #{ftROelstMin,jdbcType=INTEGER}, #{ftROelstMax,jdbcType=INTEGER}, 
+      #{ftRCsMin,jdbcType=INTEGER}, #{ftRCsMax,jdbcType=INTEGER}, #{ftRTgMin,jdbcType=INTEGER}, 
+      #{ftRTgMax,jdbcType=INTEGER}, #{ftRTglstMin,jdbcType=INTEGER}, #{ftRTglstMax,jdbcType=INTEGER}, 
+      #{ftRHfMin,jdbcType=INTEGER}, #{ftRHfMax,jdbcType=INTEGER}, #{ftRFglgMin,jdbcType=INTEGER}, 
+      #{ftRFglgMax,jdbcType=INTEGER}, #{ftOrMin,jdbcType=INTEGER}, #{ftOrMax,jdbcType=INTEGER}, 
+      #{ftP3Min,jdbcType=INTEGER}, #{ftP3Max,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MemberFtConfig" >
+    insert into web_member_ft_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+      <if test="ftReFthtMin != null" >
+        ft_re_ftht_min,
+      </if>
+      <if test="ftReFthtMax != null" >
+        ft_re_ftht_max,
+      </if>
+      <if test="ftReFthtlstMin != null" >
+        ft_re_fthtlst_min,
+      </if>
+      <if test="ftReFthtlstMax != null" >
+        ft_re_fthtlst_max,
+      </if>
+      <if test="ftReAhMin != null" >
+        ft_re_ah_min,
+      </if>
+      <if test="ftReAhMax != null" >
+        ft_re_ah_max,
+      </if>
+      <if test="ftReAhlstMin != null" >
+        ft_re_ahlst_min,
+      </if>
+      <if test="ftReAhlstMax != null" >
+        ft_re_ahlst_max,
+      </if>
+      <if test="ftReOuMin != null" >
+        ft_re_ou_min,
+      </if>
+      <if test="ftReOuMax != null" >
+        ft_re_ou_max,
+      </if>
+      <if test="ftReOulstMin != null" >
+        ft_re_oulst_min,
+      </if>
+      <if test="ftReOulstMax != null" >
+        ft_re_oulst_max,
+      </if>
+      <if test="ftRbFthtMin != null" >
+        ft_rb_ftht_min,
+      </if>
+      <if test="ftRbFthtMax != null" >
+        ft_rb_ftht_max,
+      </if>
+      <if test="ftRbFthtlstMin != null" >
+        ft_rb_fthtlst_min,
+      </if>
+      <if test="ftRbFthtlstMax != null" >
+        ft_rb_fthtlst_max,
+      </if>
+      <if test="ftRbAhMin != null" >
+        ft_rb_ah_min,
+      </if>
+      <if test="ftRbAhMax != null" >
+        ft_rb_ah_max,
+      </if>
+      <if test="ftRbAhlstMin != null" >
+        ft_rb_ahlst_min,
+      </if>
+      <if test="ftRbAhlstMax != null" >
+        ft_rb_ahlst_max,
+      </if>
+      <if test="ftRbOuMin != null" >
+        ft_rb_ou_min,
+      </if>
+      <if test="ftRbOuMax != null" >
+        ft_rb_ou_max,
+      </if>
+      <if test="ftRbOulstMin != null" >
+        ft_rb_oulst_min,
+      </if>
+      <if test="ftRbOulstMax != null" >
+        ft_rb_oulst_max,
+      </if>
+      <if test="ftRbOeMin != null" >
+        ft_rb_oe_min,
+      </if>
+      <if test="ftRbOeMax != null" >
+        ft_rb_oe_max,
+      </if>
+      <if test="ftRbOelstMin != null" >
+        ft_rb_oelst_min,
+      </if>
+      <if test="ftRbOelstMax != null" >
+        ft_rb_oelst_max,
+      </if>
+      <if test="ftRbCsMin != null" >
+        ft_rb_cs_min,
+      </if>
+      <if test="ftRbCsMax != null" >
+        ft_rb_cs_max,
+      </if>
+      <if test="ftRbTgMin != null" >
+        ft_rb_tg_min,
+      </if>
+      <if test="ftRbTgMax != null" >
+        ft_rb_tg_max,
+      </if>
+      <if test="ftRbTglstMin != null" >
+        ft_rb_tglst_min,
+      </if>
+      <if test="ftRbTglstMax != null" >
+        ft_rb_tglst_max,
+      </if>
+      <if test="ftRbHfMin != null" >
+        ft_rb_hf_min,
+      </if>
+      <if test="ftRbHfMax != null" >
+        ft_rb_hf_max,
+      </if>
+      <if test="ftRbFglgMin != null" >
+        ft_rb_fglg_min,
+      </if>
+      <if test="ftRbFglgMax != null" >
+        ft_rb_fglg_max,
+      </if>
+      <if test="ftRFthtMin != null" >
+        ft_r_ftht_min,
+      </if>
+      <if test="ftRFthtMax != null" >
+        ft_r_ftht_max,
+      </if>
+      <if test="ftRFthtlstMin != null" >
+        ft_r_fthtlst_min,
+      </if>
+      <if test="ftRFthtlstMax != null" >
+        ft_r_fthtlst_max,
+      </if>
+      <if test="ftRAhMin != null" >
+        ft_r_ah_min,
+      </if>
+      <if test="ftRAhMax != null" >
+        ft_r_ah_max,
+      </if>
+      <if test="ftRAhlstMin != null" >
+        ft_r_ahlst_min,
+      </if>
+      <if test="ftRAhlstMax != null" >
+        ft_r_ahlst_max,
+      </if>
+      <if test="ftROuMin != null" >
+        ft_r_ou_min,
+      </if>
+      <if test="ftROuMax != null" >
+        ft_r_ou_max,
+      </if>
+      <if test="ftROulstMin != null" >
+        ft_r_oulst_min,
+      </if>
+      <if test="ftROulstMax != null" >
+        ft_r_oulst_max,
+      </if>
+      <if test="ftROeMin != null" >
+        ft_r_oe_min,
+      </if>
+      <if test="ftROeMax != null" >
+        ft_r_oe_max,
+      </if>
+      <if test="ftROelstMin != null" >
+        ft_r_oelst_min,
+      </if>
+      <if test="ftROelstMax != null" >
+        ft_r_oelst_max,
+      </if>
+      <if test="ftRCsMin != null" >
+        ft_r_cs_min,
+      </if>
+      <if test="ftRCsMax != null" >
+        ft_r_cs_max,
+      </if>
+      <if test="ftRTgMin != null" >
+        ft_r_tg_min,
+      </if>
+      <if test="ftRTgMax != null" >
+        ft_r_tg_max,
+      </if>
+      <if test="ftRTglstMin != null" >
+        ft_r_tglst_min,
+      </if>
+      <if test="ftRTglstMax != null" >
+        ft_r_tglst_max,
+      </if>
+      <if test="ftRHfMin != null" >
+        ft_r_hf_min,
+      </if>
+      <if test="ftRHfMax != null" >
+        ft_r_hf_max,
+      </if>
+      <if test="ftRFglgMin != null" >
+        ft_r_fglg_min,
+      </if>
+      <if test="ftRFglgMax != null" >
+        ft_r_fglg_max,
+      </if>
+      <if test="ftOrMin != null" >
+        ft_or_min,
+      </if>
+      <if test="ftOrMax != null" >
+        ft_or_max,
+      </if>
+      <if test="ftP3Min != null" >
+        ft_p3_min,
+      </if>
+      <if test="ftP3Max != null" >
+        ft_p3_max,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="ftReFthtMin != null" >
+        #{ftReFthtMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftReFthtMax != null" >
+        #{ftReFthtMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftReFthtlstMin != null" >
+        #{ftReFthtlstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftReFthtlstMax != null" >
+        #{ftReFthtlstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftReAhMin != null" >
+        #{ftReAhMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftReAhMax != null" >
+        #{ftReAhMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftReAhlstMin != null" >
+        #{ftReAhlstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftReAhlstMax != null" >
+        #{ftReAhlstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftReOuMin != null" >
+        #{ftReOuMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftReOuMax != null" >
+        #{ftReOuMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftReOulstMin != null" >
+        #{ftReOulstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftReOulstMax != null" >
+        #{ftReOulstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbFthtMin != null" >
+        #{ftRbFthtMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbFthtMax != null" >
+        #{ftRbFthtMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbFthtlstMin != null" >
+        #{ftRbFthtlstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbFthtlstMax != null" >
+        #{ftRbFthtlstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbAhMin != null" >
+        #{ftRbAhMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbAhMax != null" >
+        #{ftRbAhMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbAhlstMin != null" >
+        #{ftRbAhlstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbAhlstMax != null" >
+        #{ftRbAhlstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbOuMin != null" >
+        #{ftRbOuMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbOuMax != null" >
+        #{ftRbOuMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbOulstMin != null" >
+        #{ftRbOulstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbOulstMax != null" >
+        #{ftRbOulstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbOeMin != null" >
+        #{ftRbOeMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbOeMax != null" >
+        #{ftRbOeMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbOelstMin != null" >
+        #{ftRbOelstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbOelstMax != null" >
+        #{ftRbOelstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbCsMin != null" >
+        #{ftRbCsMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbCsMax != null" >
+        #{ftRbCsMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbTgMin != null" >
+        #{ftRbTgMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbTgMax != null" >
+        #{ftRbTgMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbTglstMin != null" >
+        #{ftRbTglstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbTglstMax != null" >
+        #{ftRbTglstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbHfMin != null" >
+        #{ftRbHfMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbHfMax != null" >
+        #{ftRbHfMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbFglgMin != null" >
+        #{ftRbFglgMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRbFglgMax != null" >
+        #{ftRbFglgMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRFthtMin != null" >
+        #{ftRFthtMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRFthtMax != null" >
+        #{ftRFthtMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRFthtlstMin != null" >
+        #{ftRFthtlstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRFthtlstMax != null" >
+        #{ftRFthtlstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRAhMin != null" >
+        #{ftRAhMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRAhMax != null" >
+        #{ftRAhMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRAhlstMin != null" >
+        #{ftRAhlstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRAhlstMax != null" >
+        #{ftRAhlstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftROuMin != null" >
+        #{ftROuMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftROuMax != null" >
+        #{ftROuMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftROulstMin != null" >
+        #{ftROulstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftROulstMax != null" >
+        #{ftROulstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftROeMin != null" >
+        #{ftROeMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftROeMax != null" >
+        #{ftROeMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftROelstMin != null" >
+        #{ftROelstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftROelstMax != null" >
+        #{ftROelstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRCsMin != null" >
+        #{ftRCsMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRCsMax != null" >
+        #{ftRCsMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRTgMin != null" >
+        #{ftRTgMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRTgMax != null" >
+        #{ftRTgMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRTglstMin != null" >
+        #{ftRTglstMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRTglstMax != null" >
+        #{ftRTglstMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRHfMin != null" >
+        #{ftRHfMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRHfMax != null" >
+        #{ftRHfMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftRFglgMin != null" >
+        #{ftRFglgMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftRFglgMax != null" >
+        #{ftRFglgMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftOrMin != null" >
+        #{ftOrMin,jdbcType=INTEGER},
+      </if>
+      <if test="ftOrMax != null" >
+        #{ftOrMax,jdbcType=INTEGER},
+      </if>
+      <if test="ftP3Min != null" >
+        #{ftP3Min,jdbcType=INTEGER},
+      </if>
+      <if test="ftP3Max != null" >
+        #{ftP3Max,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.pay.PaymentDataMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.pay.PaymentDataEntity">
+        <id column="id" property="id" />
+        <result column="account_company" property="accountCompany" />
+        <result column="url" property="payUrl" />
+        <result column="business_code" property="businessCode" />
+        <result column="baofooid" property="baofooid" />
+        <result column="pay_type" property="payType" />
+        <result column="status" property="status" />
+        <result column="type" property="type" />
+        <result column="total_money" property="totalMoney" />
+        <result column="total_time" property="totalTime" />
+        <result column="level_id" property="levelId" />
+        <result column="limit_min" property="min" />
+        <result column="limit_max" property="max" />
+        <result column="discount_rate" property="discountRate" />
+        <result column="notes" property="notes" />
+        <result column="choose_bank" property="chooseBank" />
+        <result column="pay_bank" property="payBank" />
+        <result column="fees_rate" property="feesRate" />
+        <result column="server_admin" property="serverAdmin" />
+        <result column="business_pwd" property="businessPwd" />
+        <result column="key2" property="key2" />
+        <result column="pay_level_name" property="payLevelName" />
+        <result column="pay_type_name" property="payTypeName" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, account_company, url, business_code, baofooid, pay_type, status, type, total_money,
+        total_time, level_id, limit_min, limit_max, discount_rate, notes, choose_bank, pay_bank,
+        fees_rate, server_admin,business_pwd,key2
+    </sql>
+    <select id="selectById" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from web_payment_data
+        where id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.cn.great.model.pay.PaymentDataEntity" >
+        insert into web_payment_data ( account_company, url,
+        business_code, baofooid, pay_type,
+        status, type, total_money, total_time,
+        level_id, limit_min, limit_max,
+        discount_rate, notes, choose_bank,
+        pay_bank, fees_rate, server_admin,
+        business_pwd, key2)
+        values (#{accountCompany,jdbcType=VARCHAR}, #{payUrl,jdbcType=VARCHAR},
+        #{businessCode,jdbcType=VARCHAR}, #{baofooid,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT},
+        #{status,jdbcType=BIT}, #{type,jdbcType=BIT}, #{totalMoney,jdbcType=DECIMAL}, #{totalTime,jdbcType=INTEGER},
+        #{levelId,jdbcType=INTEGER}, #{min,jdbcType=DECIMAL}, #{max,jdbcType=DECIMAL},
+        #{discountRate,jdbcType=DOUBLE}, #{notes,jdbcType=VARCHAR}, #{chooseBank,jdbcType=TINYINT},
+        #{payBank,jdbcType=VARCHAR}, #{feesRate,jdbcType=DECIMAL}, #{serverAdmin,jdbcType=VARCHAR},
+        #{businessPwd,jdbcType=LONGVARCHAR}, #{key2,jdbcType=LONGVARCHAR})
+    </insert>
+
+
+    <update id="update" parameterType="com.cn.great.model.pay.PaymentDataEntity" >
+        update web_payment_data
+        set account_company = #{accountCompany,jdbcType=VARCHAR},
+        url = #{payUrl,jdbcType=VARCHAR},
+        business_code = #{businessCode,jdbcType=VARCHAR},
+        baofooid = #{baofooid,jdbcType=VARCHAR},
+        pay_type = #{payType,jdbcType=TINYINT},
+        status = #{status,jdbcType=BIT},
+        type = #{type,jdbcType=BIT},
+        total_money = #{totalMoney,jdbcType=DECIMAL},
+        total_time = #{totalTime,jdbcType=INTEGER},
+        level_id = #{levelId,jdbcType=INTEGER},
+        limit_min = #{min,jdbcType=DECIMAL},
+        limit_max = #{max,jdbcType=DECIMAL},
+        discount_rate = #{discountRate,jdbcType=DOUBLE},
+        notes = #{notes,jdbcType=VARCHAR},
+        choose_bank = #{chooseBank,jdbcType=TINYINT},
+        pay_bank = #{payBank,jdbcType=VARCHAR},
+        fees_rate = #{feesRate,jdbcType=DECIMAL},
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+        business_pwd = #{businessPwd,jdbcType=LONGVARCHAR},
+        key2 = #{key2,jdbcType=LONGVARCHAR}
+        where id = #{id}
+    </update>
+    <select id="fetchList" resultMap="BaseResultMap" parameterType="com.cn.great.req.pay.PaymentReq">
+        select  (select level_name from web_pay_level where id = a.level_id) pay_level_name,
+        (select pay_name from web_pay_type_name where id = a.pay_type) pay_type_name,
+        <include refid="Base_Column_List" />
+        from web_payment_data a where 1=1
+        <if test="status!=null">
+            and a.status=#{status}
+        </if>
+        <if test="businessCode!=null">
+            and a.business_code=#{businessCode}
+        </if>
+        <if test="paymentName!=null and paymentName!=''">
+            and a.account_company like CONCAT('%', #{paymentName}, '%')
+        </if>
+        order by id desc limit #{start}, #{length}
+    </select>
+    <select id="count" resultType="int" parameterType="com.cn.great.req.pay.PaymentReq">
+        select count(1)
+        from web_payment_data where 1=1
+        <if test="status!=null">
+            and status=#{status}
+        </if>
+        <if test="businessCode!=null">
+            and business_code=#{businessCode}
+        </if>
+        <if test="paymentName!=null and paymentName!=''">
+            and account_company like CONCAT('%', #{paymentName}, '%')
+        </if>
+    </select>
+</mapper>

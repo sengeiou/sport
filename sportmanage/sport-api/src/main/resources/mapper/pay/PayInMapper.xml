@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.pay.PayInMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.pay.PayInEntity" >
+    <id column="id" property="id" />
+    <result column="userid" property="userid" />
+    <result column="username" property="username" />
+    <result column="goldf" property="goldf" />
+    <result column="gold" property="gold" />
+    <result column="golds" property="golds" />
+    <result column="order_code" property="orderCode" />
+    <result column="youhui_gold" property="youhuiGold" />
+    <result column="add_date" property="addDate" />
+    <result column="notes" property="notes" />
+    <result column="operator" property="operator" />
+    <result column="pay_id" property="payId" />
+    <result column="pay_type_id" property="payTypeId" />
+    <result column="payment_name_id" property="paymentNameId" />
+    <result column="status" property="status" />
+    <result column="ip" property="ip" />
+    <result column="type" property="type" />
+    <result column="server_admin" property="serverAdmin" />
+  </resultMap>
+
+  <select id="checkNotApprovalIn" resultType="java.lang.Integer">
+    select count(*) from web_pay_in where status = 0 and userid = #{userId}
+  </select>
+
+  <insert id="insert" parameterType="com.cn.great.model.pay.PayInEntity" >
+    insert into web_pay_in (userid, goldf,
+      gold, golds, order_code, 
+      youhui_gold, add_date, notes, 
+      operator, pay_id, pay_type_id, 
+      payment_name_id, status, ip, 
+      type, server_admin)
+    values (
+      #{userid},
+      #{goldf},
+      #{gold},
+      #{golds},
+      #{orderCode},
+      #{youhuiGold},
+      #{addDate},
+      #{notes},
+      #{operator},
+      #{payId},
+      #{payTypeId},
+      #{paymentNameId},
+      #{status},
+      #{ip},
+      #{type},
+      #{serverAdmin})
+  </insert>
+  <select id="count" resultType="int">
+    select count(1) from web_pay_in  where 1=1
+    <if test="payReq.type!=null">
+      and type = #{payReq.type}
+    </if>
+    <if test="payReq.userId!=null">
+      and userid = #{payReq.userId}
+    </if>
+    <if test="payReq.status!=null">
+      and status = #{payReq.status}
+    </if>
+    <if test="payReq.orderId!=null and payReq.orderId!=''">
+      and order_code like  CONCAT('%', #{payReq.orderId}, '%')
+    </if>
+    <if test="payReq.beginTime!=null and payReq.endTime!=null">
+      and add_date BETWEEN  #{payReq.beginTime} and #{payReq.endTime}
+    </if>
+  </select>
+  <select id="fetchList" resultMap="BaseResultMap">
+    select id, userid, goldf,gold, golds, order_code,youhui_gold, add_date, notes,operator, pay_id, pay_type_id,payment_name_id, status, ip,type, server_admin,
+    (select username from web_member_data where id=userid ) username
+    from web_pay_in a where 1=1
+    <if test="payReq.type!=null">
+      and type = #{payReq.type}
+    </if>
+    <if test="payReq.userId!=null">
+      and userid = #{payReq.userId}
+    </if>
+    <if test="payReq.status!=null">
+      and status = #{payReq.status}
+    </if>
+    <if test="payReq.orderId!=null and payReq.orderId!=''">
+      and order_code like  CONCAT('%', #{payReq.orderId}, '%')
+    </if>
+    <if test="payReq.beginTime!=null and payReq.endTime!=null">
+      and add_date BETWEEN  #{payReq.beginTime} and #{payReq.endTime}
+    </if>
+    order by id desc limit #{payReq.start}, #{payReq.length}
+  </select>
+  <select id="selectById" resultMap="BaseResultMap">
+    select * from web_pay_in where id=#{id}
+  </select>
+  <update id="update" parameterType="com.cn.great.model.pay.PayInEntity">
+    update web_pay_in
+    <trim prefix="SET" suffixOverrides=",">
+      <if test="status != null">
+        status=#{status},
+      </if>
+    </trim>
+    where id=#{id}
+  </update>
+  <select id="selectLast" resultMap="BaseResultMap">
+     select  * from web_pay_in where userid=#{userId} order by add_date desc limit 1
+  </select>
+  <select id="sumAmount" resultType="java.math.BigDecimal">
+     select  sum(gold) from web_pay_in where userid=#{userId}
+  </select>
+</mapper>

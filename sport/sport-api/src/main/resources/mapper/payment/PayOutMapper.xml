@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.payment.PayOutMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.payment.PayOutEntity" >
+    <id column="id" property="id" />
+    <result column="userid" property="userid" />
+    <result column="goldf" property="goldf" />
+    <result column="gold" property="gold" />
+    <result column="golds" property="golds" />
+    <result column="bank_id" property="bankId" />
+    <result column="order_code" property="order_code" />
+    <result column="add_date" property="add_date" />
+    <result column="notes" property="notes" />
+    <result column="auditor" property="auditor" />
+    <result column="operator" property="operator" />
+    <result column="pay_id" property="payId" />
+    <result column="status" property="status" />
+    <result column="ip" property="ip" />
+    <result column="type" property="type" />
+    <result column="server_admin" property="serverAdmin" />
+  </resultMap>
+
+  <select id="checkNotApprovalOrder" resultType="java.lang.Integer">
+      select count(*) from web_pay_out where status = 0 and userid = #{userId}
+  </select>
+
+  <select id="getWithdrawalLog" resultMap="BaseResultMap" parameterType="com.cn.great.req.payment.WithdrawReq">
+      select id,gold,goldf,golds,status,order_code,notes,add_date from web_pay_out
+        where userid = #{userId} and add_date between #{start_date} and #{end_date}
+  </select>
+
+  <insert id="insert" parameterType="com.cn.great.model.payment.PayOutEntity" >
+        insert into web_pay_out (userid, goldf,
+          gold, golds, bank_id,
+          order_code, add_date, notes,
+          auditor, operator, pay_id,
+          status, ip, type, server_admin
+          )
+        values
+           (
+            #{userid},
+            #{goldf},
+            #{gold},
+            #{golds},
+            #{bankId},
+            #{orderCode},
+            #{addDate},
+            #{notes},
+            #{auditor},
+            #{operator},
+            #{payId},
+            #{status},
+            #{ip},
+            #{type},
+            #{serverAdmin}
+          )
+  </insert>
+</mapper>

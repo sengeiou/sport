@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.pay.PayOutMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.pay.PayOutEntity" >
+    <id column="id" property="id" />
+    <result column="userid" property="userid" />
+    <result column="goldf" property="goldf" />
+    <result column="gold" property="gold" />
+    <result column="golds" property="golds" />
+    <result column="bank_id" property="bankId" />
+    <result column="order_code" property="orderCode" />
+    <result column="add_date" property="addDate" />
+    <result column="notes" property="notes" />
+    <result column="auditor" property="auditor" />
+    <result column="operator" property="operator" />
+    <result column="pay_id" property="payId" />
+    <result column="status" property="status" />
+    <result column="ip" property="ip" />
+    <result column="type" property="type" />
+    <result column="server_admin" property="serverAdmin" />
+      <result column="username" property="username" />
+      <result column="bank_account" property="bankAccount" />
+  </resultMap>
+
+  <select id="checkNotApprovalOrder" resultType="java.lang.Integer">
+      select count(*) from web_pay_out where status = 0 and userid = #{userId}
+  </select>
+
+  <insert id="insert" parameterType="com.cn.great.model.pay.PayOutEntity" >
+        insert into web_pay_out (userid, goldf,
+          gold, golds, bank_id,
+          order_code, add_date, notes,
+          auditor, operator, pay_id,
+          status, ip, type, server_admin
+          )
+        values
+           (
+            #{userid},
+            #{goldf},
+            #{gold},
+            #{golds},
+            #{bankId},
+            #{orderCode},
+            #{addDate},
+            #{notes},
+            #{auditor},
+            #{operator},
+            #{payId},
+            #{status},
+            #{ip},
+            #{type},
+            #{serverAdmin}
+          )
+  </insert>
+    <select id="count" resultType="int" parameterType="com.cn.great.req.pay.PayReq">
+        select count(1) from web_pay_out  where 1=1
+        <if test="type!=null">
+            and type = #{type}
+        </if>
+        <if test="userId!=null">
+            and userid = #{userId}
+        </if>
+        <if test="statusStr!=null and statusStr!=''">
+            and status in
+            <foreach item="item" index="index" collection="statusStr.split(',')" open="(" separator="," close=")">${item}</foreach>
+        </if>
+        <if test="status!=null ">
+            and status =#{status}
+        </if>
+        <if test="orderId!=null and orderId!=''">
+            and order_code like  CONCAT('%', #{orderId}, '%')
+        </if>
+        <if test="beginTime!=null and beginTime!=''">
+            and add_date BETWEEN  #{beginTime} and #{endTime}
+        </if>
+    </select>
+    <select id="fetchList" resultMap="BaseResultMap" parameterType="com.cn.great.req.pay.PayReq">
+        select a.*,
+        (select username from web_member_data where id=userid ) username,
+        (select bank_account from web_member_bank where id=bank_id ) bank_account
+        from web_pay_out a where 1=1
+        <if test="type!=null">
+            and type = #{type}
+        </if>
+        <if test="userId!=null">
+            and userid = #{userId}
+        </if>
+        <if test="statusStr!=null and statusStr!=''">
+            and status in
+            <foreach item="item" index="index" collection="statusStr.split(',')" open="(" separator="," close=")">${item}</foreach>
+        </if>
+        <if test="status!=null ">
+            and status =#{status}
+        </if>
+        <if test="orderId!=null and orderId!=''">
+            and order_code like  CONCAT('%', #{orderId}, '%')
+        </if>
+        <if test="beginTime!=null and endTime!=null">
+            and add_date BETWEEN  #{beginTime} and #{endTime}
+        </if>
+        order by id desc limit #{start}, #{length}
+    </select>
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from web_pay_out where id=#{id}
+    </select>
+    <update id="updateStatus"  parameterType="com.cn.great.model.pay.PayOutEntity">
+        update web_pay_out set status=#{status} where id=#{id}
+    </update>
+</mapper>

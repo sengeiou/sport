@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.AgentsUrlMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.AgentsUrl" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="agents_id" property="agentsId" jdbcType="INTEGER" />
+    <result column="agents_url" property="agentsUrl" jdbcType="VARCHAR" />
+    <result column="notes" property="notes" jdbcType="VARCHAR" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, agents_id, agents_url, notes, server_admin, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_agents_url
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_agents_url
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.AgentsUrl" >
+    insert into web_agents_url (id, agents_id, agents_url, 
+      notes, server_admin, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{agentsId,jdbcType=INTEGER}, #{agentsUrl,jdbcType=VARCHAR}, 
+      #{notes,jdbcType=VARCHAR}, #{serverAdmin,jdbcType=VARCHAR}, #{status,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.AgentsUrl" >
+    insert into web_agents_url
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="agentsId != null" >
+        agents_id,
+      </if>
+      <if test="agentsUrl != null" >
+        agents_url,
+      </if>
+      <if test="notes != null" >
+        notes,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="agentsId != null" >
+        #{agentsId,jdbcType=INTEGER},
+      </if>
+      <if test="agentsUrl != null" >
+        #{agentsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.AgentsUrl" >
+    update web_agents_url
+    <set >
+      <if test="agentsId != null" >
+        agents_id = #{agentsId,jdbcType=INTEGER},
+      </if>
+      <if test="agentsUrl != null" >
+        agents_url = #{agentsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.AgentsUrl" >
+    update web_agents_url
+    set agents_id = #{agentsId,jdbcType=INTEGER},
+      agents_url = #{agentsUrl,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

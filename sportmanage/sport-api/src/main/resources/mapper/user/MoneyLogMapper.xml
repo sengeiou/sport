@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.great.mapper.user.MoneyLogMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.user.MoneyLogEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="moneyf" jdbcType="DECIMAL" property="moneyf"/>
+        <result column="money" jdbcType="DECIMAL" property="money"/>
+        <result column="moneys" jdbcType="DECIMAL" property="moneys"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="order_id" jdbcType="INTEGER" property="orderId"/>
+        <result column="add_date" jdbcType="VARCHAR" property="addDate"/>
+        <result column="notes" jdbcType="VARCHAR" property="notes"/>
+    </resultMap>
+
+    <insert id="addMoneyLog">
+        INSERT INTO web_money_log (
+            `userid`,
+            `moneyf`,
+            `money`,
+            `moneys`,
+            `type`,
+            `order_id`,
+            `add_date`,
+            `notes`
+        )
+        VALUES
+            (
+                #{userid},
+                #{moneyf},
+                #{money},
+                #{moneys},
+                #{type},
+                #{orderId},
+                #{addDate},
+                #{notes}
+            )
+    </insert>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.payment.BankDataMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.payment.BankDataEntity">
+        <id column="id" property="id" />
+        <result column="bank" property="bank" />
+        <result column="bank_account" property="bank_account" />
+        <result column="bank_address" property="bankAddress" />
+        <result column="bank_name" property="bank_name" />
+        <result column="level_id" property="levelId" />
+        <result column="status" property="status" />
+        <result column="img_url" property="img_url" />
+        <result column="limit_max" property="max" />
+        <result column="limit_min" property="min" />
+        <result column="discount_rate" property="discount_rate" />
+        <result column="server_admin" property="serverAdmin" />
+        <result column="pay_type" property="payType" />
+    </resultMap>
+
+    <select id="getOfflineChannel" resultMap="BaseResultMap">
+        select id,bank,bank_account,bank_name,img_url,min,max,discount_rate from web_bank_data
+         where pay_type = #{category_id} and level_id = #{levelId}
+    </select>
+    
+    <select id="getValidChannel" resultType="java.lang.Double">
+        select discount_rate from web_bank_data where status = 1 and id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MemberDataMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MemberData" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="money2" property="money2" jdbcType="DECIMAL" />
+    <result column="agents_id" property="agentsId" jdbcType="INTEGER" />
+    <result column="ctime" property="ctime" jdbcType="INTEGER" />
+    <result column="cmoney" property="cmoney" jdbcType="DECIMAL" />
+    <result column="ttime" property="ttime" jdbcType="INTEGER" />
+    <result column="tmoney" property="tmoney" jdbcType="DECIMAL" />
+    <result column="sum_bet" property="sumBet" jdbcType="BIGINT" />
+    <result column="password" property="password" jdbcType="CHAR" />
+    <result column="level_id" property="levelId" jdbcType="INTEGER" />
+    <result column="notes_withdrawal" property="notesWithdrawal" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, money, money2, agents_id, ctime, cmoney, ttime, tmoney, sum_bet, password, 
+    level_id, notes_withdrawal, status, server_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_member_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_member_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.MemberData" >
+    insert into web_member_data (id, username, money, 
+      money2, agents_id, ctime, 
+      cmoney, ttime, tmoney, 
+      sum_bet, password, level_id, 
+      notes_withdrawal, status, server_admin
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{money2,jdbcType=DECIMAL}, #{agentsId,jdbcType=INTEGER}, #{ctime,jdbcType=INTEGER}, 
+      #{cmoney,jdbcType=DECIMAL}, #{ttime,jdbcType=INTEGER}, #{tmoney,jdbcType=DECIMAL}, 
+      #{sumBet,jdbcType=BIGINT}, #{password,jdbcType=CHAR}, #{levelId,jdbcType=INTEGER}, 
+      #{notesWithdrawal,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{serverAdmin,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MemberData" >
+    insert into web_member_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="money2 != null" >
+        money2,
+      </if>
+      <if test="agentsId != null" >
+        agents_id,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="cmoney != null" >
+        cmoney,
+      </if>
+      <if test="ttime != null" >
+        ttime,
+      </if>
+      <if test="tmoney != null" >
+        tmoney,
+      </if>
+      <if test="sumBet != null" >
+        sum_bet,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="levelId != null" >
+        level_id,
+      </if>
+      <if test="notesWithdrawal != null" >
+        notes_withdrawal,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="money2 != null" >
+        #{money2,jdbcType=DECIMAL},
+      </if>
+      <if test="agentsId != null" >
+        #{agentsId,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=INTEGER},
+      </if>
+      <if test="cmoney != null" >
+        #{cmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ttime != null" >
+        #{ttime,jdbcType=INTEGER},
+      </if>
+      <if test="tmoney != null" >
+        #{tmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="sumBet != null" >
+        #{sumBet,jdbcType=BIGINT},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="levelId != null" >
+        #{levelId,jdbcType=INTEGER},
+      </if>
+      <if test="notesWithdrawal != null" >
+        #{notesWithdrawal,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.MemberData" >
+    update web_member_data
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="money2 != null" >
+        money2 = #{money2,jdbcType=DECIMAL},
+      </if>
+      <if test="agentsId != null" >
+        agents_id = #{agentsId,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=INTEGER},
+      </if>
+      <if test="cmoney != null" >
+        cmoney = #{cmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ttime != null" >
+        ttime = #{ttime,jdbcType=INTEGER},
+      </if>
+      <if test="tmoney != null" >
+        tmoney = #{tmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="sumBet != null" >
+        sum_bet = #{sumBet,jdbcType=BIGINT},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="levelId != null" >
+        level_id = #{levelId,jdbcType=INTEGER},
+      </if>
+      <if test="notesWithdrawal != null" >
+        notes_withdrawal = #{notesWithdrawal,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.MemberData" >
+    update web_member_data
+    set username = #{username,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      money2 = #{money2,jdbcType=DECIMAL},
+      agents_id = #{agentsId,jdbcType=INTEGER},
+      ctime = #{ctime,jdbcType=INTEGER},
+      cmoney = #{cmoney,jdbcType=DECIMAL},
+      ttime = #{ttime,jdbcType=INTEGER},
+      tmoney = #{tmoney,jdbcType=DECIMAL},
+      sum_bet = #{sumBet,jdbcType=BIGINT},
+      password = #{password,jdbcType=CHAR},
+      level_id = #{levelId,jdbcType=INTEGER},
+      notes_withdrawal = #{notesWithdrawal,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

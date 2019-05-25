@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.pay.BankDataMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.pay.BankDataEntity">
+        <id column="id" property="id" />
+        <result column="bank" property="bank" />
+        <result column="bank_account" property="bankAccount" />
+        <result column="bank_address" property="bankAddress" />
+        <result column="bank_name" property="bankName" />
+        <result column="level_id" property="levelId" />
+        <result column="status" property="status" />
+        <result column="img_url" property="imgUrl" />
+        <result column="limit_max" property="max" />
+        <result column="limit_min" property="min" />
+        <result column="discount_rate" property="discountRate" />
+        <result column="server_admin" property="serverAdmin" />
+        <result column="pay_type" property="payType" />
+        <result column="level_name" property="levelName" />
+        <result column="pay_type_name" property="payTypeName" />
+    </resultMap>
+    
+    <select id="getValidChannel" resultType="java.lang.Double">
+        select discount_rate from web_bank_data where status = 1 and id = #{id}
+    </select>
+    <select id="fetchList" resultMap="BaseResultMap" parameterType="com.cn.great.req.pay.BankDataReq">
+        select a.*,
+        (select level_name from web_pay_level where id = a.level_id) level_name,
+        (select pay_name from web_pay_type_name where id = a.pay_type) pay_type_name
+        from web_bank_data a
+        where 1=1
+        <if test="bank!=null and bank!=''">
+          and  bank=#{bank}
+        </if>
+        <if test="bankName!=null and bankName!=''">
+          and bank_name like CONCAT('%', #{bankName}, '%')
+        </if>
+        <if test="status!=null">
+          and status =#{status}
+        </if>
+        order by id desc limit #{start}, #{length}
+    </select>
+    <select id="count" resultType="int" parameterType="com.cn.great.req.pay.BankDataReq">
+        select count(1) from web_bank_data
+        where 1=1
+        <if test="bank!=null and bank!=''">
+            and  bank=#{bank}
+        </if>
+        <if test="bankName!=null and bankName!=''">
+            and bank_name like CONCAT('%', #{bankName}, '%')
+        </if>
+        <if test="status!=null">
+            and status =#{status}
+        </if>
+    </select>
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from web_bank_data where id=#{id}
+    </select>
+    <insert id="save" parameterType="com.cn.great.model.pay.BankDataEntity" >
+        insert into web_bank_data (id, bank, bank_account,
+        bank_address, bank_name, level_id,
+        status, img_url, limit_max,
+        limit_min, discount_rate, server_admin,
+        pay_type)
+        values (#{id,jdbcType=INTEGER}, #{bank,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR},
+        #{bankAddress,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{levelId,jdbcType=INTEGER},
+        #{status,jdbcType=BIT}, #{imgUrl,jdbcType=VARCHAR}, #{max,jdbcType=INTEGER},
+        #{min,jdbcType=INTEGER}, #{discountRate,jdbcType=DOUBLE}, #{serverAdmin,jdbcType=VARCHAR},
+        #{payType,jdbcType=TINYINT})
+    </insert>
+    <update id="update" parameterType="com.cn.great.model.pay.BankDataEntity" >
+        update web_bank_data
+        <set >
+            <if test="bank != null" >
+                bank = #{bank,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAccount != null" >
+                bank_account = #{bankAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAddress != null" >
+                bank_address = #{bankAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="levelId != null" >
+                level_id = #{levelId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=BIT},
+            </if>
+            <if test="imgUrl != null" >
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="max != null" >
+                limit_max = #{max,jdbcType=INTEGER},
+            </if>
+            <if test="min != null" >
+                limit_min = #{min,jdbcType=INTEGER},
+            </if>
+            <if test="discountRate != null" >
+                discount_rate = #{discountRate,jdbcType=DOUBLE},
+            </if>
+            <if test="serverAdmin != null" >
+                server_admin = #{serverAdmin,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                pay_type = #{payType,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="getPayBankData" resultType="com.cn.great.req.pay.MapDataRep">
+        select code as 'key',bank_name as value from web_bank_name
+    </select>
+</mapper>

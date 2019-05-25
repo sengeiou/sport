@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.DiscountDataMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.DiscountData" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="pc" property="pc" jdbcType="BIT" />
+    <result column="wap" property="wap" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="pc_big_img" property="pcBigImg" jdbcType="VARCHAR" />
+    <result column="pc_small_img" property="pcSmallImg" jdbcType="VARCHAR" />
+    <result column="wap_big_img" property="wapBigImg" jdbcType="VARCHAR" />
+    <result column="wap_small_img" property="wapSmallImg" jdbcType="VARCHAR" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cn.great.model.system.DiscountData" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, intro, start_time, end_time, pc, wap, status, level, pc_big_img, pc_small_img, 
+    wap_big_img, wap_small_img, server_admin
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from web_discount_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_discount_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.DiscountData" >
+    insert into web_discount_data (id, name, intro, 
+      start_time, end_time, pc, 
+      wap, status, level, pc_big_img, 
+      pc_small_img, wap_big_img, wap_small_img, 
+      server_admin, description)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{pc,jdbcType=BIT}, 
+      #{wap,jdbcType=BIT}, #{status,jdbcType=BIT}, #{level,jdbcType=INTEGER}, #{pcBigImg,jdbcType=VARCHAR}, 
+      #{pcSmallImg,jdbcType=VARCHAR}, #{wapBigImg,jdbcType=VARCHAR}, #{wapSmallImg,jdbcType=VARCHAR}, 
+      #{serverAdmin,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.DiscountData" >
+    insert into web_discount_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="pc != null" >
+        pc,
+      </if>
+      <if test="wap != null" >
+        wap,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="pcBigImg != null" >
+        pc_big_img,
+      </if>
+      <if test="pcSmallImg != null" >
+        pc_small_img,
+      </if>
+      <if test="wapBigImg != null" >
+        wap_big_img,
+      </if>
+      <if test="wapSmallImg != null" >
+        wap_small_img,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pc != null" >
+        #{pc,jdbcType=BIT},
+      </if>
+      <if test="wap != null" >
+        #{wap,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="pcBigImg != null" >
+        #{pcBigImg,jdbcType=VARCHAR},
+      </if>
+      <if test="pcSmallImg != null" >
+        #{pcSmallImg,jdbcType=VARCHAR},
+      </if>
+      <if test="wapBigImg != null" >
+        #{wapBigImg,jdbcType=VARCHAR},
+      </if>
+      <if test="wapSmallImg != null" >
+        #{wapSmallImg,jdbcType=VARCHAR},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.DiscountData" >
+    update web_discount_data
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pc != null" >
+        pc = #{pc,jdbcType=BIT},
+      </if>
+      <if test="wap != null" >
+        wap = #{wap,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="pcBigImg != null" >
+        pc_big_img = #{pcBigImg,jdbcType=VARCHAR},
+      </if>
+      <if test="pcSmallImg != null" >
+        pc_small_img = #{pcSmallImg,jdbcType=VARCHAR},
+      </if>
+      <if test="wapBigImg != null" >
+        wap_big_img = #{wapBigImg,jdbcType=VARCHAR},
+      </if>
+      <if test="wapSmallImg != null" >
+        wap_small_img = #{wapSmallImg,jdbcType=VARCHAR},
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cn.great.model.system.DiscountData" >
+    update web_discount_data
+    set name = #{name,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      pc = #{pc,jdbcType=BIT},
+      wap = #{wap,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      level = #{level,jdbcType=INTEGER},
+      pc_big_img = #{pcBigImg,jdbcType=VARCHAR},
+      pc_small_img = #{pcSmallImg,jdbcType=VARCHAR},
+      wap_big_img = #{wapBigImg,jdbcType=VARCHAR},
+      wap_small_img = #{wapSmallImg,jdbcType=VARCHAR},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.DiscountData" >
+    update web_discount_data
+    set name = #{name,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      pc = #{pc,jdbcType=BIT},
+      wap = #{wap,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      level = #{level,jdbcType=INTEGER},
+      pc_big_img = #{pcBigImg,jdbcType=VARCHAR},
+      pc_small_img = #{pcSmallImg,jdbcType=VARCHAR},
+      wap_big_img = #{wapBigImg,jdbcType=VARCHAR},
+      wap_small_img = #{wapSmallImg,jdbcType=VARCHAR},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

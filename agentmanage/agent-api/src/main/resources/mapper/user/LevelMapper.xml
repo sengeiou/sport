@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.user.LevelMapper">
+
+    <resultMap id="levels" type="com.cn.great.model.user.MemberLevelEntity">
+        <id column="id" property="id"></id>
+        <result column="sum_money" property="sumMoney"/>
+        <result column="sum_bet" property="sumBet"/>
+        <result column="mem_level" property="memLevel"/>
+        <result column="notes" property="notes"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+
+    <select id="fetchUserLevelList" resultMap="levels" parameterType="java.lang.String">
+        select * from web_member_level
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="serverAdmin != null and '' != serverAdmin">
+                and server_admin like concat(concat('%',#{serverAdmin}),'%')
+            </if>
+        </trim>
+        order by id asc limit #{start}, #{length}
+    </select>
+
+    <select id="countUserLevels" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(id) from web_member_level
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="serverAdmin != null and '' != serverAdmin">
+                and server_admin like concat(concat('%',#{serverAdmin}),'%')
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addLevelInfo" parameterType="com.cn.great.req.user.LevelOpeReq" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into web_member_level(sum_money, sum_bet, mem_level, notes, server_admin)
+        values(#{sumMoney},#{sumBet},#{memLevel},#{notes}, #{serverAdmin})
+    </insert>
+
+    <update id="updateLevelInfo" parameterType="com.cn.great.req.user.LevelOpeReq">
+        update web_member_level
+        <trim prefix="SET" suffixOverrides=",">
+            sum_money=#{sumMoney},
+            sum_bet=#{sumBet},
+            mem_level=#{memLevel},
+            <if test="null != serverAdmin and '' != serverAdmin">
+                server_admin=#{serverAdmin},
+            </if>
+            <if test="null != notes and '' != notes">
+                notes=#{notes},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteLevelInfo" parameterType="java.lang.Integer">
+        delete from web_member_level where id = #{id}
+    </delete>
+
+</mapper>

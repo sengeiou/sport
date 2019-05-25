@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.AgConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.AgConfig" >
+    <result column="agip" property="agip" jdbcType="VARCHAR" />
+    <result column="subfix" property="subfix" jdbcType="CHAR" />
+    <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="server" property="server" jdbcType="VARCHAR" />
+    <result column="newgc" property="newgc" jdbcType="VARCHAR" />
+    <result column="apiserver" property="apiserver" jdbcType="VARCHAR" />
+    <result column="cagent" property="cagent" jdbcType="VARCHAR" />
+    <result column="desckey" property="desckey" jdbcType="VARCHAR" />
+    <result column="md5key" property="md5key" jdbcType="VARCHAR" />
+    <result column="domain" property="domain" jdbcType="VARCHAR" />
+    <result column="agftp" property="agftp" jdbcType="VARCHAR" />
+    <result column="agftp_port" property="agftpPort" jdbcType="VARCHAR" />
+    <result column="agftp_user" property="agftpUser" jdbcType="VARCHAR" />
+    <result column="agftp_psw" property="agftpPsw" jdbcType="VARCHAR" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cn.great.model.system.AgConfig" >
+    insert into web_ag_config (agip, subfix, website, 
+      server, newgc, apiserver, 
+      cagent, desckey, md5key, 
+      domain, agftp, agftp_port, 
+      agftp_user, agftp_psw, server_admin
+      )
+    values (#{agip,jdbcType=VARCHAR}, #{subfix,jdbcType=CHAR}, #{website,jdbcType=VARCHAR}, 
+      #{server,jdbcType=VARCHAR}, #{newgc,jdbcType=VARCHAR}, #{apiserver,jdbcType=VARCHAR}, 
+      #{cagent,jdbcType=VARCHAR}, #{desckey,jdbcType=VARCHAR}, #{md5key,jdbcType=VARCHAR}, 
+      #{domain,jdbcType=VARCHAR}, #{agftp,jdbcType=VARCHAR}, #{agftpPort,jdbcType=VARCHAR}, 
+      #{agftpUser,jdbcType=VARCHAR}, #{agftpPsw,jdbcType=VARCHAR}, #{serverAdmin,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.AgConfig" >
+    insert into web_ag_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="agip != null" >
+        agip,
+      </if>
+      <if test="subfix != null" >
+        subfix,
+      </if>
+      <if test="website != null" >
+        website,
+      </if>
+      <if test="server != null" >
+        server,
+      </if>
+      <if test="newgc != null" >
+        newgc,
+      </if>
+      <if test="apiserver != null" >
+        apiserver,
+      </if>
+      <if test="cagent != null" >
+        cagent,
+      </if>
+      <if test="desckey != null" >
+        desckey,
+      </if>
+      <if test="md5key != null" >
+        md5key,
+      </if>
+      <if test="domain != null" >
+        domain,
+      </if>
+      <if test="agftp != null" >
+        agftp,
+      </if>
+      <if test="agftpPort != null" >
+        agftp_port,
+      </if>
+      <if test="agftpUser != null" >
+        agftp_user,
+      </if>
+      <if test="agftpPsw != null" >
+        agftp_psw,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="agip != null" >
+        #{agip,jdbcType=VARCHAR},
+      </if>
+      <if test="subfix != null" >
+        #{subfix,jdbcType=CHAR},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="server != null" >
+        #{server,jdbcType=VARCHAR},
+      </if>
+      <if test="newgc != null" >
+        #{newgc,jdbcType=VARCHAR},
+      </if>
+      <if test="apiserver != null" >
+        #{apiserver,jdbcType=VARCHAR},
+      </if>
+      <if test="cagent != null" >
+        #{cagent,jdbcType=VARCHAR},
+      </if>
+      <if test="desckey != null" >
+        #{desckey,jdbcType=VARCHAR},
+      </if>
+      <if test="md5key != null" >
+        #{md5key,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="agftp != null" >
+        #{agftp,jdbcType=VARCHAR},
+      </if>
+      <if test="agftpPort != null" >
+        #{agftpPort,jdbcType=VARCHAR},
+      </if>
+      <if test="agftpUser != null" >
+        #{agftpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="agftpPsw != null" >
+        #{agftpPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

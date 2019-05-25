@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.ScoreSportsBkMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.ScoreSportsBk" >
+    <id column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="mb_team" property="mbTeam" jdbcType="VARCHAR" />
+    <result column="tg_team" property="tgTeam" jdbcType="VARCHAR" />
+    <result column="mb_score_q1" property="mbScoreQ1" jdbcType="TINYINT" />
+    <result column="tg_score_q1" property="tgScoreQ1" jdbcType="TINYINT" />
+    <result column="mb_score_q2" property="mbScoreQ2" jdbcType="TINYINT" />
+    <result column="tg_score_q2" property="tgScoreQ2" jdbcType="TINYINT" />
+    <result column="mb_score_q3" property="mbScoreQ3" jdbcType="TINYINT" />
+    <result column="tg_score_q3" property="tgScoreQ3" jdbcType="TINYINT" />
+    <result column="mb_score_q4" property="mbScoreQ4" jdbcType="TINYINT" />
+    <result column="tg_score_q4" property="tgScoreQ4" jdbcType="TINYINT" />
+    <result column="mb_score_hr" property="mbScoreHr" jdbcType="TINYINT" />
+    <result column="tg_score_hr" property="tgScoreHr" jdbcType="TINYINT" />
+    <result column="mb_score" property="mbScore" jdbcType="TINYINT" />
+    <result column="tg_score" property="tgScore" jdbcType="TINYINT" />
+    <result column="mb_score_ot1" property="mbScoreOt1" jdbcType="TINYINT" />
+    <result column="tb_score_ot1" property="tbScoreOt1" jdbcType="TINYINT" />
+    <result column="mb_score_ot2" property="mbScoreOt2" jdbcType="TINYINT" />
+    <result column="tb_score_ot2" property="tbScoreOt2" jdbcType="TINYINT" />
+    <result column="m_date" property="mDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mid, mb_team, tg_team, mb_score_q1, tg_score_q1, mb_score_q2, tg_score_q2, mb_score_q3, 
+    tg_score_q3, mb_score_q4, tg_score_q4, mb_score_hr, tg_score_hr, mb_score, tg_score, 
+    mb_score_ot1, tb_score_ot1, mb_score_ot2, tb_score_ot2, m_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_score_sports_bk
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_score_sports_bk
+    where mid = #{mid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.ScoreSportsBk" >
+    insert into web_score_sports_bk (mid, mb_team, tg_team, 
+      mb_score_q1, tg_score_q1, mb_score_q2, 
+      tg_score_q2, mb_score_q3, tg_score_q3, 
+      mb_score_q4, tg_score_q4, mb_score_hr, 
+      tg_score_hr, mb_score, tg_score, 
+      mb_score_ot1, tb_score_ot1, mb_score_ot2, 
+      tb_score_ot2, m_date)
+    values (#{mid,jdbcType=INTEGER}, #{mbTeam,jdbcType=VARCHAR}, #{tgTeam,jdbcType=VARCHAR}, 
+      #{mbScoreQ1,jdbcType=TINYINT}, #{tgScoreQ1,jdbcType=TINYINT}, #{mbScoreQ2,jdbcType=TINYINT}, 
+      #{tgScoreQ2,jdbcType=TINYINT}, #{mbScoreQ3,jdbcType=TINYINT}, #{tgScoreQ3,jdbcType=TINYINT}, 
+      #{mbScoreQ4,jdbcType=TINYINT}, #{tgScoreQ4,jdbcType=TINYINT}, #{mbScoreHr,jdbcType=TINYINT}, 
+      #{tgScoreHr,jdbcType=TINYINT}, #{mbScore,jdbcType=TINYINT}, #{tgScore,jdbcType=TINYINT}, 
+      #{mbScoreOt1,jdbcType=TINYINT}, #{tbScoreOt1,jdbcType=TINYINT}, #{mbScoreOt2,jdbcType=TINYINT}, 
+      #{tbScoreOt2,jdbcType=TINYINT}, #{mDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.ScoreSportsBk" >
+    insert into web_score_sports_bk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="mbTeam != null" >
+        mb_team,
+      </if>
+      <if test="tgTeam != null" >
+        tg_team,
+      </if>
+      <if test="mbScoreQ1 != null" >
+        mb_score_q1,
+      </if>
+      <if test="tgScoreQ1 != null" >
+        tg_score_q1,
+      </if>
+      <if test="mbScoreQ2 != null" >
+        mb_score_q2,
+      </if>
+      <if test="tgScoreQ2 != null" >
+        tg_score_q2,
+      </if>
+      <if test="mbScoreQ3 != null" >
+        mb_score_q3,
+      </if>
+      <if test="tgScoreQ3 != null" >
+        tg_score_q3,
+      </if>
+      <if test="mbScoreQ4 != null" >
+        mb_score_q4,
+      </if>
+      <if test="tgScoreQ4 != null" >
+        tg_score_q4,
+      </if>
+      <if test="mbScoreHr != null" >
+        mb_score_hr,
+      </if>
+      <if test="tgScoreHr != null" >
+        tg_score_hr,
+      </if>
+      <if test="mbScore != null" >
+        mb_score,
+      </if>
+      <if test="tgScore != null" >
+        tg_score,
+      </if>
+      <if test="mbScoreOt1 != null" >
+        mb_score_ot1,
+      </if>
+      <if test="tbScoreOt1 != null" >
+        tb_score_ot1,
+      </if>
+      <if test="mbScoreOt2 != null" >
+        mb_score_ot2,
+      </if>
+      <if test="tbScoreOt2 != null" >
+        tb_score_ot2,
+      </if>
+      <if test="mDate != null" >
+        m_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mbTeam != null" >
+        #{mbTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="tgTeam != null" >
+        #{tgTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="mbScoreQ1 != null" >
+        #{mbScoreQ1,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreQ1 != null" >
+        #{tgScoreQ1,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreQ2 != null" >
+        #{mbScoreQ2,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreQ2 != null" >
+        #{tgScoreQ2,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreQ3 != null" >
+        #{mbScoreQ3,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreQ3 != null" >
+        #{tgScoreQ3,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreQ4 != null" >
+        #{mbScoreQ4,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreQ4 != null" >
+        #{tgScoreQ4,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreHr != null" >
+        #{mbScoreHr,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreHr != null" >
+        #{tgScoreHr,jdbcType=TINYINT},
+      </if>
+      <if test="mbScore != null" >
+        #{mbScore,jdbcType=TINYINT},
+      </if>
+      <if test="tgScore != null" >
+        #{tgScore,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreOt1 != null" >
+        #{mbScoreOt1,jdbcType=TINYINT},
+      </if>
+      <if test="tbScoreOt1 != null" >
+        #{tbScoreOt1,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreOt2 != null" >
+        #{mbScoreOt2,jdbcType=TINYINT},
+      </if>
+      <if test="tbScoreOt2 != null" >
+        #{tbScoreOt2,jdbcType=TINYINT},
+      </if>
+      <if test="mDate != null" >
+        #{mDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.ScoreSportsBk" >
+    update web_score_sports_bk
+    <set >
+      <if test="mbTeam != null" >
+        mb_team = #{mbTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="tgTeam != null" >
+        tg_team = #{tgTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="mbScoreQ1 != null" >
+        mb_score_q1 = #{mbScoreQ1,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreQ1 != null" >
+        tg_score_q1 = #{tgScoreQ1,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreQ2 != null" >
+        mb_score_q2 = #{mbScoreQ2,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreQ2 != null" >
+        tg_score_q2 = #{tgScoreQ2,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreQ3 != null" >
+        mb_score_q3 = #{mbScoreQ3,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreQ3 != null" >
+        tg_score_q3 = #{tgScoreQ3,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreQ4 != null" >
+        mb_score_q4 = #{mbScoreQ4,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreQ4 != null" >
+        tg_score_q4 = #{tgScoreQ4,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreHr != null" >
+        mb_score_hr = #{mbScoreHr,jdbcType=TINYINT},
+      </if>
+      <if test="tgScoreHr != null" >
+        tg_score_hr = #{tgScoreHr,jdbcType=TINYINT},
+      </if>
+      <if test="mbScore != null" >
+        mb_score = #{mbScore,jdbcType=TINYINT},
+      </if>
+      <if test="tgScore != null" >
+        tg_score = #{tgScore,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreOt1 != null" >
+        mb_score_ot1 = #{mbScoreOt1,jdbcType=TINYINT},
+      </if>
+      <if test="tbScoreOt1 != null" >
+        tb_score_ot1 = #{tbScoreOt1,jdbcType=TINYINT},
+      </if>
+      <if test="mbScoreOt2 != null" >
+        mb_score_ot2 = #{mbScoreOt2,jdbcType=TINYINT},
+      </if>
+      <if test="tbScoreOt2 != null" >
+        tb_score_ot2 = #{tbScoreOt2,jdbcType=TINYINT},
+      </if>
+      <if test="mDate != null" >
+        m_date = #{mDate,jdbcType=DATE},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.ScoreSportsBk" >
+    update web_score_sports_bk
+    set mb_team = #{mbTeam,jdbcType=VARCHAR},
+      tg_team = #{tgTeam,jdbcType=VARCHAR},
+      mb_score_q1 = #{mbScoreQ1,jdbcType=TINYINT},
+      tg_score_q1 = #{tgScoreQ1,jdbcType=TINYINT},
+      mb_score_q2 = #{mbScoreQ2,jdbcType=TINYINT},
+      tg_score_q2 = #{tgScoreQ2,jdbcType=TINYINT},
+      mb_score_q3 = #{mbScoreQ3,jdbcType=TINYINT},
+      tg_score_q3 = #{tgScoreQ3,jdbcType=TINYINT},
+      mb_score_q4 = #{mbScoreQ4,jdbcType=TINYINT},
+      tg_score_q4 = #{tgScoreQ4,jdbcType=TINYINT},
+      mb_score_hr = #{mbScoreHr,jdbcType=TINYINT},
+      tg_score_hr = #{tgScoreHr,jdbcType=TINYINT},
+      mb_score = #{mbScore,jdbcType=TINYINT},
+      tg_score = #{tgScore,jdbcType=TINYINT},
+      mb_score_ot1 = #{mbScoreOt1,jdbcType=TINYINT},
+      tb_score_ot1 = #{tbScoreOt1,jdbcType=TINYINT},
+      mb_score_ot2 = #{mbScoreOt2,jdbcType=TINYINT},
+      tb_score_ot2 = #{tbScoreOt2,jdbcType=TINYINT},
+      m_date = #{mDate,jdbcType=DATE}
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+</mapper>

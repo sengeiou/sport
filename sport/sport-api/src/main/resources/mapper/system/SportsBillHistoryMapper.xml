@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.SportsBillHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.SportsBillHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="mid" property="mid" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="active" property="active" jdbcType="TINYINT" />
+    <result column="linetype" property="linetype" jdbcType="TINYINT" />
+    <result column="mtype" property="mtype" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="BIT" />
+    <result column="m_date" property="mDate" jdbcType="DATE" />
+    <result column="bettime" property="bettime" jdbcType="TIMESTAMP" />
+    <result column="gold" property="gold" jdbcType="DECIMAL" />
+    <result column="m_place" property="mPlace" jdbcType="VARCHAR" />
+    <result column="m_rate" property="mRate" jdbcType="VARCHAR" />
+    <result column="gwin" property="gwin" jdbcType="DECIMAL" />
+    <result column="m_result" property="mResult" jdbcType="DECIMAL" />
+    <result column="show_type" property="showType" jdbcType="CHAR" />
+    <result column="cancel" property="cancel" jdbcType="BIT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="ptype" property="ptype" jdbcType="CHAR" />
+    <result column="gtype" property="gtype" jdbcType="CHAR" />
+    <result column="mb_mid" property="mbMid" jdbcType="INTEGER" />
+    <result column="tg_mid" property="tgMid" jdbcType="INTEGER" />
+    <result column="mb_ball" property="mbBall" jdbcType="TINYINT" />
+    <result column="tg_ball" property="tgBall" jdbcType="TINYINT" />
+    <result column="checked" property="checked" jdbcType="BIT" />
+    <result column="confirmed" property="confirmed" jdbcType="TINYINT" />
+    <result column="danger" property="danger" jdbcType="BIT" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="last_bet_money" property="lastBetMoney" jdbcType="DECIMAL" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mid, userid, username, active, linetype, mtype, pay_type, m_date, bettime, gold, 
+    m_place, m_rate, gwin, m_result, show_type, cancel, type, ptype, gtype, mb_mid, tg_mid, 
+    mb_ball, tg_ball, checked, confirmed, danger, score, last_bet_money, server_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_sports_bill_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from web_sports_bill_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.SportsBillHistory" >
+    insert into web_sports_bill_history (id, mid, userid, 
+      username, active, linetype, 
+      mtype, pay_type, m_date, bettime, 
+      gold, m_place, m_rate, 
+      gwin, m_result, show_type, 
+      cancel, type, ptype, gtype, 
+      mb_mid, tg_mid, mb_ball, 
+      tg_ball, checked, confirmed, 
+      danger, score, last_bet_money, 
+      server_admin)
+    values (#{id,jdbcType=BIGINT}, #{mid,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{active,jdbcType=TINYINT}, #{linetype,jdbcType=TINYINT}, 
+      #{mtype,jdbcType=VARCHAR}, #{payType,jdbcType=BIT}, #{mDate,jdbcType=DATE}, #{bettime,jdbcType=TIMESTAMP}, 
+      #{gold,jdbcType=DECIMAL}, #{mPlace,jdbcType=VARCHAR}, #{mRate,jdbcType=VARCHAR}, 
+      #{gwin,jdbcType=DECIMAL}, #{mResult,jdbcType=DECIMAL}, #{showType,jdbcType=CHAR}, 
+      #{cancel,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, #{ptype,jdbcType=CHAR}, #{gtype,jdbcType=CHAR}, 
+      #{mbMid,jdbcType=INTEGER}, #{tgMid,jdbcType=INTEGER}, #{mbBall,jdbcType=TINYINT}, 
+      #{tgBall,jdbcType=TINYINT}, #{checked,jdbcType=BIT}, #{confirmed,jdbcType=TINYINT}, 
+      #{danger,jdbcType=BIT}, #{score,jdbcType=VARCHAR}, #{lastBetMoney,jdbcType=DECIMAL}, 
+      #{serverAdmin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.SportsBillHistory" >
+    insert into web_sports_bill_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="active != null" >
+        active,
+      </if>
+      <if test="linetype != null" >
+        linetype,
+      </if>
+      <if test="mtype != null" >
+        mtype,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="mDate != null" >
+        m_date,
+      </if>
+      <if test="bettime != null" >
+        bettime,
+      </if>
+      <if test="gold != null" >
+        gold,
+      </if>
+      <if test="mPlace != null" >
+        m_place,
+      </if>
+      <if test="mRate != null" >
+        m_rate,
+      </if>
+      <if test="gwin != null" >
+        gwin,
+      </if>
+      <if test="mResult != null" >
+        m_result,
+      </if>
+      <if test="showType != null" >
+        show_type,
+      </if>
+      <if test="cancel != null" >
+        cancel,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="ptype != null" >
+        ptype,
+      </if>
+      <if test="gtype != null" >
+        gtype,
+      </if>
+      <if test="mbMid != null" >
+        mb_mid,
+      </if>
+      <if test="tgMid != null" >
+        tg_mid,
+      </if>
+      <if test="mbBall != null" >
+        mb_ball,
+      </if>
+      <if test="tgBall != null" >
+        tg_ball,
+      </if>
+      <if test="checked != null" >
+        checked,
+      </if>
+      <if test="confirmed != null" >
+        confirmed,
+      </if>
+      <if test="danger != null" >
+        danger,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="lastBetMoney != null" >
+        last_bet_money,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null" >
+        #{active,jdbcType=TINYINT},
+      </if>
+      <if test="linetype != null" >
+        #{linetype,jdbcType=TINYINT},
+      </if>
+      <if test="mtype != null" >
+        #{mtype,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=BIT},
+      </if>
+      <if test="mDate != null" >
+        #{mDate,jdbcType=DATE},
+      </if>
+      <if test="bettime != null" >
+        #{bettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gold != null" >
+        #{gold,jdbcType=DECIMAL},
+      </if>
+      <if test="mPlace != null" >
+        #{mPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="mRate != null" >
+        #{mRate,jdbcType=VARCHAR},
+      </if>
+      <if test="gwin != null" >
+        #{gwin,jdbcType=DECIMAL},
+      </if>
+      <if test="mResult != null" >
+        #{mResult,jdbcType=DECIMAL},
+      </if>
+      <if test="showType != null" >
+        #{showType,jdbcType=CHAR},
+      </if>
+      <if test="cancel != null" >
+        #{cancel,jdbcType=BIT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null" >
+        #{ptype,jdbcType=CHAR},
+      </if>
+      <if test="gtype != null" >
+        #{gtype,jdbcType=CHAR},
+      </if>
+      <if test="mbMid != null" >
+        #{mbMid,jdbcType=INTEGER},
+      </if>
+      <if test="tgMid != null" >
+        #{tgMid,jdbcType=INTEGER},
+      </if>
+      <if test="mbBall != null" >
+        #{mbBall,jdbcType=TINYINT},
+      </if>
+      <if test="tgBall != null" >
+        #{tgBall,jdbcType=TINYINT},
+      </if>
+      <if test="checked != null" >
+        #{checked,jdbcType=BIT},
+      </if>
+      <if test="confirmed != null" >
+        #{confirmed,jdbcType=TINYINT},
+      </if>
+      <if test="danger != null" >
+        #{danger,jdbcType=BIT},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBetMoney != null" >
+        #{lastBetMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.SportsBillHistory" >
+    update web_sports_bill_history
+    <set >
+      <if test="mid != null" >
+        mid = #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=TINYINT},
+      </if>
+      <if test="linetype != null" >
+        linetype = #{linetype,jdbcType=TINYINT},
+      </if>
+      <if test="mtype != null" >
+        mtype = #{mtype,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=BIT},
+      </if>
+      <if test="mDate != null" >
+        m_date = #{mDate,jdbcType=DATE},
+      </if>
+      <if test="bettime != null" >
+        bettime = #{bettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gold != null" >
+        gold = #{gold,jdbcType=DECIMAL},
+      </if>
+      <if test="mPlace != null" >
+        m_place = #{mPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="mRate != null" >
+        m_rate = #{mRate,jdbcType=VARCHAR},
+      </if>
+      <if test="gwin != null" >
+        gwin = #{gwin,jdbcType=DECIMAL},
+      </if>
+      <if test="mResult != null" >
+        m_result = #{mResult,jdbcType=DECIMAL},
+      </if>
+      <if test="showType != null" >
+        show_type = #{showType,jdbcType=CHAR},
+      </if>
+      <if test="cancel != null" >
+        cancel = #{cancel,jdbcType=BIT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null" >
+        ptype = #{ptype,jdbcType=CHAR},
+      </if>
+      <if test="gtype != null" >
+        gtype = #{gtype,jdbcType=CHAR},
+      </if>
+      <if test="mbMid != null" >
+        mb_mid = #{mbMid,jdbcType=INTEGER},
+      </if>
+      <if test="tgMid != null" >
+        tg_mid = #{tgMid,jdbcType=INTEGER},
+      </if>
+      <if test="mbBall != null" >
+        mb_ball = #{mbBall,jdbcType=TINYINT},
+      </if>
+      <if test="tgBall != null" >
+        tg_ball = #{tgBall,jdbcType=TINYINT},
+      </if>
+      <if test="checked != null" >
+        checked = #{checked,jdbcType=BIT},
+      </if>
+      <if test="confirmed != null" >
+        confirmed = #{confirmed,jdbcType=TINYINT},
+      </if>
+      <if test="danger != null" >
+        danger = #{danger,jdbcType=BIT},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBetMoney != null" >
+        last_bet_money = #{lastBetMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.SportsBillHistory" >
+    update web_sports_bill_history
+    set mid = #{mid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      active = #{active,jdbcType=TINYINT},
+      linetype = #{linetype,jdbcType=TINYINT},
+      mtype = #{mtype,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=BIT},
+      m_date = #{mDate,jdbcType=DATE},
+      bettime = #{bettime,jdbcType=TIMESTAMP},
+      gold = #{gold,jdbcType=DECIMAL},
+      m_place = #{mPlace,jdbcType=VARCHAR},
+      m_rate = #{mRate,jdbcType=VARCHAR},
+      gwin = #{gwin,jdbcType=DECIMAL},
+      m_result = #{mResult,jdbcType=DECIMAL},
+      show_type = #{showType,jdbcType=CHAR},
+      cancel = #{cancel,jdbcType=BIT},
+      type = #{type,jdbcType=VARCHAR},
+      ptype = #{ptype,jdbcType=CHAR},
+      gtype = #{gtype,jdbcType=CHAR},
+      mb_mid = #{mbMid,jdbcType=INTEGER},
+      tg_mid = #{tgMid,jdbcType=INTEGER},
+      mb_ball = #{mbBall,jdbcType=TINYINT},
+      tg_ball = #{tgBall,jdbcType=TINYINT},
+      checked = #{checked,jdbcType=BIT},
+      confirmed = #{confirmed,jdbcType=TINYINT},
+      danger = #{danger,jdbcType=BIT},
+      score = #{score,jdbcType=VARCHAR},
+      last_bet_money = #{lastBetMoney,jdbcType=DECIMAL},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

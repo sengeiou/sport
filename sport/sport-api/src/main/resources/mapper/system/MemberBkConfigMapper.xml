@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MemberBkConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MemberBkConfig" >
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+    <result column="bk_re_ftht_min" property="bkReFthtMin" jdbcType="INTEGER" />
+    <result column="bk_re_ftht_max" property="bkReFthtMax" jdbcType="INTEGER" />
+    <result column="bk_re_ah_min" property="bkReAhMin" jdbcType="INTEGER" />
+    <result column="bk_re_ah_max" property="bkReAhMax" jdbcType="INTEGER" />
+    <result column="bk_re_ou_min" property="bkReOuMin" jdbcType="INTEGER" />
+    <result column="bk_re_ou_max" property="bkReOuMax" jdbcType="INTEGER" />
+    <result column="bk_re_big_min" property="bkReBigMin" jdbcType="INTEGER" />
+    <result column="bk_re_big_max" property="bkReBigMax" jdbcType="INTEGER" />
+    <result column="bk_re_small_min" property="bkReSmallMin" jdbcType="INTEGER" />
+    <result column="bk_re_small_max" property="bkReSmallMax" jdbcType="INTEGER" />
+    <result column="bk_rb_ftht_min" property="bkRbFthtMin" jdbcType="INTEGER" />
+    <result column="bk_rb_ftht_max" property="bkRbFthtMax" jdbcType="INTEGER" />
+    <result column="bk_rb_ah_min" property="bkRbAhMin" jdbcType="INTEGER" />
+    <result column="bk_rb_ah_max" property="bkRbAhMax" jdbcType="INTEGER" />
+    <result column="bk_rb_ou_min" property="bkRbOuMin" jdbcType="INTEGER" />
+    <result column="bk_rb_ou_max" property="bkRbOuMax" jdbcType="INTEGER" />
+    <result column="bk_rb_big_min" property="bkRbBigMin" jdbcType="INTEGER" />
+    <result column="bk_rb_big_max" property="bkRbBigMax" jdbcType="INTEGER" />
+    <result column="bk_rb_small_min" property="bkRbSmallMin" jdbcType="INTEGER" />
+    <result column="bk_rb_small_max" property="bkRbSmallMax" jdbcType="INTEGER" />
+    <result column="bk_r_ftht_min" property="bkRFthtMin" jdbcType="INTEGER" />
+    <result column="bk_r_ftht_max" property="bkRFthtMax" jdbcType="INTEGER" />
+    <result column="bk_r_ah_min" property="bkRAhMin" jdbcType="INTEGER" />
+    <result column="bk_r_ah_max" property="bkRAhMax" jdbcType="INTEGER" />
+    <result column="bk_r_ou_min" property="bkROuMin" jdbcType="INTEGER" />
+    <result column="bk_r_ou_max" property="bkROuMax" jdbcType="INTEGER" />
+    <result column="bk_r_big_min" property="bkRBigMin" jdbcType="INTEGER" />
+    <result column="bk_r_big_max" property="bkRBigMax" jdbcType="INTEGER" />
+    <result column="bk_r_small_min" property="bkRSmallMin" jdbcType="INTEGER" />
+    <result column="bk_r_small_max" property="bkRSmallMax" jdbcType="INTEGER" />
+    <result column="bk_or_min" property="bkOrMin" jdbcType="INTEGER" />
+    <result column="bk_or_max" property="bkOrMax" jdbcType="INTEGER" />
+    <result column="bk_p3_min" property="bkP3Min" jdbcType="INTEGER" />
+    <result column="bk_p3_max" property="bkP3Max" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cn.great.model.system.MemberBkConfig" >
+    insert into web_member_bk_config (userid, type, server_admin, 
+      bk_re_ftht_min, bk_re_ftht_max, bk_re_ah_min, 
+      bk_re_ah_max, bk_re_ou_min, bk_re_ou_max, 
+      bk_re_big_min, bk_re_big_max, bk_re_small_min, 
+      bk_re_small_max, bk_rb_ftht_min, bk_rb_ftht_max, 
+      bk_rb_ah_min, bk_rb_ah_max, bk_rb_ou_min, 
+      bk_rb_ou_max, bk_rb_big_min, bk_rb_big_max, 
+      bk_rb_small_min, bk_rb_small_max, bk_r_ftht_min, 
+      bk_r_ftht_max, bk_r_ah_min, bk_r_ah_max, 
+      bk_r_ou_min, bk_r_ou_max, bk_r_big_min, 
+      bk_r_big_max, bk_r_small_min, bk_r_small_max, 
+      bk_or_min, bk_or_max, bk_p3_min, 
+      bk_p3_max)
+    values (#{userid,jdbcType=INTEGER}, #{type,jdbcType=BIT}, #{serverAdmin,jdbcType=VARCHAR}, 
+      #{bkReFthtMin,jdbcType=INTEGER}, #{bkReFthtMax,jdbcType=INTEGER}, #{bkReAhMin,jdbcType=INTEGER}, 
+      #{bkReAhMax,jdbcType=INTEGER}, #{bkReOuMin,jdbcType=INTEGER}, #{bkReOuMax,jdbcType=INTEGER}, 
+      #{bkReBigMin,jdbcType=INTEGER}, #{bkReBigMax,jdbcType=INTEGER}, #{bkReSmallMin,jdbcType=INTEGER}, 
+      #{bkReSmallMax,jdbcType=INTEGER}, #{bkRbFthtMin,jdbcType=INTEGER}, #{bkRbFthtMax,jdbcType=INTEGER}, 
+      #{bkRbAhMin,jdbcType=INTEGER}, #{bkRbAhMax,jdbcType=INTEGER}, #{bkRbOuMin,jdbcType=INTEGER}, 
+      #{bkRbOuMax,jdbcType=INTEGER}, #{bkRbBigMin,jdbcType=INTEGER}, #{bkRbBigMax,jdbcType=INTEGER}, 
+      #{bkRbSmallMin,jdbcType=INTEGER}, #{bkRbSmallMax,jdbcType=INTEGER}, #{bkRFthtMin,jdbcType=INTEGER}, 
+      #{bkRFthtMax,jdbcType=INTEGER}, #{bkRAhMin,jdbcType=INTEGER}, #{bkRAhMax,jdbcType=INTEGER}, 
+      #{bkROuMin,jdbcType=INTEGER}, #{bkROuMax,jdbcType=INTEGER}, #{bkRBigMin,jdbcType=INTEGER}, 
+      #{bkRBigMax,jdbcType=INTEGER}, #{bkRSmallMin,jdbcType=INTEGER}, #{bkRSmallMax,jdbcType=INTEGER}, 
+      #{bkOrMin,jdbcType=INTEGER}, #{bkOrMax,jdbcType=INTEGER}, #{bkP3Min,jdbcType=INTEGER}, 
+      #{bkP3Max,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MemberBkConfig" >
+    insert into web_member_bk_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+      <if test="bkReFthtMin != null" >
+        bk_re_ftht_min,
+      </if>
+      <if test="bkReFthtMax != null" >
+        bk_re_ftht_max,
+      </if>
+      <if test="bkReAhMin != null" >
+        bk_re_ah_min,
+      </if>
+      <if test="bkReAhMax != null" >
+        bk_re_ah_max,
+      </if>
+      <if test="bkReOuMin != null" >
+        bk_re_ou_min,
+      </if>
+      <if test="bkReOuMax != null" >
+        bk_re_ou_max,
+      </if>
+      <if test="bkReBigMin != null" >
+        bk_re_big_min,
+      </if>
+      <if test="bkReBigMax != null" >
+        bk_re_big_max,
+      </if>
+      <if test="bkReSmallMin != null" >
+        bk_re_small_min,
+      </if>
+      <if test="bkReSmallMax != null" >
+        bk_re_small_max,
+      </if>
+      <if test="bkRbFthtMin != null" >
+        bk_rb_ftht_min,
+      </if>
+      <if test="bkRbFthtMax != null" >
+        bk_rb_ftht_max,
+      </if>
+      <if test="bkRbAhMin != null" >
+        bk_rb_ah_min,
+      </if>
+      <if test="bkRbAhMax != null" >
+        bk_rb_ah_max,
+      </if>
+      <if test="bkRbOuMin != null" >
+        bk_rb_ou_min,
+      </if>
+      <if test="bkRbOuMax != null" >
+        bk_rb_ou_max,
+      </if>
+      <if test="bkRbBigMin != null" >
+        bk_rb_big_min,
+      </if>
+      <if test="bkRbBigMax != null" >
+        bk_rb_big_max,
+      </if>
+      <if test="bkRbSmallMin != null" >
+        bk_rb_small_min,
+      </if>
+      <if test="bkRbSmallMax != null" >
+        bk_rb_small_max,
+      </if>
+      <if test="bkRFthtMin != null" >
+        bk_r_ftht_min,
+      </if>
+      <if test="bkRFthtMax != null" >
+        bk_r_ftht_max,
+      </if>
+      <if test="bkRAhMin != null" >
+        bk_r_ah_min,
+      </if>
+      <if test="bkRAhMax != null" >
+        bk_r_ah_max,
+      </if>
+      <if test="bkROuMin != null" >
+        bk_r_ou_min,
+      </if>
+      <if test="bkROuMax != null" >
+        bk_r_ou_max,
+      </if>
+      <if test="bkRBigMin != null" >
+        bk_r_big_min,
+      </if>
+      <if test="bkRBigMax != null" >
+        bk_r_big_max,
+      </if>
+      <if test="bkRSmallMin != null" >
+        bk_r_small_min,
+      </if>
+      <if test="bkRSmallMax != null" >
+        bk_r_small_max,
+      </if>
+      <if test="bkOrMin != null" >
+        bk_or_min,
+      </if>
+      <if test="bkOrMax != null" >
+        bk_or_max,
+      </if>
+      <if test="bkP3Min != null" >
+        bk_p3_min,
+      </if>
+      <if test="bkP3Max != null" >
+        bk_p3_max,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="bkReFthtMin != null" >
+        #{bkReFthtMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkReFthtMax != null" >
+        #{bkReFthtMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkReAhMin != null" >
+        #{bkReAhMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkReAhMax != null" >
+        #{bkReAhMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkReOuMin != null" >
+        #{bkReOuMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkReOuMax != null" >
+        #{bkReOuMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkReBigMin != null" >
+        #{bkReBigMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkReBigMax != null" >
+        #{bkReBigMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkReSmallMin != null" >
+        #{bkReSmallMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkReSmallMax != null" >
+        #{bkReSmallMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbFthtMin != null" >
+        #{bkRbFthtMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbFthtMax != null" >
+        #{bkRbFthtMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbAhMin != null" >
+        #{bkRbAhMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbAhMax != null" >
+        #{bkRbAhMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbOuMin != null" >
+        #{bkRbOuMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbOuMax != null" >
+        #{bkRbOuMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbBigMin != null" >
+        #{bkRbBigMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbBigMax != null" >
+        #{bkRbBigMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbSmallMin != null" >
+        #{bkRbSmallMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRbSmallMax != null" >
+        #{bkRbSmallMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRFthtMin != null" >
+        #{bkRFthtMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRFthtMax != null" >
+        #{bkRFthtMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRAhMin != null" >
+        #{bkRAhMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRAhMax != null" >
+        #{bkRAhMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkROuMin != null" >
+        #{bkROuMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkROuMax != null" >
+        #{bkROuMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRBigMin != null" >
+        #{bkRBigMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRBigMax != null" >
+        #{bkRBigMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkRSmallMin != null" >
+        #{bkRSmallMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkRSmallMax != null" >
+        #{bkRSmallMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkOrMin != null" >
+        #{bkOrMin,jdbcType=INTEGER},
+      </if>
+      <if test="bkOrMax != null" >
+        #{bkOrMax,jdbcType=INTEGER},
+      </if>
+      <if test="bkP3Min != null" >
+        #{bkP3Min,jdbcType=INTEGER},
+      </if>
+      <if test="bkP3Max != null" >
+        #{bkP3Max,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

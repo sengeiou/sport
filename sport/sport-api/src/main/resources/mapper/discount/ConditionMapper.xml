@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.discount.ConditionMapper">
+
+    <sql id="condition">
+     id,`name`,`condition`,	white,black,beta,start_time startTime,end_time endTime,total,get_money getMoney,`status`,server_admin serverAdmin
+    </sql>
+
+    <update id="conditionModify">
+      UPDATE web_activity_condition set get_money=total-#{ran} where id=#{id}
+    </update>
+
+    <select id="ConditionById" resultType="com.cn.great.model.discount.ConditionEntity">
+        select
+        <include refid="condition"/>
+        from web_activity_condition where id=#{id}
+    </select>
+
+    <select id="moneyInfo" resultType="java.lang.String">
+        select SUM(money) from web_money_log where userid=#{id} and type=4 and add_date > #{time}
+    </select>
+    
+</mapper>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.bill.BillMapper">
+    <resultMap id="mgBills" type="com.cn.great.model.bill.MgBill">
+        <result column="key" property="key" jdbcType="CHAR"/>
+        <result column="colId" property="colid" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="CHAR"/>
+        <result column="transactionTimestampDate" property="transactiontimestampdate" jdbcType="BIGINT"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="mbrCode" property="mbrcode" jdbcType="VARCHAR"/>
+        <result column="gameCasinoId" property="gamecasinoid" jdbcType="VARCHAR"/>
+        <result column="afterTxWalletAmount" property="aftertxwalletamount" jdbcType="DECIMAL"/>
+        <result column="mgsGameId" property="mgsgameid" jdbcType="INTEGER"/>
+        <result column="gamePlatformType" property="gameplatformtype" jdbcType="CHAR"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="username" property="userName" jdbcType="CHAR"/>
+    </resultMap>
+
+    <resultMap id="agBills" type="com.cn.great.model.bill.AgBill">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="billno" property="billno" jdbcType="VARCHAR"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="game_code" property="gameCode" jdbcType="CHAR"/>
+        <result column="net_amount" property="netAmount" jdbcType="DECIMAL"/>
+        <result column="bet_time" property="betTime" jdbcType="TIMESTAMP"/>
+        <result column="game_type" property="gameType" jdbcType="VARCHAR"/>
+        <result column="bet_amount" property="betAmount" jdbcType="DECIMAL"/>
+        <result column="valid_bet_amount" property="validBetAmount" jdbcType="DECIMAL"/>
+        <result column="flag" property="flag" jdbcType="BIT"/>
+        <result column="play_type" property="playType" jdbcType="INTEGER"/>
+        <result column="currency" property="currency" jdbcType="CHAR"/>
+        <result column="login_ip" property="loginIp" jdbcType="BIGINT"/>
+        <result column="recalcu_time" property="recalcuTime" jdbcType="TIMESTAMP"/>
+        <result column="platform_type" property="platformType" jdbcType="VARCHAR"/>
+        <result column="round" property="round" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="INTEGER"/>
+        <result column="username" property="userName" jdbcType="CHAR"/>
+    </resultMap>
+
+    <resultMap id="lotteryBills" type="com.cn.great.model.bill.LotteryBill">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="game_code" property="gameCode" jdbcType="INTEGER"/>
+        <result column="type_code" property="typeCode" jdbcType="INTEGER"/>
+        <result column="happy8" property="happy8" jdbcType="INTEGER"/>
+        <result column="round" property="round" jdbcType="VARCHAR"/>
+        <result column="drop_money" property="dropMoney" jdbcType="DECIMAL"/>
+        <result column="drop_content" property="dropContent" jdbcType="VARCHAR"/>
+        <result column="total" property="total" jdbcType="DECIMAL"/>
+        <result column="valid_money" property="validMoney" jdbcType="DECIMAL"/>
+        <result column="user_win" property="userWin" jdbcType="DECIMAL"/>
+        <result column="user_cut" property="userCut" jdbcType="DECIMAL"/>
+        <result column="user_rate" property="userRate" jdbcType="DECIMAL"/>
+        <result column="xq_rate" property="xqRate" jdbcType="VARCHAR"/>
+        <result column="count_pay" property="countPay" jdbcType="INTEGER"/>
+        <result column="bet_ip" property="betIp" jdbcType="BIGINT"/>
+        <result column="bet_time" property="betTime" jdbcType="TIMESTAMP"/>
+        <result column="xq_de_id" property="xqDeId" jdbcType="INTEGER"/>
+        <result column="count_status" property="countStatus" jdbcType="INTEGER"/>
+        <result column="order_number" property="orderNumber" jdbcType="VARCHAR"/>
+        <result column="username" property="userName" jdbcType="CHAR"/>
+    </resultMap>
+
+    <resultMap id="sportBill" type="com.cn.great.model.bill.SportBillEntity">
+        <id column="id" property="id" jdbcType="INTEGER"></id>
+        <result column="userid" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="userName" jdbcType="VARCHAR"/>
+        <result column="active" property="active" jdbcType="INTEGER"/>
+        <result column="mid" property="mid" jdbcType="INTEGER"/>
+        <result column="mleagueid" property="mLeagueId" jdbcType="INTEGER"/>
+        <result column="mtype" property="mType" jdbcType="VARCHAR"/>
+        <result column="m_result" property="mResult" jdbcType="DECIMAL"/>
+        <result column="linetype" property="lineType" jdbcType="INTEGER"/>
+        <result column="bettime" property="bettime"  jdbcType="TIMESTAMP"/>
+        <result column="gold" property="gold"  jdbcType="DECIMAL"/>
+        <result column="mdate" property="mDate"  jdbcType="TIMESTAMP"/>
+        <result column="mrate" property="mRate"  jdbcType="VARCHAR"/>
+        <result column="m_place" property="mPlace"  jdbcType="VARCHAR"/>
+        <result column="gwin" property="gwin" jdbcType="DECIMAL"/>
+        <result column="show_type" property="showType" jdbcType="VARCHAR"/>
+        <result column="cancel" property="cancel" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="ptype" property="pType" jdbcType="VARCHAR"/>
+        <result column="gtype" property="gType" jdbcType="VARCHAR"/>
+        <result column="mb_ball" property="mbBall" jdbcType="INTEGER"/>
+        <result column="tg_ball" property="tgBall" jdbcType="INTEGER"/>
+        <result column="checked" property="checked" jdbcType="INTEGER"/>
+        <result column="confirmed" property="confirmed" jdbcType="INTEGER"/>
+        <result column="danger" property="danger" jdbcType="INTEGER"/>
+        <result column="score1" property="score1" jdbcType="VARCHAR"/>
+        <result column="score2" property="score2" jdbcType="VARCHAR"/>
+        <result column="last_bet_money" property="lastBetMoney" jdbcType="DECIMAL"/>
+        <result column="agent_id" property="agentId" jdbcType="INTEGER"/>
+        <result column="betip" property="betIp" jdbcType="INTEGER"/>
+        <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR"/>
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="after_bet_credit" property="afterBetCredit" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="fetchSportList" resultMap="sportBill" parameterType="com.cn.great.req.bill.SportBillReq">
+        select id,userid,username,active,mid,mleagueid,mtype,m_result,linetype,bettime,gold,mdate,
+        mrate,m_place,gwin,show_type,cancel,type,ptype,gtype,mb_ball,tg_ball,checked,
+        confirmed,danger,score1,score2,last_bet_money,agent_id,betip,server_admin,order_no,after_bet_credit
+        from web_sports_bill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != orderNo and '' != orderNo">
+                and order_no = #{orderNo}
+            </if>
+            <if test="null != gType and '' != gType">
+                and gtype = #{gType}
+            </if>
+            <if test="null != pType and '' != pType">
+                and ptype = #{pType}
+            </if>
+            <if test="null != beginTime and '' != beginTime">
+                and bettime  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="null != endTime and '' != endTime">
+                and bettime  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+        order by bettime desc limit #{start}, #{length}
+    </select>
+
+    <select id="countSportBill" resultType="java.lang.String" parameterType="com.cn.great.req.bill.SportBillReq">
+        select CONCAT(count(id),',',IFNULL(sum(gold),0),',', IFNULL(sum(gwin),0),',',
+        IFNULL(sum(last_bet_money),0),',',IFNULL(sum(after_bet_credit),0))
+        from web_sports_bill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != id and '' != id">
+                and id = #{id}
+            </if>
+            <if test="null != gType and '' != gType">
+                and gtype = #{gType}
+            </if>
+            <if test="null != pType and '' != pType">
+                and ptype = #{pType}
+            </if>
+            <if test="null != beginTime and '' != beginTime">
+                and bettime  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="null != endTime and '' != endTime">
+                and bettime  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="fetchMgList" resultMap="mgBills" parameterType="com.cn.great.req.bill.MGBillReq">
+        select a.*, b.username
+        from web_mg_bill a
+        left join
+        web_member_data b
+        on a.userid=b.id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != colid and '' != colid">
+                and a.colId = #{colid}
+            </if>
+            <if test="null != type and '' != type">
+                and a.type = #{type}
+            </if>
+            <if test="startTime != 0">
+                and a.transactionTimestampDate  <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="finalTime != 0">
+                and a.transactionTimestampDate  <![CDATA[ <= ]]> #{finalTime}
+            </if>
+        </trim>
+        order by a.transactionTimestampDate desc limit #{start}, #{length}
+    </select>
+
+    <select id="countMGBill" resultType="java.lang.String" parameterType="com.cn.great.req.bill.MGBillReq">
+        select CONCAT(count(colId),',',IFNULL(sum(amount),0),',', IFNULL(sum(aftertxwalletamount),0)) from web_mg_bill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != colid and '' != colid">
+                and colId = #{colid}
+            </if>
+            <if test="null != type and '' != type">
+                and type = #{type}
+            </if>
+            <if test="startTime != 0">
+                and transactionTimestampDate  <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="finalTime != 0">
+                and transactionTimestampDate  <![CDATA[ <= ]]> #{finalTime}
+            </if>
+        </trim>
+    </select>
+
+    <select id="fetchAgList" resultMap="agBills" parameterType="com.cn.great.req.bill.AGBillReq">
+        select a.*, b.username
+        from web_ag_bill a
+        left join
+        web_member_data b
+        on a.userid=b.id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != billno and '' != billno">
+                and a.billno = #{billno}
+            </if>
+            <if test="null != gameCode and '' != gameCode">
+                and a.game_code = #{gameCode}
+            </if>
+            <if test="null != beginTime and '' != beginTime">
+                and a.bet_time  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="null != endTime and '' != endTime">
+                and a.bet_time  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+        order by a.bet_time desc limit #{start}, #{length}
+    </select>
+
+    <select id="countAGBill" resultType="java.lang.String" parameterType="com.cn.great.req.bill.AGBillReq">
+        select CONCAT(count(billno),',',IFNULL(sum(bet_amount),0),',', IFNULL(sum(valid_bet_amount),0),',',
+        IFNULL(sum(net_amount),0))
+        from web_ag_bill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != billno and '' != billno">
+                and billno = #{billno}
+            </if>
+            <if test="null != gameCode and '' != gameCode">
+                and game_code = #{gameCode}
+            </if>
+            <if test="null != beginTime and '' != beginTime">
+                and bet_time  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="null != endTime and '' != endTime">
+                and bet_time  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+    </select>
+
+    <select id="fetchLotteryList" resultMap="lotteryBills" parameterType="com.cn.great.req.bill.LotteryBillReq">
+        select a.*, b.username
+        from web_lottery_bill a
+        left join
+        web_member_data b
+        on a.userid=b.id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != orderNumber and '' != orderNumber">
+                and a.order_number = #{orderNumber}
+            </if>
+            <if test="null != round and '' != round">
+                and a.round = #{round}
+            </if>
+            <if test="countStatus != -1">
+                and a.count_status = #{countStatus}
+            </if>
+            <if test="null != beginTime and '' != beginTime">
+                and a.bet_time  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="null != endTime and '' != endTime">
+                and a.bet_time  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+        order by a.bet_time desc limit #{start}, #{length}
+    </select>
+
+    <select id="countLotteryBill" resultType="java.lang.String" parameterType="com.cn.great.req.bill.LotteryBillReq">
+        select CONCAT(count(order_number),',',IFNULL(sum(drop_money),0),',', IFNULL(sum(user_win),0))
+        from web_lottery_bill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != orderNumber and '' != orderNumber">
+                and order_number = #{orderNumber}
+            </if>
+            <if test="null != round and '' != round">
+                and round = #{round}
+            </if>
+            <if test="countStatus != -1">
+                and count_status = #{countStatus}
+            </if>
+            <if test="null != beginTime and '' != beginTime">
+                and bet_time  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="null != endTime and '' != endTime">
+                and bet_time  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

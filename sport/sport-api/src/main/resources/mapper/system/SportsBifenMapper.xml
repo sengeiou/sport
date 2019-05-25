@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.SportsBifenMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.SportsBifen" >
+    <result column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="mleagueid" property="mleagueid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="mleague" property="mleague" jdbcType="VARCHAR" />
+    <result column="mbteam" property="mbteam" jdbcType="VARCHAR" />
+    <result column="tgteam" property="tgteam" jdbcType="VARCHAR" />
+    <result column="mdate" property="mdate" jdbcType="DATE" />
+    <result column="datetimes" property="datetimes" jdbcType="VARCHAR" />
+    <result column="scoreFirstHalf" property="scorefirsthalf" jdbcType="VARCHAR" />
+    <result column="scoreFullCourt" property="scorefullcourt" jdbcType="VARCHAR" />
+    <result column="all" property="all" jdbcType="OTHER" />
+    <result column="score1" property="score1" jdbcType="VARCHAR" />
+    <result column="score2" property="score2" jdbcType="VARCHAR" />
+    <result column="score3" property="score3" jdbcType="VARCHAR" />
+    <result column="score4" property="score4" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cn.great.model.system.SportsBifen" >
+    insert into web_sports_bifen (mid, mleagueid, type, 
+      mleague, mbteam, tgteam, 
+      mdate, datetimes, scoreFirstHalf, 
+      scoreFullCourt, all, score1, 
+      score2, score3, score4, 
+      status)
+    values (#{mid,jdbcType=INTEGER}, #{mleagueid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{mleague,jdbcType=VARCHAR}, #{mbteam,jdbcType=VARCHAR}, #{tgteam,jdbcType=VARCHAR}, 
+      #{mdate,jdbcType=DATE}, #{datetimes,jdbcType=VARCHAR}, #{scorefirsthalf,jdbcType=VARCHAR}, 
+      #{scorefullcourt,jdbcType=VARCHAR}, #{all,jdbcType=OTHER}, #{score1,jdbcType=VARCHAR}, 
+      #{score2,jdbcType=VARCHAR}, #{score3,jdbcType=VARCHAR}, #{score4,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.SportsBifen" >
+    insert into web_sports_bifen
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="mleagueid != null" >
+        mleagueid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="mleague != null" >
+        mleague,
+      </if>
+      <if test="mbteam != null" >
+        mbteam,
+      </if>
+      <if test="tgteam != null" >
+        tgteam,
+      </if>
+      <if test="mdate != null" >
+        mdate,
+      </if>
+      <if test="datetimes != null" >
+        datetimes,
+      </if>
+      <if test="scorefirsthalf != null" >
+        scoreFirstHalf,
+      </if>
+      <if test="scorefullcourt != null" >
+        scoreFullCourt,
+      </if>
+      <if test="all != null" >
+        all,
+      </if>
+      <if test="score1 != null" >
+        score1,
+      </if>
+      <if test="score2 != null" >
+        score2,
+      </if>
+      <if test="score3 != null" >
+        score3,
+      </if>
+      <if test="score4 != null" >
+        score4,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mleagueid != null" >
+        #{mleagueid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="mleague != null" >
+        #{mleague,jdbcType=VARCHAR},
+      </if>
+      <if test="mbteam != null" >
+        #{mbteam,jdbcType=VARCHAR},
+      </if>
+      <if test="tgteam != null" >
+        #{tgteam,jdbcType=VARCHAR},
+      </if>
+      <if test="mdate != null" >
+        #{mdate,jdbcType=DATE},
+      </if>
+      <if test="datetimes != null" >
+        #{datetimes,jdbcType=VARCHAR},
+      </if>
+      <if test="scorefirsthalf != null" >
+        #{scorefirsthalf,jdbcType=VARCHAR},
+      </if>
+      <if test="scorefullcourt != null" >
+        #{scorefullcourt,jdbcType=VARCHAR},
+      </if>
+      <if test="all != null" >
+        #{all,jdbcType=OTHER},
+      </if>
+      <if test="score1 != null" >
+        #{score1,jdbcType=VARCHAR},
+      </if>
+      <if test="score2 != null" >
+        #{score2,jdbcType=VARCHAR},
+      </if>
+      <if test="score3 != null" >
+        #{score3,jdbcType=VARCHAR},
+      </if>
+      <if test="score4 != null" >
+        #{score4,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

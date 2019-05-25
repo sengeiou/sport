@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.pay.PayLevelMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.pay.PayLevelEntity">
+        <id column="id" property="id"/>
+        <result column="level_name" property="levelName"/>
+        <result column="reg_start" property="regStart"/>
+        <result column="reg_end" property="regEnd"/>
+        <result column="mix_ctime" property="mixCtime"/>
+        <result column="max_ctime" property="maxCtime"/>
+        <result column="mix_amount" property="mixAmount"/>
+        <result column="max_amount" property="maxAmount"/>
+        <result column="notes" property="notes"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, level_name, reg_start, reg_end, mix_ctime, max_ctime, mix_amount, max_amount,
+        notes, server_admin,status
+    </sql>
+    <select id="getUserfulLevels" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from web_pay_level where status=1 and now() BETWEEN  reg_start and reg_end
+    </select>
+    <select id="selectById" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from web_pay_level
+        where id = #{id,jdbcType=TINYINT}
+    </select>
+    <insert id="insert" parameterType="com.cn.great.model.pay.PayLevelEntity" >
+        insert into web_pay_level (id, level_name, reg_start,
+        reg_end, mix_ctime, max_ctime,
+        mix_amount, max_amount, notes,
+        server_admin)
+        values (#{id,jdbcType=TINYINT}, #{levelName,jdbcType=VARCHAR}, #{regStart,jdbcType=DATE},
+        #{regEnd,jdbcType=DATE}, #{mixCtime,jdbcType=SMALLINT}, #{maxCtime,jdbcType=INTEGER},
+        #{mixAmount,jdbcType=DECIMAL}, #{maxAmount,jdbcType=DECIMAL}, #{notes,jdbcType=VARCHAR},
+        #{serverAdmin,jdbcType=VARCHAR})
+    </insert>
+    <update id="update" parameterType="com.cn.great.model.pay.PayLevelEntity" >
+        update web_pay_level
+        set level_name = #{levelName,jdbcType=VARCHAR},
+        reg_start = #{regStart,jdbcType=DATE},
+        reg_end = #{regEnd,jdbcType=DATE},
+        mix_ctime = #{mixCtime,jdbcType=SMALLINT},
+        max_ctime = #{maxCtime,jdbcType=INTEGER},
+        mix_amount = #{mixAmount,jdbcType=DECIMAL},
+        max_amount = #{maxAmount,jdbcType=DECIMAL},
+        notes = #{notes,jdbcType=VARCHAR},
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+        status=#{status}
+        where id = #{id,jdbcType=TINYINT}
+    </update>
+    <select id="fetchList" resultMap="BaseResultMap" parameterType="com.cn.great.req.pay.PayLevelReq">
+        select
+        <include refid="Base_Column_List" />
+        from web_pay_level where 1=1
+        <if test="status!=null">
+            and status=#{status}
+        </if>
+        <if test="levelName!=null and levelName!=''">
+            and level_name like CONCAT('%', #{levelName}, '%')
+        </if>
+        order by id desc limit #{start}, #{length}
+    </select>
+    <select id="count" resultType="int" parameterType="com.cn.great.req.pay.PayLevelReq">
+        select count(1)
+        from web_pay_level where 1=1
+        <if test="status!=null">
+            and status=#{status}
+        </if>
+        <if test="levelName!=null and levelName!=''">
+            and level_name like CONCAT('%', #{levelName}, '%')
+        </if>
+    </select>
+</mapper>

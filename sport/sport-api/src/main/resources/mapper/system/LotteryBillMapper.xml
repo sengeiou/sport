@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.LotteryBillMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.LotteryBill" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="game_code" property="gameCode" jdbcType="INTEGER" />
+    <result column="type_code" property="typeCode" jdbcType="INTEGER" />
+    <result column="happy8" property="happy8" jdbcType="INTEGER" />
+    <result column="round" property="round" jdbcType="VARCHAR" />
+    <result column="drop_money" property="dropMoney" jdbcType="DECIMAL" />
+    <result column="drop_content" property="dropContent" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="DECIMAL" />
+    <result column="valid_money" property="validMoney" jdbcType="DECIMAL" />
+    <result column="user_win" property="userWin" jdbcType="DECIMAL" />
+    <result column="user_cut" property="userCut" jdbcType="DECIMAL" />
+    <result column="user_rate" property="userRate" jdbcType="DECIMAL" />
+    <result column="xq_rate" property="xqRate" jdbcType="VARCHAR" />
+    <result column="count_pay" property="countPay" jdbcType="INTEGER" />
+    <result column="bet_ip" property="betIp" jdbcType="BIGINT" />
+    <result column="bet_time" property="betTime" jdbcType="TIMESTAMP" />
+    <result column="xq_de_id" property="xqDeId" jdbcType="INTEGER" />
+    <result column="count_status" property="countStatus" jdbcType="BIT" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, game_code, type_code, happy8, round, drop_money, drop_content, total, 
+    valid_money, user_win, user_cut, user_rate, xq_rate, count_pay, bet_ip, bet_time, 
+    xq_de_id, count_status, order_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_lottery_bill
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_lottery_bill
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.LotteryBill" >
+    insert into web_lottery_bill (id, userid, game_code, 
+      type_code, happy8, round, 
+      drop_money, drop_content, total, 
+      valid_money, user_win, user_cut, 
+      user_rate, xq_rate, count_pay, 
+      bet_ip, bet_time, xq_de_id, 
+      count_status, order_number)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{gameCode,jdbcType=INTEGER}, 
+      #{typeCode,jdbcType=INTEGER}, #{happy8,jdbcType=INTEGER}, #{round,jdbcType=VARCHAR}, 
+      #{dropMoney,jdbcType=DECIMAL}, #{dropContent,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, 
+      #{validMoney,jdbcType=DECIMAL}, #{userWin,jdbcType=DECIMAL}, #{userCut,jdbcType=DECIMAL}, 
+      #{userRate,jdbcType=DECIMAL}, #{xqRate,jdbcType=VARCHAR}, #{countPay,jdbcType=INTEGER}, 
+      #{betIp,jdbcType=BIGINT}, #{betTime,jdbcType=TIMESTAMP}, #{xqDeId,jdbcType=INTEGER}, 
+      #{countStatus,jdbcType=BIT}, #{orderNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.LotteryBill" >
+    insert into web_lottery_bill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="gameCode != null" >
+        game_code,
+      </if>
+      <if test="typeCode != null" >
+        type_code,
+      </if>
+      <if test="happy8 != null" >
+        happy8,
+      </if>
+      <if test="round != null" >
+        round,
+      </if>
+      <if test="dropMoney != null" >
+        drop_money,
+      </if>
+      <if test="dropContent != null" >
+        drop_content,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="validMoney != null" >
+        valid_money,
+      </if>
+      <if test="userWin != null" >
+        user_win,
+      </if>
+      <if test="userCut != null" >
+        user_cut,
+      </if>
+      <if test="userRate != null" >
+        user_rate,
+      </if>
+      <if test="xqRate != null" >
+        xq_rate,
+      </if>
+      <if test="countPay != null" >
+        count_pay,
+      </if>
+      <if test="betIp != null" >
+        bet_ip,
+      </if>
+      <if test="betTime != null" >
+        bet_time,
+      </if>
+      <if test="xqDeId != null" >
+        xq_de_id,
+      </if>
+      <if test="countStatus != null" >
+        count_status,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="gameCode != null" >
+        #{gameCode,jdbcType=INTEGER},
+      </if>
+      <if test="typeCode != null" >
+        #{typeCode,jdbcType=INTEGER},
+      </if>
+      <if test="happy8 != null" >
+        #{happy8,jdbcType=INTEGER},
+      </if>
+      <if test="round != null" >
+        #{round,jdbcType=VARCHAR},
+      </if>
+      <if test="dropMoney != null" >
+        #{dropMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="dropContent != null" >
+        #{dropContent,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="validMoney != null" >
+        #{validMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="userWin != null" >
+        #{userWin,jdbcType=DECIMAL},
+      </if>
+      <if test="userCut != null" >
+        #{userCut,jdbcType=DECIMAL},
+      </if>
+      <if test="userRate != null" >
+        #{userRate,jdbcType=DECIMAL},
+      </if>
+      <if test="xqRate != null" >
+        #{xqRate,jdbcType=VARCHAR},
+      </if>
+      <if test="countPay != null" >
+        #{countPay,jdbcType=INTEGER},
+      </if>
+      <if test="betIp != null" >
+        #{betIp,jdbcType=BIGINT},
+      </if>
+      <if test="betTime != null" >
+        #{betTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xqDeId != null" >
+        #{xqDeId,jdbcType=INTEGER},
+      </if>
+      <if test="countStatus != null" >
+        #{countStatus,jdbcType=BIT},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.LotteryBill" >
+    update web_lottery_bill
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="gameCode != null" >
+        game_code = #{gameCode,jdbcType=INTEGER},
+      </if>
+      <if test="typeCode != null" >
+        type_code = #{typeCode,jdbcType=INTEGER},
+      </if>
+      <if test="happy8 != null" >
+        happy8 = #{happy8,jdbcType=INTEGER},
+      </if>
+      <if test="round != null" >
+        round = #{round,jdbcType=VARCHAR},
+      </if>
+      <if test="dropMoney != null" >
+        drop_money = #{dropMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="dropContent != null" >
+        drop_content = #{dropContent,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="validMoney != null" >
+        valid_money = #{validMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="userWin != null" >
+        user_win = #{userWin,jdbcType=DECIMAL},
+      </if>
+      <if test="userCut != null" >
+        user_cut = #{userCut,jdbcType=DECIMAL},
+      </if>
+      <if test="userRate != null" >
+        user_rate = #{userRate,jdbcType=DECIMAL},
+      </if>
+      <if test="xqRate != null" >
+        xq_rate = #{xqRate,jdbcType=VARCHAR},
+      </if>
+      <if test="countPay != null" >
+        count_pay = #{countPay,jdbcType=INTEGER},
+      </if>
+      <if test="betIp != null" >
+        bet_ip = #{betIp,jdbcType=BIGINT},
+      </if>
+      <if test="betTime != null" >
+        bet_time = #{betTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xqDeId != null" >
+        xq_de_id = #{xqDeId,jdbcType=INTEGER},
+      </if>
+      <if test="countStatus != null" >
+        count_status = #{countStatus,jdbcType=BIT},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.LotteryBill" >
+    update web_lottery_bill
+    set userid = #{userid,jdbcType=INTEGER},
+      game_code = #{gameCode,jdbcType=INTEGER},
+      type_code = #{typeCode,jdbcType=INTEGER},
+      happy8 = #{happy8,jdbcType=INTEGER},
+      round = #{round,jdbcType=VARCHAR},
+      drop_money = #{dropMoney,jdbcType=DECIMAL},
+      drop_content = #{dropContent,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DECIMAL},
+      valid_money = #{validMoney,jdbcType=DECIMAL},
+      user_win = #{userWin,jdbcType=DECIMAL},
+      user_cut = #{userCut,jdbcType=DECIMAL},
+      user_rate = #{userRate,jdbcType=DECIMAL},
+      xq_rate = #{xqRate,jdbcType=VARCHAR},
+      count_pay = #{countPay,jdbcType=INTEGER},
+      bet_ip = #{betIp,jdbcType=BIGINT},
+      bet_time = #{betTime,jdbcType=TIMESTAMP},
+      xq_de_id = #{xqDeId,jdbcType=INTEGER},
+      count_status = #{countStatus,jdbcType=BIT},
+      order_number = #{orderNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

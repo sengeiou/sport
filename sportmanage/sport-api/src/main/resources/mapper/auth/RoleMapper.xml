@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.auth.RoleMapper">
+
+    <resultMap id="auths" type="com.cn.great.model.auth.AuthInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="auth_name_CN" property="authNameCN"/>
+        <result column="auth_name_EN" property="authNameEN"/>
+        <result column="auth_type" property="authType"/>
+        <result column="auth_desc" property="authDesc"/>
+        <result column="auth_url" property="authUrl"/>
+        <result column="parent" property="parent"/>
+    </resultMap>
+
+    <resultMap id="roles" type="com.cn.great.model.auth.RoleInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="role_name_CN" property="roleNameCN"/>
+        <result column="role_name_EN" property="roleNameEN"/>
+        <result column="role_desc" property="roleDesc"/>
+    </resultMap>
+
+
+    <select id="fetchRoleList" resultMap="roles" parameterType="com.cn.great.req.auth.RoleReq">
+        select * from web_role_info
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="roleNameCN!=null">
+                and role_name_CN like concat(concat('%',#{roleNameCN}),'%')
+            </if>
+            <if test="roleNameEN!=null">
+                and role_name_EN like concat(concat('%',#{roleNameEN}),'%')
+            </if>
+        </trim>
+        order by id asc limit #{start}, #{length}
+    </select>
+
+    <select id="countRoles" resultType="java.lang.Integer" parameterType="com.cn.great.req.auth.RoleReq">
+        select count(id) from web_role_info
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="roleNameCN!=null">
+                and role_name_CN like concat(concat('%',#{roleNameCN}),'%')
+            </if>
+            <if test="roleNameEN!=null">
+                and role_name_EN like concat(concat('%',#{roleNameEN}),'%')
+            </if>
+        </trim>
+    </select>
+
+    <select id="checkRoleNameExists" resultMap="roles" parameterType="com.cn.great.req.auth.RoleReq">
+        select * from web_role_info
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="roleNameCN!=null">
+                and role_name_CN = #{roleNameCN}
+            </if>
+            <if test="roleNameEN!=null">
+                or role_name_EN = #{roleNameEN}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addRoleInfo"  parameterType="com.cn.great.req.auth.RoleReq" useGeneratedKeys="true" keyProperty="id">
+        insert into web_role_info(role_name_CN, role_name_EN, role_desc)
+        values(#{roleNameCN},#{roleNameEN},#{roleDesc})
+    </insert>
+
+    <update id="updateRoleInfo" parameterType="com.cn.great.req.auth.RoleReq">
+        update web_role_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="null != roleNameCN and '' != roleNameCN">
+                role_name_CN=#{roleNameCN},
+            </if>
+            <if test="null != roleNameEN and '' != roleNameEN">
+                role_name_EN=#{roleNameEN},
+            </if>
+            <if test="null != roleDesc and '' != roleDesc">
+                role_desc=#{roleDesc},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteRoleInfo" parameterType="java.lang.Integer">
+        delete from web_role_info where id = #{id}
+    </delete>
+
+
+</mapper>

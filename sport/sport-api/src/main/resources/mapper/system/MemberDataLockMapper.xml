@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MemberDataLockMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MemberDataLock" >
+    <result column="mem_id" property="memId" jdbcType="INTEGER" />
+    <result column="ft" property="ft" jdbcType="BIT" />
+    <result column="bk" property="bk" jdbcType="BIT" />
+    <result column="tn" property="tn" jdbcType="BIT" />
+    <result column="vb" property="vb" jdbcType="BIT" />
+    <result column="bs" property="bs" jdbcType="BIT" />
+    <result column="op" property="op" jdbcType="BIT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cn.great.model.system.MemberDataLock" >
+    insert into web_member_data_lock (mem_id, ft, bk, tn, 
+      vb, bs, op)
+    values (#{memId,jdbcType=INTEGER}, #{ft,jdbcType=BIT}, #{bk,jdbcType=BIT}, #{tn,jdbcType=BIT}, 
+      #{vb,jdbcType=BIT}, #{bs,jdbcType=BIT}, #{op,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MemberDataLock" >
+    insert into web_member_data_lock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memId != null" >
+        mem_id,
+      </if>
+      <if test="ft != null" >
+        ft,
+      </if>
+      <if test="bk != null" >
+        bk,
+      </if>
+      <if test="tn != null" >
+        tn,
+      </if>
+      <if test="vb != null" >
+        vb,
+      </if>
+      <if test="bs != null" >
+        bs,
+      </if>
+      <if test="op != null" >
+        op,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memId != null" >
+        #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="ft != null" >
+        #{ft,jdbcType=BIT},
+      </if>
+      <if test="bk != null" >
+        #{bk,jdbcType=BIT},
+      </if>
+      <if test="tn != null" >
+        #{tn,jdbcType=BIT},
+      </if>
+      <if test="vb != null" >
+        #{vb,jdbcType=BIT},
+      </if>
+      <if test="bs != null" >
+        #{bs,jdbcType=BIT},
+      </if>
+      <if test="op != null" >
+        #{op,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

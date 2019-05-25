@@ -1,0 +1,36 @@
+server:
+  tomcat:
+    basedir: C:\temp
+
+
+
+logging:
+  level:
+    tk.mybatis: DEBUG
+
+
+mybatis:
+    datasource:
+        jdbc-url: jdbc:mysql://13.209.108.189:3306/sports2?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false
+        username: develop
+        password: rBQHFGb=Z9he
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+spring:
+    redis:
+        host: 13.209.108.189
+        port: 6379
+        password: 1234qwer
+        timeout: 1500 # 超时时间
+        lettuce:
+          pool:
+            max-active: 200 #连接池最大连接数（使用负值表示没有限制）
+            max-idle: 20 # 连接池中的最大空闲连接
+            min-idle: 5 #连接池中的最小空闲连接
+            max-wait: -1 #连接池最大阻塞等待时间（使用负值表示没有限制）
+    data:
+      mongodb:
+        database: sport
+        host: 13.209.108.189
+        port: 27020

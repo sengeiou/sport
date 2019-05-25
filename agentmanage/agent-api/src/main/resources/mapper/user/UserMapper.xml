@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.user.UserMapper">
+
+    <resultMap id="users" type="com.cn.great.model.user.UserInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="username" property="userName"/>
+        <result column="money" property="money"/>
+        <result column="money2" property="money2"/>
+        <result column="agents_id" property="agentId"/>
+        <result column="ctime" property="ctime"/>
+        <result column="cmoney" property="cmoney"/>
+        <result column="ttime" property="ttime"/>
+        <result column="tmoney" property="tmoney"/>
+        <result column="sum_bet" property="sumBet"/>
+        <result column="password" property="password"/>
+        <result column="level_id" property="levelId"/>
+        <result column="notes_withdrawal" property="notesWithdrawal"/>
+        <result column="status" property="status"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+
+    <resultMap id="auths" type="com.cn.great.model.auth.AuthInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="auth_name_CN" property="authNameCN"/>
+        <result column="auth_name_EN" property="authNameEN"/>
+        <result column="auth_type" property="authType"/>
+        <result column="auth_desc" property="authDesc"/>
+        <result column="auth_url" property="authUrl"/>
+        <result column="parent" property="parent"/>
+    </resultMap>
+
+    <resultMap id="members" type="com.cn.great.model.user.MemberInfoEntity">
+        <id column="userid" property="userId"></id>
+        <result column="username" property="userName"/>
+        <result column="add_date" property="addDate"/>
+        <result column="birthday" property="birthday"/>
+        <result column="withdrawal_passwd" property="withdrawalPasswd"/>
+        <result column="notes" property="notes"/>
+        <result column="agopen" property="agopen"/>
+        <result column="cpopen" property="cpopen"/>
+        <result column="mgopen" property="mgopen"/>
+        <result column="alias" property="alias"/>
+        <result column="test_flag" property="testFlag"/>
+        <result column="reg_ip" property="regIp"/>
+        <result column="bank_id" property="bankId"/>
+        <result column="vip_level" property="vipLevel"/>
+        <result column="question" property="question"/>
+        <result column="answer" property="answer"/>
+        <result column="collection" property="collection"/>
+        <result column="message_time" property="messageTime"/>
+        <result column="his_loss" property="hisLoss"/>
+        <result column="his_bets" property="hisBets"/>
+    </resultMap>
+
+    <resultMap id="userInfos" type="com.cn.great.model.user.UserEntity">
+        <id column="id" property="id"></id>
+        <result column="username" property="userName"/>
+        <result column="money" property="money"/>
+        <result column="money2" property="money2"/>
+        <result column="agents_id" property="agentId"/>
+        <result column="ctime" property="ctime"/>
+        <result column="cmoney" property="cmoney"/>
+        <result column="ttime" property="ttime"/>
+        <result column="tmoney" property="tmoney"/>
+        <result column="sum_bet" property="sumBet"/>
+        <result column="password" property="password"/>
+        <result column="level_id" property="levelId"/>
+        <result column="notes_withdrawal" property="notesWithdrawal"/>
+        <result column="status" property="status"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="add_date" property="addDate"/>
+        <result column="birthday" property="birthday"/>
+        <result column="withdrawal_passwd" property="withdrawalPasswd"/>
+        <result column="notes" property="notes"/>
+        <result column="agopen" property="agopen"/>
+        <result column="cpopen" property="cpopen"/>
+        <result column="mgopen" property="mgopen"/>
+        <result column="alias" property="alias"/>
+        <result column="test_flag" property="testFlag"/>
+        <result column="reg_ip" property="regIp"/>
+        <result column="bank_id" property="bankId"/>
+        <result column="vip_level" property="vipLevel"/>
+        <result column="question" property="question"/>
+        <result column="answer" property="answer"/>
+        <result column="collection" property="collection"/>
+        <result column="message_time" property="messageTime"/>
+        <result column="his_loss" property="hisLoss"/>
+        <result column="his_bets" property="hisBets"/>
+        <result column="limit_bk" property="limitBk"/>
+        <result column="limit_ft" property="limitFt"/>
+    </resultMap>
+
+    <resultMap id="agents" type="com.cn.great.model.user.AgentInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="username" property="userName"/>
+        <result column="money" property="money"/>
+        <result column="password" property="password"/>
+        <result column="password_safe" property="passwordSafe"/>
+        <result column="add_date" property="addDate"/>
+        <result column="alias" property="alias"/>
+        <result column="bank_id" property="bankId"/>
+        <result column="notes" property="notes"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <resultMap id="admins" type="com.cn.great.model.user.AdminInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="username" property="userName"/>
+        <result column="add_date" property="addDate"/>
+        <result column="password" property="password"/>
+        <result column="type" property="type"/>
+        <result column="alias" property="alias"/>
+        <result column="status" property="status"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+
+    <resultMap id="onlines" type="com.cn.great.model.online.LoginInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="userid" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="online" property="online"/>
+        <result column="type" property="type"/>
+        <result column="logintime" property="loginTime"/>
+        <result column="login_ip" property="loginIp"/>
+        <result column="login_url" property="loginUrl"/>
+        <result column="onlinetime" property="onlineTime"/>
+        <result column="logout_time" property="logoutTime"/>
+        <result column="token" property="token"/>
+    </resultMap>
+
+    <resultMap id="payLevels" type="com.cn.great.model.user.PayLevelEntity">
+        <id column="id" property="id"/>
+        <result column="level_name" property="levelName"/>
+        <result column="reg_start" property="regStart"/>
+        <result column="reg_end" property="regEnd"/>
+        <result column="mix_ctime" property="mixCtime"/>
+        <result column="max_ctime" property="maxCtime"/>
+        <result column="mix_amount" property="mixAmount"/>
+        <result column="max_amount" property="maxAmount"/>
+        <result column="notes" property="notes"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+
+    <resultMap id="question" type="com.cn.great.model.user.QuestionEntity">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="fetchAllUsers" resultMap="users">
+        select * from web_member_data
+    </select>
+
+    <select id="fetchAllAgents" resultMap="agents">
+        select * from web_agents_data
+    </select>
+
+    <select id="fetchAllAdmins" resultMap="admins">
+        select * from web_system_data
+    </select>
+
+    <select id="fetchAllOnlines" resultMap="onlines">
+        select * from web_login_info where type = 0
+    </select>
+
+    <select id="getUserLoginInfo" resultMap="onlines" parameterType="java.lang.String">
+        select * from web_login_info where type = 0 and username = #{userName}
+    </select>
+
+    <update id="updateLoginInfo" parameterType="com.cn.great.model.online.LoginInfoEntity">
+        update web_login_info set online = #{online}, token=#{token}, logout_time=#{logoutTime}
+        where utype = 0 and username=#{userName} and userid=#{userId}
+    </update>
+
+    <select id="fetchUserInfo" resultMap="users">
+        select * from web_member_data where username = #{userName}
+    </select>
+
+    <select id="fetchAgentInfo" resultMap="agents">
+        select * from web_agents_data where username = #{agentName}
+    </select>
+
+    <delete id="deleteUserLoginInfo" parameterType="java.lang.String">
+        delete from web_login_info where type = 0 and username = #{userName}
+    </delete>
+
+    <insert id="addUserLoginInfo" parameterType="com.cn.great.model.online.LoginInfoEntity" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into web_login_info(userid, username, online, type, logintime, login_ip, login_url, onlinetime, token)
+        values(#{userId},#{userName},#{online},#{type},#{loginTime},#{loginIp},#{loginUrl},#{onlineTime},#{token})
+    </insert>
+
+    <insert id="addUserInfo" parameterType="com.cn.great.model.user.UserInfoEntity" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into web_member_data(username, money, agents_id, password, level_id, server_admin)
+        values(#{userName},#{money},#{agentId},#{password},#{levelId},#{serverAdmin})
+    </insert>
+
+    <insert id="addMemberInfo" parameterType="com.cn.great.model.user.MemberInfoEntity">
+        insert into web_member_info(userid, username, add_date, birthday, withdrawal_passwd, alias, test_flag, agopen, cpopen, mgopen, reg_ip, bank_id, notes, question, answer)
+        values(#{userId},#{userName},#{addDate},#{birthday},#{withdrawalPasswd}, #{alias}, #{testFlag}, #{agopen}, #{cpopen}, #{mgopen}, #{regIp},#{bankId},#{notes}, 0, '0')
+    </insert>
+
+    <insert id="addUserCaptcha" parameterType="java.lang.String">
+        insert into web_captcha_record(username, captext) values(#{userName},#{capText})
+    </insert>
+
+    <delete id="deleteUserCaptcha" parameterType="java.lang.String">
+        delete from web_captcha_record where username = #{userName}
+    </delete>
+
+    <select id="getCaptchaText" parameterType="java.lang.String" resultType="java.lang.String">
+        select captext from web_captcha_record where username = #{userName}
+    </select>
+
+    <update id="userLoginout" parameterType="com.cn.great.model.online.LoginInfoEntity">
+        update web_login_info set online = #{online}, logout_time = #{logoutTime}, token = #{token}
+        where userid = #{userId} and username = #{userName} and type = #{type}
+    </update>
+
+    <select id="getMemberInfo" resultMap="members">
+        select * from web_member_info where username = #{userName}
+    </select>
+
+    <select id="fetchAllMemberInfos" resultMap="members">
+        select * from web_member_info
+    </select>
+
+    <update id="updateMemberDrawPassword" parameterType="com.cn.great.model.user.MemberInfoEntity">
+        update web_member_info set withdrawal_passwd = #{withdrawalPasswd} where userid = #{userId} and username = #{userName}
+    </update>
+
+    <update id="updateUserPassword" parameterType="com.cn.great.model.user.UserInfoEntity">
+        update web_member_data set password = #{password} where username = #{userName}
+    </update>
+
+    <select id="fetchAllQuestions" resultMap="question">
+        select * from web_question_data
+    </select>
+
+    <select id="fetchAdminList" resultMap="admins" parameterType="com.cn.great.req.user.UserReq">
+        select * from web_system_data
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="userName!=null">
+                and username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="alias!=null">
+                and alias like concat(concat('%',#{alias}),'%')
+            </if>
+            <if test="status!=-1">
+                and status = #{status}
+            </if>
+            <if test="beginTime!=null">
+                and add_date  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and add_date  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+        order by id asc limit #{start}, #{length}
+    </select>
+
+    <select id="fetchUserList" resultMap="userInfos" parameterType="com.cn.great.req.user.UserInfoReq">
+        select a.id, a.username, a.money, a.money2, a.agents_id, a.ctime, a.cmoney, a.ttime, a.tmoney, a.sum_bet,
+        a.password, a.level_id, a.notes_withdrawal, a.status, a.server_admin,b.add_date, b.birthday, b.withdrawal_passwd,
+        b.notes, b.agopen, b.cpopen, b.mgopen, b.alias, b.test_flag,b.reg_ip, IFNULL(b.bank_id, 0) as bank_id,
+        b.vip_level, b.question, b.answer,b.collection, b.message_time,b.his_loss,b.his_bets,b.limit_bk,limit_ft
+        from web_member_data a
+        left join web_member_info b
+        on a.id = b.userid
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="userName!=null">
+                and a.username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="alias!=null">
+                and b.alias like concat(concat('%',#{alias}),'%')
+            </if>
+            <if test="status!=-1">
+                and a.status = #{status}
+            </if>
+            <if test="beginTime!=null">
+                and b.add_date  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and b.add_date  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+        order by add_date desc, id asc limit #{start}, #{length}
+    </select>
+
+    <select id="countUsers" resultType="java.lang.Integer" parameterType="com.cn.great.req.user.UserInfoReq">
+        select count(a.id)
+        from web_member_data a
+        left join web_member_info b
+        on a.id = b.userid
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="userName!=null">
+                and a.username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="alias!=null">
+                and b.alias like concat(concat('%',#{alias}),'%')
+            </if>
+            <if test="status!=-1">
+                and a.status = #{status}
+            </if>
+            <if test="beginTime!=null">
+                and b.add_date  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and b.add_date  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+    </select>
+
+    <select id="countAdmins" resultType="java.lang.Integer" parameterType="com.cn.great.req.user.UserReq">
+        select count(id) from web_system_data
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="userName!=null">
+                and username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="alias!=null">
+                and alias like concat(concat('%',#{alias}),'%')
+            </if>
+            <if test="status!=-1">
+                and status = #{status}
+            </if>
+            <if test="beginTime!=null">
+                and add_date  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and add_date  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+    </select>
+
+    <select id="fetchAdminByName" resultMap="admins">
+        select * from web_system_data where username = #{userName}
+    </select>
+
+    <select id="fetchUserByName" resultMap="users">
+        select * from web_member_data where username = #{userName}
+    </select>
+
+    <insert id="addSystemAdmin"  parameterType="com.cn.great.req.user.UserAddReq" useGeneratedKeys="true" keyProperty="id">
+        insert into web_system_data(username, add_date, password, alias, type, status, agent_flag, server_admin)
+        values(#{userName},#{addDate},#{password}, #{alias},#{type},0,1,#{serverAdmin})
+    </insert>
+
+    <update id="updateSystemAdmin" parameterType="com.cn.great.req.user.UserUpdateReq">
+        update web_system_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="null != alias and '' != alias">
+                alias=#{alias},
+            </if>
+            <if test="null != serverAdmin and '' != serverAdmin">
+                server_admin=#{serverAdmin},
+            </if>
+            <if test="null != password and '' != password">
+                password=#{password},
+            </if>
+            <if test="status != -1">
+                status=#{status}
+            </if>
+        </trim>
+        where id=#{id} and agent_flag = 1
+    </update>
+
+    <select id="fetchAdminById" resultMap="admins">
+        select * from web_system_data where id = #{id}
+    </select>
+
+    <delete id="deleteSystemAdmin" parameterType="java.lang.Integer">
+        delete from web_system_data where id = #{id} and agent_flag = 1
+    </delete>
+
+    <select id="fetchAllAuths" resultMap="auths">
+        select * from web_auth_info
+    </select>
+
+    <select id="fetchOwenAuths" resultMap="auths" parameterType="java.lang.String">
+        select d.* from web_role_info b
+        left join web_role_auth_map c
+        on b.id = c.role_id
+        left join web_auth_info d
+        on c.auth_id = d.id
+        where 1=1
+        and b.id=(select type from web_system_data a where a.username = #{userName})
+    </select>
+
+    <select id="fetchAllPayLevel" resultMap="payLevels">
+        select * from web_pay_level
+    </select>
+
+    <update id="updateUserInfo" parameterType="com.cn.great.req.user.UserOpeReq">
+        update web_member_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="null != password and '' != password">
+                password=#{password},
+            </if>
+            level_id=#{levelId},
+            notes_withdrawal=#{notesWithdrawal},
+            <if test="status != -1">
+                status=#{status}
+            </if>
+        </trim>
+        where id=#{id} and username=#{userName}
+    </update>
+
+    <update id="updateMemberInfo" parameterType="com.cn.great.req.user.UserOpeReq">
+        update web_member_info
+        <trim prefix="SET" suffixOverrides=",">
+            birthday=#{birthday},
+            <if test="null != withdrawalPasswd and '' != withdrawalPasswd">
+                withdrawal_passwd=#{withdrawalPasswd},
+            </if>
+            notes=#{notes},
+            agopen=#{agopen},
+            cpopen=#{cpopen},
+            mgopen=#{mgopen},
+            <if test="null != alias and '' != alias">
+                alias=#{alias},
+            </if>
+            test_flag=#{testFlag},
+            bank_id=#{bankId}
+        </trim>
+        where userid=#{id}
+    </update>
+
+    <update id="updateMemberBkLimit" parameterType="com.cn.great.req.user.UserInfoReq">
+        update web_member_info set limit_bk=#{value} where username=#{userName}
+    </update>
+
+    <update id="updateMemberFTLimit" parameterType="com.cn.great.req.user.UserInfoReq">
+        update web_member_info set limit_ft=#{value} where username=#{userName}
+    </update>
+
+</mapper>

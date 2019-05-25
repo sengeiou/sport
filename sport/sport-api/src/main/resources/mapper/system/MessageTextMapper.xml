@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MessageTextMapper">
+
+    <resultMap id="BaseResultMap" type="com.cn.great.model.system.MessageTextEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="from_user" property="fromUser" jdbcType="BIT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="BIT"/>
+        <result column="to_user" property="toUser" jdbcType="VARCHAR"/>
+        <result column="from_type" property="fromType" jdbcType="BIT"/>
+        <result column="reply_id" property="replyId" jdbcType="INTEGER"/>
+        <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ResultMapWithBLOBs" type="com.cn.great.model.system.MessageTextEntity" extends="BaseResultMap">
+        <result column="context" property="context" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, from_user, title, add_time, status, to_user, from_type, reply_id, server_admin
+  </sql>
+    <sql id="Blob_Column_List">
+    context
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from web_message_text
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+      UPDATE web_message_text 
+         set status=1
+       where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.cn.great.model.system.MessageTextEntity">
+    insert into web_message_text (id, from_user, title, 
+      add_time, status, to_user, 
+      from_type, reply_id, server_admin, 
+      context)
+    values (#{id,jdbcType=INTEGER}, #{fromUser,jdbcType=BIT}, #{title,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}, #{toUser,jdbcType=VARCHAR}, 
+      #{fromType,jdbcType=BIT}, #{replyId,jdbcType=INTEGER}, #{serverAdmin,jdbcType=VARCHAR}, 
+      #{context,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.cn.great.model.system.MessageTextEntity">
+        insert into web_message_text
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="fromUser != null">
+                from_user,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="toUser != null">
+                to_user,
+            </if>
+            <if test="fromType != null">
+                from_type,
+            </if>
+            <if test="replyId != null">
+                reply_id,
+            </if>
+            <if test="serverAdmin != null">
+                server_admin,
+            </if>
+            <if test="context != null">
+                context,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="fromUser != null">
+                #{fromUser,jdbcType=BIT},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIT},
+            </if>
+            <if test="toUser != null">
+                #{toUser,jdbcType=VARCHAR},
+            </if>
+            <if test="fromType != null">
+                #{fromType,jdbcType=BIT},
+            </if>
+            <if test="replyId != null">
+                #{replyId,jdbcType=INTEGER},
+            </if>
+            <if test="serverAdmin != null">
+                #{serverAdmin,jdbcType=VARCHAR},
+            </if>
+            <if test="context != null">
+                #{context,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.MessageTextEntity">
+        update web_message_text
+        <set>
+            <if test="fromUser != null">
+                from_user = #{fromUser,jdbcType=BIT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=BIT},
+            </if>
+            <if test="toUser != null">
+                to_user = #{toUser,jdbcType=VARCHAR},
+            </if>
+            <if test="fromType != null">
+                from_type = #{fromType,jdbcType=BIT},
+            </if>
+            <if test="replyId != null">
+                reply_id = #{replyId,jdbcType=INTEGER},
+            </if>
+            <if test="serverAdmin != null">
+                server_admin = #{serverAdmin,jdbcType=VARCHAR},
+            </if>
+            <if test="context != null">
+                context = #{context,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cn.great.model.system.MessageTextEntity">
+    update web_message_text
+    set from_user = #{fromUser,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      to_user = #{toUser,jdbcType=VARCHAR},
+      from_type = #{fromType,jdbcType=BIT},
+      reply_id = #{replyId,jdbcType=INTEGER},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      context = #{context,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.MessageTextEntity">
+    update web_message_text
+    set from_user = #{fromUser,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      to_user = #{toUser,jdbcType=VARCHAR},
+      from_type = #{fromType,jdbcType=BIT},
+      reply_id = #{replyId,jdbcType=INTEGER},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="getMessageNumber" resultType="java.lang.Integer">
+      select count(1) from web_message_info where userid=#{id} or userid=0 and read_status=0
+    </select>
+
+    <select id="getMessageList" resultType="java.util.HashMap">
+      select t.id,title,add_time addTime,i.read_status readStatus,t.from_type fromType,t.from_user fromUser,u.username userName from web_message_text t,web_member_data u,web_message_info i where t.id=i.message_id and t.from_user=u.id and u.id=#{id} order by add_time DESC 
+    </select>
+
+    <select id="messageById" resultType="java.util.HashMap">
+    select t.id,title,context,add_time addTime,t.from_type fromType,from_user fromUser,d.username fromUserName from web_message_text t,web_member_data d where t.from_user=d.id and t.id=#{id}
+  </select>
+
+    <select id="getMessagereplyList" resultType="java.util.HashMap">
+     select from_type fromType,from_user fromUser,context,add_time addTime,d.username fromUserName FROM web_message_text t,web_member_data d where t.from_user=d.id and t.reply_id=#{id}
+  </select>
+
+    <select id="selectTitleById" resultType="java.lang.String">
+     select title from web_message_text where id =#{id}
+  </select>
+
+    <insert id="addMessageTextReply" useGeneratedKeys="true" keyProperty="id" parameterType="com.cn.great.model.system.MessageTextEntity">
+    insert into web_message_text (from_user,title,context,add_time,to_user,reply_id,server_admin) 
+    VALUES (#{fromUser},#{title},#{context},#{addDate},#{toUser},#{replyId},#{serverAdmin})
+  </insert>
+
+</mapper>

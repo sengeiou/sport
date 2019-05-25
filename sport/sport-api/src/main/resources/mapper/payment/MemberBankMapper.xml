@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.payment.MemberBankMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.payment.MemberBankEntity">
+        <id column="id" property="card_id"/>
+        <result column="member_id" property="memberId"/>
+        <result column="type" property="type"/>
+        <result column="code" property="code"/>
+        <result column="bank_name" property="bank"/>
+        <result column="bank_address" property="bank_address"/>
+        <result column="bank_account" property="bank_account"/>
+        <result column="status" property="status"/>
+        <result column="def_bank" property="def_bank"/>
+    </resultMap>
+
+    <select id="getMyBankCards" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+            a.id,a.bank_account,a.bank_address,b.`code`,b.bank_name,
+            if(ISNULL((select bank_id from web_member_info c where a.member_id = c.userid)),0,1) as def_bank
+        FROM web_member_bank a INNER JOIN web_bank_name b ON a.bank = b.id
+        WHERE
+         STATUS = 0
+        AND	member_id = #{userId}
+    </select>
+
+    <select id="checkBank" resultType="java.lang.Integer">
+        select count(*) from web_member_bank where status = 0 and bank_account = #{bankAccount} and member_id = #{memberId}
+        and (select id from web_bank_name where code = #{code})
+    </select>
+
+    <select id="checkValidBank" resultType="java.lang.Integer">
+        select count(*) from web_member_bank where status = 0 and bank = #{bankId} and member_id = #{memberId}
+    </select>
+
+    <insert id="insert" parameterType="com.cn.great.model.payment.MemberBankEntity">
+        insert into web_member_bank (member_id, type,
+          bank, bank_address, bank_account,
+          status)
+        values (
+          #{memberId},
+          #{type},
+          #{bankNameId},
+          #{bankAddress},
+          #{bankAccount},
+          #{status})
+    </insert>
+
+    <update id="unbindBankcard" parameterType="com.cn.great.model.payment.MemberBankEntity">
+        update web_member_bank set status = 1 where status = 0 and bank = #{bankId} and member_id = #{userId}
+    </update>
+</mapper>

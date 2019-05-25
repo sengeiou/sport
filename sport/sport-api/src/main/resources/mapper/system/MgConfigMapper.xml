@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MgConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MgConfig" >
+    <result column="subfix" property="subfix" jdbcType="CHAR" />
+    <result column="mem_url" property="memUrl" jdbcType="VARCHAR" />
+    <result column="partner_id" property="partnerId" jdbcType="INTEGER" />
+    <result column="api_usr" property="apiUsr" jdbcType="VARCHAR" />
+    <result column="api_psw" property="apiPsw" jdbcType="VARCHAR" />
+    <result column="currency_code" property="currencyCode" jdbcType="CHAR" />
+    <result column="language" property="language" jdbcType="CHAR" />
+    <result column="ag_usr" property="agUsr" jdbcType="VARCHAR" />
+    <result column="ag_psw" property="agPsw" jdbcType="VARCHAR" />
+    <result column="ag_url" property="agUrl" jdbcType="VARCHAR" />
+    <result column="ag_neid" property="agNeid" jdbcType="BIGINT" />
+    <result column="ag_lst_login" property="agLstLogin" jdbcType="INTEGER" />
+    <result column="ag_lst_id" property="agLstId" jdbcType="INTEGER" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cn.great.model.system.MgConfig" extends="BaseResultMap" >
+    <result column="access_token" property="accessToken" jdbcType="LONGVARCHAR" />
+    <result column="refresh_token" property="refreshToken" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    access_token, refresh_token
+  </sql>
+  <insert id="insert" parameterType="com.cn.great.model.system.MgConfig" >
+    insert into web_mg_config (subfix, mem_url, partner_id, 
+      api_usr, api_psw, currency_code, 
+      language, ag_usr, ag_psw, 
+      ag_url, ag_neid, ag_lst_login, 
+      ag_lst_id, server_admin, access_token, 
+      refresh_token)
+    values (#{subfix,jdbcType=CHAR}, #{memUrl,jdbcType=VARCHAR}, #{partnerId,jdbcType=INTEGER}, 
+      #{apiUsr,jdbcType=VARCHAR}, #{apiPsw,jdbcType=VARCHAR}, #{currencyCode,jdbcType=CHAR}, 
+      #{language,jdbcType=CHAR}, #{agUsr,jdbcType=VARCHAR}, #{agPsw,jdbcType=VARCHAR}, 
+      #{agUrl,jdbcType=VARCHAR}, #{agNeid,jdbcType=BIGINT}, #{agLstLogin,jdbcType=INTEGER}, 
+      #{agLstId,jdbcType=INTEGER}, #{serverAdmin,jdbcType=VARCHAR}, #{accessToken,jdbcType=LONGVARCHAR}, 
+      #{refreshToken,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MgConfig" >
+    insert into web_mg_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subfix != null" >
+        subfix,
+      </if>
+      <if test="memUrl != null" >
+        mem_url,
+      </if>
+      <if test="partnerId != null" >
+        partner_id,
+      </if>
+      <if test="apiUsr != null" >
+        api_usr,
+      </if>
+      <if test="apiPsw != null" >
+        api_psw,
+      </if>
+      <if test="currencyCode != null" >
+        currency_code,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="agUsr != null" >
+        ag_usr,
+      </if>
+      <if test="agPsw != null" >
+        ag_psw,
+      </if>
+      <if test="agUrl != null" >
+        ag_url,
+      </if>
+      <if test="agNeid != null" >
+        ag_neid,
+      </if>
+      <if test="agLstLogin != null" >
+        ag_lst_login,
+      </if>
+      <if test="agLstId != null" >
+        ag_lst_id,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+      <if test="accessToken != null" >
+        access_token,
+      </if>
+      <if test="refreshToken != null" >
+        refresh_token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subfix != null" >
+        #{subfix,jdbcType=CHAR},
+      </if>
+      <if test="memUrl != null" >
+        #{memUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null" >
+        #{partnerId,jdbcType=INTEGER},
+      </if>
+      <if test="apiUsr != null" >
+        #{apiUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="apiPsw != null" >
+        #{apiPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyCode != null" >
+        #{currencyCode,jdbcType=CHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=CHAR},
+      </if>
+      <if test="agUsr != null" >
+        #{agUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="agPsw != null" >
+        #{agPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="agUrl != null" >
+        #{agUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="agNeid != null" >
+        #{agNeid,jdbcType=BIGINT},
+      </if>
+      <if test="agLstLogin != null" >
+        #{agLstLogin,jdbcType=INTEGER},
+      </if>
+      <if test="agLstId != null" >
+        #{agLstId,jdbcType=INTEGER},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        #{accessToken,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="refreshToken != null" >
+        #{refreshToken,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

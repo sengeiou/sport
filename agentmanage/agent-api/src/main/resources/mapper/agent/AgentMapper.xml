@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.agent.AgentMapper">
+
+    <resultMap id="agents" type="com.cn.great.model.user.AgentInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="username" property="userName"/>
+        <result column="money" property="money"/>
+        <result column="password" property="password"/>
+        <result column="password_safe" property="passwordSafe"/>
+        <result column="add_date" property="addDate"/>
+        <result column="alias" property="alias"/>
+        <result column="bank_id" property="bankId"/>
+        <result column="notes" property="notes"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <resultMap id="banks" type="com.cn.great.model.user.BankInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="bank" property="bank"/>
+        <result column="bank_account" property="bankAccount"/>
+        <result column="bank_address" property="bankAddress"/>
+        <result column="bank_name" property="bankName"/>
+        <result column="level_id" property="levelId"/>
+        <result column="status" property="status"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="limit_max" property="max"/>
+        <result column="limit_min" property="min"/>
+        <result column="discount_rate" property="discountRate"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="pay_type" property="payType"/>
+    </resultMap>
+
+
+    <select id="fetchAgentList" resultMap="agents" parameterType="com.cn.great.req.agent.AgentReq">
+        select * from web_agents_data
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="userName!=null">
+                and username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="alias!=null">
+                and alias like concat(concat('%',#{alias}),'%')
+            </if>
+            <if test="status!=-1">
+                and status = #{status}
+            </if>
+            <if test="beginTime!=null">
+                and add_date  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and add_date  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+        order by id asc limit #{start}, #{length}
+    </select>
+
+    <select id="countAgents" resultType="java.lang.Integer" parameterType="com.cn.great.req.agent.AgentReq">
+        select count(id) from web_agents_data
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="userName!=null">
+                and username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="alias!=null">
+                and alias like concat(concat('%',#{alias}),'%')
+            </if>
+            <if test="status!=-1">
+                and status = #{status}
+            </if>
+            <if test="beginTime!=null">
+                and add_date  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and add_date  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+    </select>
+
+    <select id="fetchAgentByName" resultMap="agents" parameterType="java.lang.String">
+        select * from web_agents_data where 1=1 and username = #{userName}
+    </select>
+
+    <select id="fetchTotalByName" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select sum(ids) FROM(
+            (select count(id) as ids from web_agents_data where 1=1 and username = #{userName})
+            UNION ALL
+            (SELECT count(id) as ids from web_system_data where 1=1 and username = #{userName})
+        ) as total
+    </select>
+
+    <insert id="addAgentInfo" parameterType="com.cn.great.req.agent.AgentOpeReq" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into web_agents_data(username, money, password, password_safe, add_date, alias, bank_id, notes, server_admin, phone, status)
+        values(#{userName},#{money},#{password},#{passwordSafe}, #{addDate},#{alias},#{bankId},#{notes},#{serverAdmin},#{phone},#{status})
+    </insert>
+
+    <select id="fetchBanks" resultMap="banks">
+        select * from web_bank_data where status = 1
+    </select>
+
+    <select id="fetchAgentById" resultMap="agents" parameterType="java.lang.Integer">
+        select * from web_agents_data where id = #{id}
+    </select>
+
+    <update id="updateAgentInfo" parameterType="com.cn.great.req.agent.AgentOpeReq">
+        update web_agents_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="null != userName and '' != userName">
+                username=#{userName},
+            </if>
+            <if test="null != alias and '' != alias">
+                alias=#{alias},
+            </if>
+            <if test="null != serverAdmin and '' != serverAdmin">
+                server_admin=#{serverAdmin},
+            </if>
+            <if test="null != password and '' != password">
+                password=#{password},
+            </if>
+            <if test="null != passwordSafe and '' != passwordSafe">
+                password_safe=#{passwordSafe},
+            </if>
+            <if test="status != -1">
+                status=#{status},
+            </if>
+            <if test="bankId != 0">
+                bank_id=#{bankId},
+            </if>
+            <if test="null != notes and '' != notes">
+                notes=#{notes},
+            </if>
+            <if test="null != phone and '' != phone">
+                phone=#{phone},
+            </if>
+            <if test="changeFlag == 1">
+                money=#{money},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteAgentInfo" parameterType="java.lang.Integer">
+        delete from web_agents_data where id = #{id}
+    </delete>
+
+    <select id="getAgentRoleId" resultType="java.lang.Integer">
+        select id from web_role_info where role_name_EN = 'agent'
+    </select>
+
+</mapper>

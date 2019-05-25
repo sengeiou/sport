@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.sportbill.SportBillMapper">
+
+    <resultMap id="sportBill" type="com.cn.great.model.match.SportBillEntity">
+        <id column="id" property="id"></id>
+        <result column="userid" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="active" property="active"/>
+        <result column="mid" property="mid"/>
+        <result column="mleagueid" property="mLeagueId"/>
+        <result column="mtype" property="mType"/>
+        <result column="linetype" property="lineType"/>
+        <result column="bettime" property="bettime"/>
+        <result column="gold" property="gold"/>
+        <result column="mdate" property="mDate"/>
+        <result column="mrate" property="mRate"/>
+        <result column="m_place" property="mPlace"/>
+        <result column="gwin" property="gwin"/>
+        <result column="m_result" property="mResult"/>
+        <result column="show_type" property="showType"/>
+        <result column="cancel" property="cancel"/>
+        <result column="type" property="type"/>
+        <result column="ptype" property="pType"/>
+        <result column="gtype" property="gType"/>
+        <result column="mb_ball" property="mbBall"/>
+        <result column="tg_ball" property="tgBall"/>
+        <result column="checked" property="checked"/>
+        <result column="confirmed" property="confirmed"/>
+        <result column="danger" property="danger"/>
+        <result column="score1" property="score1"/>
+        <result column="score2" property="score2"/>
+        <result column="last_bet_money" property="lastBetMoney"/>
+        <result column="agents_id" property="agentId"/>
+        <result column="betip" property="betIp"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="bill_val" property="billVal"/>
+        <result column="bill_team" property="billteam"/>
+        <result column="bill_title" property="billTitle"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="after_bet_credit" property="afterBetCredit"/>
+        <result column="mleague_name" property="mLeagueName"/>
+        <result column="event_name" property="eventName"/>
+    </resultMap>
+    <resultMap id="sportBets" type="com.cn.great.model.match.SportHotEntity">
+        <result column="mid" property="mid"/>
+        <result column="mleagueid" property="mLeagueId"/>
+        <result column="mleague" property="mLeague"/>
+        <result column="mbteam" property="mbTeam"/>
+        <result column="tgteam" property="tgTeam"/>
+        <result column="type" property="type"/>
+        <result column="mdate" property="mDate"/>
+        <result column="mtime" property="mTime"/>
+        <result column="status" property="status"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+
+    <!--下注记录   "billTitle": "独赢"字段未确定    -->
+    <select id="getSportBetLog" resultMap="sportBill">
+        SELECT
+            d.id,
+            d.mid,
+            d.mleagueid,
+            d.mleague,
+            d.mbteam,
+            d.tgteam,
+            d.mdate,
+            d.type,
+            d.mtype,
+            d.billteam,
+            CONCAT(d.billteam, '@', d.mrate) AS billVal,
+            d.bettime,
+            d.danger,
+            d.m_result,
+            d.gwin,
+            d.gold,
+            d.last_bet_money
+        FROM
+            (
+                SELECT
+                    f.*, c.mleague,
+                    c.mbteam,
+                    c.tgteam,
+
+                IF (
+                    f.show_type = 'H',
+                    c.mbteam,
+                    c.tgteam
+                ) AS billteam
+                FROM
+                    (
+                        SELECT
+                            a.id,
+                            a.mid,
+                            a.mleagueid,
+                            a.mdate,
+                            a.type,
+                            a.mtype,
+                            a.bettime,
+                            a.danger,
+                            a.m_result,
+                            a.gwin,
+                            a.gold,
+                            a.last_bet_money,
+                            a.show_type,
+                            a.mrate,
+                            a.checked
+                        FROM
+                            web_sports_bill a
+                        UNION ALL
+                            SELECT
+                                b.id,
+                                b.mid,
+                                b.mleagueid,
+                                b.mdate,
+                                b.type,
+                                b.mtype,
+                                b.bettime,
+                                b.danger,
+                                b.m_result,
+                                b.gwin,
+                                b.gold,
+                                b.last_bet_money,
+                                b.show_type,
+                                b.mrate,
+                                b.checked
+                            FROM
+                                web_sports_bill b
+                    ) f
+                LEFT JOIN web_sports_hot c USING (mid, mleagueid)
+                <where>
+                    <if test="sportDate != null and sportDate != ''">
+                        AND f.mdate = #{sportDate}
+                    </if>
+                    <if test="sportDate != null and sportDate != ''">
+                        AND f.type = #{type}
+                    </if>
+                    <if test="betTime_start != null and betTime_start != ''">
+                        AND f.bettime >= UNIX_TIMESTAMP(#{betTime_start})
+                    </if>
+                    <if test="betTime_end != null and betTime_end != ''">
+                        AND f.bettime &lt;= UNIX_TIMESTAMP(#{betTime_end})
+                    </if>
+                    <if test="billStatus != null and billStatus != ''">
+                        AND f.checked = #{billStatus}
+                    </if>
+                </where>
+            ) d
+        GROUP BY id  ORDER BY bettime DESC
+    </select>
+
+    <select id="getBasketballQuotaConfig" resultType="com.cn.great.model.match.BasketballQuotaEntity">
+        select * from web_member_bk_config
+    </select>
+    <select id="getFootballQuotaConfig" resultType="com.cn.great.model.match.FootballQuotaEntity">
+        select * from web_member_ft_config
+    </select>
+    <select id="getSportHotById" resultMap="sportBets">
+        select * from web_sports_hot where mid = #{mid} and mleagueid = #{mLeagueId}
+    </select>
+
+    <insert id="addBet" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO web_sports_bill (
+            `userid`,
+            `username`,
+            `active`,
+            `mid`,
+            `mleagueid`,
+            `mtype`,
+            `linetype`,
+            `bettime`,
+            `gold`,
+            `mdate`,
+            `mrate`,
+            `m_place`,
+            `gwin`,
+            `m_result`,
+            `show_type`,
+            `cancel`,
+            `type`,
+            `ptype`,
+            `gtype`,
+            `mb_ball`,
+            `tg_ball`,
+            `checked`,
+            `confirmed`,
+            `danger`,
+            `score1`,
+            `score2`,
+            `last_bet_money`,
+            `agent_id`,
+            `betip`,
+            `server_admin`,
+            order_no,
+            after_bet_credit,
+            mleague_name,
+            event_name
+        )
+        VALUES
+            (
+                #{userId},
+                #{userName},
+                #{active},
+                #{mid},
+                #{mLeagueId},
+                #{mType},
+                #{middle},
+                #{lineType},
+                UNIX_TIMESTAMP(NOW()),
+                #{gold},
+                #{mDate},
+                #{mRate},
+                #{mPlace},
+                #{gwin},
+                #{mResult},
+                #{showType},
+                #{cancel},
+                #{type},
+                #{pType},
+                #{gType},
+                #{mbBall},
+                #{tgBall},
+                #{checked},
+                #{confirmed},
+                #{danger},
+                #{score1},
+                #{score2},
+                #{lastBetMoney},
+                #{agentId},
+                INET_ATON(#{betIp}),
+                #{serverAdmin},
+                #{orderNo},
+                #{afterBetCredit},
+                #{mLeagueName},
+                #{eventName}
+            );
+    </insert>
+    <insert id="batchSaveMixBill">
+        INSERT INTO `web_sports_bill_mix` (`mid`, `mleagueid`, `mtype`, `mrate`, `m_place`, `show_type`, `type`, `ptype`, `gtype`, `order_no`,`mdate`, `mleague_name`, `event_name`)
+        VALUES
+    <foreach item="item" index="index" collection="list"
+             separator=",">
+        (
+        #{item.mid},
+        #{item.mLeagueId},
+        #{item.mType},
+        #{item.mRate},
+        #{item.mPlace},
+        #{item.showType},
+        #{item.type},
+        #{item.pType},
+        #{item.gType},
+        #{item.orderNo},
+        #{mDate},
+        #{mLeagueName},
+        #{eventName}
+        )
+    </foreach>
+    </insert>
+</mapper>

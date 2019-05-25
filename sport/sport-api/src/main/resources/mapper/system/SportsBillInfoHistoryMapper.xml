@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.SportsBillInfoHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.SportsBillInfoHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="middle" property="middle" jdbcType="VARCHAR" />
+    <result column="bet_type" property="betType" jdbcType="VARCHAR" />
+    <result column="agents_id" property="agentsId" jdbcType="INTEGER" />
+    <result column="betip" property="betip" jdbcType="INTEGER" />
+    <result column="isphone" property="isphone" jdbcType="BIT" />
+    <result column="check_from" property="checkFrom" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, middle, bet_type, agents_id, betip, isphone, check_from
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_sports_bill_info_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from web_sports_bill_info_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.SportsBillInfoHistory" >
+    insert into web_sports_bill_info_history (id, middle, bet_type, 
+      agents_id, betip, isphone, 
+      check_from)
+    values (#{id,jdbcType=BIGINT}, #{middle,jdbcType=VARCHAR}, #{betType,jdbcType=VARCHAR}, 
+      #{agentsId,jdbcType=INTEGER}, #{betip,jdbcType=INTEGER}, #{isphone,jdbcType=BIT}, 
+      #{checkFrom,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.SportsBillInfoHistory" >
+    insert into web_sports_bill_info_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="middle != null" >
+        middle,
+      </if>
+      <if test="betType != null" >
+        bet_type,
+      </if>
+      <if test="agentsId != null" >
+        agents_id,
+      </if>
+      <if test="betip != null" >
+        betip,
+      </if>
+      <if test="isphone != null" >
+        isphone,
+      </if>
+      <if test="checkFrom != null" >
+        check_from,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="middle != null" >
+        #{middle,jdbcType=VARCHAR},
+      </if>
+      <if test="betType != null" >
+        #{betType,jdbcType=VARCHAR},
+      </if>
+      <if test="agentsId != null" >
+        #{agentsId,jdbcType=INTEGER},
+      </if>
+      <if test="betip != null" >
+        #{betip,jdbcType=INTEGER},
+      </if>
+      <if test="isphone != null" >
+        #{isphone,jdbcType=BIT},
+      </if>
+      <if test="checkFrom != null" >
+        #{checkFrom,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.SportsBillInfoHistory" >
+    update web_sports_bill_info_history
+    <set >
+      <if test="middle != null" >
+        middle = #{middle,jdbcType=VARCHAR},
+      </if>
+      <if test="betType != null" >
+        bet_type = #{betType,jdbcType=VARCHAR},
+      </if>
+      <if test="agentsId != null" >
+        agents_id = #{agentsId,jdbcType=INTEGER},
+      </if>
+      <if test="betip != null" >
+        betip = #{betip,jdbcType=INTEGER},
+      </if>
+      <if test="isphone != null" >
+        isphone = #{isphone,jdbcType=BIT},
+      </if>
+      <if test="checkFrom != null" >
+        check_from = #{checkFrom,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.SportsBillInfoHistory" >
+    update web_sports_bill_info_history
+    set middle = #{middle,jdbcType=VARCHAR},
+      bet_type = #{betType,jdbcType=VARCHAR},
+      agents_id = #{agentsId,jdbcType=INTEGER},
+      betip = #{betip,jdbcType=INTEGER},
+      isphone = #{isphone,jdbcType=BIT},
+      check_from = #{checkFrom,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

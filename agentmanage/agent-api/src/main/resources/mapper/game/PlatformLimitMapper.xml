@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.game.PlatformLimitMapper">
+    <resultMap id="bkConfigs" type="com.cn.great.model.game.MemberBkConfig">
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR"/>
+        <result column="bk_re_ftht_min" property="bkReFthtMin" jdbcType="INTEGER"/>
+        <result column="bk_re_ftht_max" property="bkReFthtMax" jdbcType="INTEGER"/>
+        <result column="bk_re_ah_min" property="bkReAhMin" jdbcType="INTEGER"/>
+        <result column="bk_re_ah_max" property="bkReAhMax" jdbcType="INTEGER"/>
+        <result column="bk_re_ou_min" property="bkReOuMin" jdbcType="INTEGER"/>
+        <result column="bk_re_ou_max" property="bkReOuMax" jdbcType="INTEGER"/>
+        <result column="bk_re_big_min" property="bkReBigMin" jdbcType="INTEGER"/>
+        <result column="bk_re_big_max" property="bkReBigMax" jdbcType="INTEGER"/>
+        <result column="bk_re_small_min" property="bkReSmallMin" jdbcType="INTEGER"/>
+        <result column="bk_re_small_max" property="bkReSmallMax" jdbcType="INTEGER"/>
+        <result column="bk_rb_ftht_min" property="bkRbFthtMin" jdbcType="INTEGER"/>
+        <result column="bk_rb_ftht_max" property="bkRbFthtMax" jdbcType="INTEGER"/>
+        <result column="bk_rb_ah_min" property="bkRbAhMin" jdbcType="INTEGER"/>
+        <result column="bk_rb_ah_max" property="bkRbAhMax" jdbcType="INTEGER"/>
+        <result column="bk_rb_ou_min" property="bkRbOuMin" jdbcType="INTEGER"/>
+        <result column="bk_rb_ou_max" property="bkRbOuMax" jdbcType="INTEGER"/>
+        <result column="bk_rb_big_min" property="bkRbBigMin" jdbcType="INTEGER"/>
+        <result column="bk_rb_big_max" property="bkRbBigMax" jdbcType="INTEGER"/>
+        <result column="bk_rb_small_min" property="bkRbSmallMin" jdbcType="INTEGER"/>
+        <result column="bk_rb_small_max" property="bkRbSmallMax" jdbcType="INTEGER"/>
+        <result column="bk_r_ftht_min" property="bkRFthtMin" jdbcType="INTEGER"/>
+        <result column="bk_r_ftht_max" property="bkRFthtMax" jdbcType="INTEGER"/>
+        <result column="bk_r_ah_min" property="bkRAhMin" jdbcType="INTEGER"/>
+        <result column="bk_r_ah_max" property="bkRAhMax" jdbcType="INTEGER"/>
+        <result column="bk_r_ou_min" property="bkROuMin" jdbcType="INTEGER"/>
+        <result column="bk_r_ou_max" property="bkROuMax" jdbcType="INTEGER"/>
+        <result column="bk_r_big_min" property="bkRBigMin" jdbcType="INTEGER"/>
+        <result column="bk_r_big_max" property="bkRBigMax" jdbcType="INTEGER"/>
+        <result column="bk_r_small_min" property="bkRSmallMin" jdbcType="INTEGER"/>
+        <result column="bk_r_small_max" property="bkRSmallMax" jdbcType="INTEGER"/>
+        <result column="bk_or_min" property="bkOrMin" jdbcType="INTEGER"/>
+        <result column="bk_or_max" property="bkOrMax" jdbcType="INTEGER"/>
+        <result column="bk_p3_min" property="bkP3Min" jdbcType="INTEGER"/>
+        <result column="bk_p3_max" property="bkP3Max" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="ftConfigs" type="com.cn.great.model.game.MemberFtConfig">
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR"/>
+        <result column="ft_re_ftht_min" property="ftReFthtMin" jdbcType="INTEGER"/>
+        <result column="ft_re_ftht_max" property="ftReFthtMax" jdbcType="INTEGER"/>
+        <result column="ft_re_fthtlst_min" property="ftReFthtlstMin" jdbcType="INTEGER"/>
+        <result column="ft_re_fthtlst_max" property="ftReFthtlstMax" jdbcType="INTEGER"/>
+        <result column="ft_re_ah_min" property="ftReAhMin" jdbcType="INTEGER"/>
+        <result column="ft_re_ah_max" property="ftReAhMax" jdbcType="INTEGER"/>
+        <result column="ft_re_ahlst_min" property="ftReAhlstMin" jdbcType="INTEGER"/>
+        <result column="ft_re_ahlst_max" property="ftReAhlstMax" jdbcType="INTEGER"/>
+        <result column="ft_re_ou_min" property="ftReOuMin" jdbcType="INTEGER"/>
+        <result column="ft_re_ou_max" property="ftReOuMax" jdbcType="INTEGER"/>
+        <result column="ft_re_oulst_min" property="ftReOulstMin" jdbcType="INTEGER"/>
+        <result column="ft_re_oulst_max" property="ftReOulstMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_ftht_min" property="ftRbFthtMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_ftht_max" property="ftRbFthtMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_fthtlst_min" property="ftRbFthtlstMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_fthtlst_max" property="ftRbFthtlstMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_ah_min" property="ftRbAhMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_ah_max" property="ftRbAhMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_ahlst_min" property="ftRbAhlstMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_ahlst_max" property="ftRbAhlstMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_ou_min" property="ftRbOuMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_ou_max" property="ftRbOuMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_oulst_min" property="ftRbOulstMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_oulst_max" property="ftRbOulstMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_oe_min" property="ftRbOeMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_oe_max" property="ftRbOeMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_oelst_min" property="ftRbOelstMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_oelst_max" property="ftRbOelstMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_cs_min" property="ftRbCsMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_cs_max" property="ftRbCsMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_tg_min" property="ftRbTgMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_tg_max" property="ftRbTgMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_tglst_min" property="ftRbTglstMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_tglst_max" property="ftRbTglstMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_hf_min" property="ftRbHfMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_hf_max" property="ftRbHfMax" jdbcType="INTEGER"/>
+        <result column="ft_rb_fglg_min" property="ftRbFglgMin" jdbcType="INTEGER"/>
+        <result column="ft_rb_fglg_max" property="ftRbFglgMax" jdbcType="INTEGER"/>
+        <result column="ft_r_ftht_min" property="ftRFthtMin" jdbcType="INTEGER"/>
+        <result column="ft_r_ftht_max" property="ftRFthtMax" jdbcType="INTEGER"/>
+        <result column="ft_r_fthtlst_min" property="ftRFthtlstMin" jdbcType="INTEGER"/>
+        <result column="ft_r_fthtlst_max" property="ftRFthtlstMax" jdbcType="INTEGER"/>
+        <result column="ft_r_ah_min" property="ftRAhMin" jdbcType="INTEGER"/>
+        <result column="ft_r_ah_max" property="ftRAhMax" jdbcType="INTEGER"/>
+        <result column="ft_r_ahlst_min" property="ftRAhlstMin" jdbcType="INTEGER"/>
+        <result column="ft_r_ahlst_max" property="ftRAhlstMax" jdbcType="INTEGER"/>
+        <result column="ft_r_ou_min" property="ftROuMin" jdbcType="INTEGER"/>
+        <result column="ft_r_ou_max" property="ftROuMax" jdbcType="INTEGER"/>
+        <result column="ft_r_oulst_min" property="ftROulstMin" jdbcType="INTEGER"/>
+        <result column="ft_r_oulst_max" property="ftROulstMax" jdbcType="INTEGER"/>
+        <result column="ft_r_oe_min" property="ftROeMin" jdbcType="INTEGER"/>
+        <result column="ft_r_oe_max" property="ftROeMax" jdbcType="INTEGER"/>
+        <result column="ft_r_oelst_min" property="ftROelstMin" jdbcType="INTEGER"/>
+        <result column="ft_r_oelst_max" property="ftROelstMax" jdbcType="INTEGER"/>
+        <result column="ft_r_cs_min" property="ftRCsMin" jdbcType="INTEGER"/>
+        <result column="ft_r_cs_max" property="ftRCsMax" jdbcType="INTEGER"/>
+        <result column="ft_r_tg_min" property="ftRTgMin" jdbcType="INTEGER"/>
+        <result column="ft_r_tg_max" property="ftRTgMax" jdbcType="INTEGER"/>
+        <result column="ft_r_tglst_min" property="ftRTglstMin" jdbcType="INTEGER"/>
+        <result column="ft_r_tglst_max" property="ftRTglstMax" jdbcType="INTEGER"/>
+        <result column="ft_r_hf_min" property="ftRHfMin" jdbcType="INTEGER"/>
+        <result column="ft_r_hf_max" property="ftRHfMax" jdbcType="INTEGER"/>
+        <result column="ft_r_fglg_min" property="ftRFglgMin" jdbcType="INTEGER"/>
+        <result column="ft_r_fglg_max" property="ftRFglgMax" jdbcType="INTEGER"/>
+        <result column="ft_or_min" property="ftOrMin" jdbcType="INTEGER"/>
+        <result column="ft_or_max" property="ftOrMax" jdbcType="INTEGER"/>
+        <result column="ft_p3_min" property="ftP3Min" jdbcType="INTEGER"/>
+        <result column="ft_p3_max" property="ftP3Max" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="fetchDefaultBKConfigs" resultMap="bkConfigs" parameterType="java.lang.Integer">
+        select * from web_member_bk_config where type=1 or userid = #{id}
+    </select>
+
+    <select id="fetchDefaultFTConfigs" resultMap="ftConfigs" parameterType="java.lang.Integer">
+        select * from web_member_ft_config where type=1 or userid = #{id}
+    </select>
+
+    <insert id="addBkPlatformConfig" parameterType="com.cn.great.req.game.MemberBKConfigReq">
+        insert into web_member_bk_config (userid, type, server_admin,
+          bk_re_ftht_min, bk_re_ftht_max, bk_re_ah_min,
+          bk_re_ah_max, bk_re_ou_min, bk_re_ou_max,
+          bk_re_big_min, bk_re_big_max, bk_re_small_min,
+          bk_re_small_max, bk_rb_ftht_min, bk_rb_ftht_max,
+          bk_rb_ah_min, bk_rb_ah_max, bk_rb_ou_min,
+          bk_rb_ou_max, bk_rb_big_min, bk_rb_big_max,
+          bk_rb_small_min, bk_rb_small_max, bk_r_ftht_min,
+          bk_r_ftht_max, bk_r_ah_min, bk_r_ah_max,
+          bk_r_ou_min, bk_r_ou_max, bk_r_big_min,
+          bk_r_big_max, bk_r_small_min, bk_r_small_max,
+          bk_or_min, bk_or_max, bk_p3_min,
+          bk_p3_max)
+        values (#{userid}, #{type}, #{serverAdmin},
+          #{bkReFthtMin}, #{bkReFthtMax}, #{bkReAhMin},
+          #{bkReAhMax}, #{bkReOuMin}, #{bkReOuMax},
+          #{bkReBigMin}, #{bkReBigMax}, #{bkReSmallMin},
+          #{bkReSmallMax}, #{bkRbFthtMin}, #{bkRbFthtMax},
+          #{bkRbAhMin}, #{bkRbAhMax}, #{bkRbOuMin},
+          #{bkRbOuMax}, #{bkRbBigMin}, #{bkRbBigMax},
+          #{bkRbSmallMin}, #{bkRbSmallMax}, #{bkRFthtMin},
+          #{bkRFthtMax}, #{bkRAhMin}, #{bkRAhMax},
+          #{bkROuMin}, #{bkROuMax}, #{bkRBigMin},
+          #{bkRBigMax}, #{bkRSmallMin}, #{bkRSmallMax},
+          #{bkOrMin}, #{bkOrMax}, #{bkP3Min},
+          #{bkP3Max})
+  </insert>
+
+    <update id="updateBkPlatformConfig" parameterType="com.cn.great.req.game.MemberBKConfigReq">
+        update web_member_bk_config set
+          bk_re_ftht_min=#{bkReFthtMin}, bk_re_ftht_max=#{bkReFthtMax}, bk_re_ah_min=#{bkReAhMin},
+          bk_re_ah_max=#{bkReAhMax}, bk_re_ou_min=#{bkReOuMin}, bk_re_ou_max=#{bkReOuMax},
+          bk_re_big_min=#{bkReBigMin}, bk_re_big_max=#{bkReBigMax}, bk_re_small_min=#{bkReSmallMin},
+          bk_re_small_max=#{bkReSmallMax}, bk_rb_ftht_min=#{bkRbFthtMin}, bk_rb_ftht_max=#{bkRbFthtMax},
+          bk_rb_ah_min=#{bkRbAhMin}, bk_rb_ah_max=#{bkRbAhMax}, bk_rb_ou_min= #{bkRbOuMin},
+          bk_rb_ou_max=#{bkRbOuMax}, bk_rb_big_min=#{bkRbBigMin}, bk_rb_big_max=#{bkRbBigMax},
+          bk_rb_small_min= #{bkRbSmallMin}, bk_rb_small_max=#{bkRbSmallMax}, bk_r_ftht_min=#{bkRFthtMin},
+          bk_r_ftht_max=#{bkRFthtMax}, bk_r_ah_min=#{bkRAhMin}, bk_r_ah_max=#{bkRAhMax},
+          bk_r_ou_min=#{bkROuMin}, bk_r_ou_max=#{bkROuMax}, bk_r_big_min=#{bkRBigMin},
+          bk_r_big_max=#{bkRBigMax}, bk_r_small_min=#{bkRSmallMin}, bk_r_small_max=#{bkRSmallMax},
+          bk_or_min=#{bkOrMin}, bk_or_max=#{bkOrMax}, bk_p3_min=#{bkP3Min}, bk_p3_max=#{bkP3Max}
+          where type = 0 and userid = #{userid}
+    </update>
+
+    <insert id="addFTPlatformConfig" parameterType="com.cn.great.req.game.MemberFTConfigReq">
+        insert into web_member_ft_config (userid, type, server_admin,
+          ft_re_ftht_min, ft_re_ftht_max, ft_re_fthtlst_min,
+          ft_re_fthtlst_max, ft_re_ah_min, ft_re_ah_max,
+          ft_re_ahlst_min, ft_re_ahlst_max, ft_re_ou_min,
+          ft_re_ou_max, ft_re_oulst_min, ft_re_oulst_max,
+          ft_rb_ftht_min, ft_rb_ftht_max, ft_rb_fthtlst_min,
+          ft_rb_fthtlst_max, ft_rb_ah_min, ft_rb_ah_max,
+          ft_rb_ahlst_min, ft_rb_ahlst_max, ft_rb_ou_min,
+          ft_rb_ou_max, ft_rb_oulst_min, ft_rb_oulst_max,
+          ft_rb_oe_min, ft_rb_oe_max, ft_rb_oelst_min,
+          ft_rb_oelst_max, ft_rb_cs_min, ft_rb_cs_max,
+          ft_rb_tg_min, ft_rb_tg_max, ft_rb_tglst_min,
+          ft_rb_tglst_max, ft_rb_hf_min, ft_rb_hf_max,
+          ft_rb_fglg_min, ft_rb_fglg_max, ft_r_ftht_min,
+          ft_r_ftht_max, ft_r_fthtlst_min, ft_r_fthtlst_max,
+          ft_r_ah_min, ft_r_ah_max, ft_r_ahlst_min,
+          ft_r_ahlst_max, ft_r_ou_min, ft_r_ou_max,
+          ft_r_oulst_min, ft_r_oulst_max, ft_r_oe_min,
+          ft_r_oe_max, ft_r_oelst_min, ft_r_oelst_max,
+          ft_r_cs_min, ft_r_cs_max, ft_r_tg_min,
+          ft_r_tg_max, ft_r_tglst_min, ft_r_tglst_max,
+          ft_r_hf_min, ft_r_hf_max, ft_r_fglg_min,
+          ft_r_fglg_max, ft_or_min, ft_or_max,
+          ft_p3_min, ft_p3_max)
+        values (#{userid}, #{type}, #{serverAdmin},
+          #{ftReFthtMin}, #{ftReFthtMax}, #{ftReFthtlstMin},
+          #{ftReFthtlstMax}, #{ftReAhMin}, #{ftReAhMax},
+          #{ftReAhlstMin}, #{ftReAhlstMax}, #{ftReOuMin},
+          #{ftReOuMax}, #{ftReOulstMin}, #{ftReOulstMax},
+          #{ftRbFthtMin}, #{ftRbFthtMax}, #{ftRbFthtlstMin},
+          #{ftRbFthtlstMax}, #{ftRbAhMin}, #{ftRbAhMax},
+          #{ftRbAhlstMin}, #{ftRbAhlstMax}, #{ftRbOuMin},
+          #{ftRbOuMax}, #{ftRbOulstMin}, #{ftRbOulstMax},
+          #{ftRbOeMin}, #{ftRbOeMax}, #{ftRbOelstMin},
+          #{ftRbOelstMax}, #{ftRbCsMin}, #{ftRbCsMax},
+          #{ftRbTgMin}, #{ftRbTgMax}, #{ftRbTglstMin},
+          #{ftRbTglstMax}, #{ftRbHfMin}, #{ftRbHfMax},
+          #{ftRbFglgMin}, #{ftRbFglgMax}, #{ftRFthtMin},
+          #{ftRFthtMax}, #{ftRFthtlstMin}, #{ftRFthtlstMax},
+          #{ftRAhMin}, #{ftRAhMax}, #{ftRAhlstMin},
+          #{ftRAhlstMax}, #{ftROuMin}, #{ftROuMax},
+          #{ftROulstMin}, #{ftROulstMax}, #{ftROeMin},
+          #{ftROeMax}, #{ftROelstMin}, #{ftROelstMax},
+          #{ftRCsMin}, #{ftRCsMax}, #{ftRTgMin},
+          #{ftRTgMax}, #{ftRTglstMin}, #{ftRTglstMax},
+          #{ftRHfMin}, #{ftRHfMax}, #{ftRFglgMin},
+          #{ftRFglgMax}, #{ftOrMin}, #{ftOrMax},
+          #{ftP3Min}, #{ftP3Max})
+  </insert>
+
+    <update id="updateFTPlatformConfig" parameterType="com.cn.great.req.game.MemberFTConfigReq">
+        update web_member_ft_config set
+          ft_re_ftht_min=#{ftReFthtMin}, ft_re_ftht_max=#{ftReFthtMax}, ft_re_fthtlst_min=#{ftReFthtlstMin},
+          ft_re_fthtlst_max=#{ftReFthtlstMax}, ft_re_ah_min= #{ftReAhMin}, ft_re_ah_max= #{ftReAhMax},
+          ft_re_ahlst_min= #{ftReAhlstMin}, ft_re_ahlst_max= #{ftReAhlstMax}, ft_re_ou_min= #{ftReOuMin},
+          ft_re_ou_max= #{ftReOuMax}, ft_re_oulst_min= #{ftReOulstMin}, ft_re_oulst_max= #{ftReOulstMax},
+          ft_rb_ftht_min= #{ftRbFthtMin}, ft_rb_ftht_max= #{ftRbFthtMax}, ft_rb_fthtlst_min= #{ftRbFthtlstMin},
+          ft_rb_fthtlst_max= #{ftRbFthtlstMax}, ft_rb_ah_min= #{ftRbAhMin}, ft_rb_ah_max= #{ftRbAhMax},
+          ft_rb_ahlst_min= #{ftRbAhlstMin}, ft_rb_ahlst_max= #{ftRbAhlstMax}, ft_rb_ou_min= #{ftRbOuMin},
+          ft_rb_ou_max= #{ftRbOuMax}, ft_rb_oulst_min= #{ftRbOulstMin}, ft_rb_oulst_max= #{ftRbOulstMax},
+          ft_rb_oe_min= #{ftRbOeMin}, ft_rb_oe_max= #{ftRbOeMax}, ft_rb_oelst_min= #{ftRbOelstMin},
+          ft_rb_oelst_max= #{ftRbOelstMax}, ft_rb_cs_min= #{ftRbCsMin}, ft_rb_cs_max= #{ftRbCsMax},
+          ft_rb_tg_min= #{ftRbTgMin}, ft_rb_tg_max= #{ftRbTgMax}, ft_rb_tglst_min= #{ftRbTglstMin},
+          ft_rb_tglst_max= #{ftRbTglstMax}, ft_rb_hf_min= #{ftRbHfMin}, ft_rb_hf_max= #{ftRbHfMax},
+          ft_rb_fglg_min= #{ftRbFglgMin}, ft_rb_fglg_max= #{ftRbFglgMax}, ft_r_ftht_min= #{ftRFthtMin},
+          ft_r_ftht_max= #{ftRFthtMax}, ft_r_fthtlst_min= #{ftRFthtlstMin}, ft_r_fthtlst_max= #{ftRFthtlstMax},
+          ft_r_ah_min= #{ftRAhMin}, ft_r_ah_max= #{ftRAhMax}, ft_r_ahlst_min= #{ftRAhlstMin},
+          ft_r_ahlst_max= #{ftRAhlstMax}, ft_r_ou_min= #{ftROuMin}, ft_r_ou_max= #{ftROuMax},
+          ft_r_oulst_min= #{ftROulstMin}, ft_r_oulst_max= #{ftROulstMax}, ft_r_oe_min= #{ftROeMin},
+          ft_r_oe_max= #{ftROeMax}, ft_r_oelst_min= #{ftROelstMin}, ft_r_oelst_max= #{ftROelstMax},
+          ft_r_cs_min= #{ftRCsMin}, ft_r_cs_max= #{ftRCsMax}, ft_r_tg_min= #{ftRTgMin},
+          ft_r_tg_max= #{ftRTgMax}, ft_r_tglst_min= #{ftRTglstMin}, ft_r_tglst_max= #{ftRTglstMax},
+          ft_r_hf_min= #{ftRHfMin}, ft_r_hf_max= #{ftRHfMax}, ft_r_fglg_min= #{ftRFglgMin},
+          ft_r_fglg_max= #{ftRFglgMax}, ft_or_min= #{ftOrMin}, ft_or_max= #{ftOrMax},
+          ft_p3_min= #{ftP3Min}, ft_p3_max=#{ftP3Max}
+          where type = 0 and userid = #{userid}
+    </update>
+
+</mapper>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MemberInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MemberInfo" >
+    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="add_date" property="addDate" jdbcType="TIMESTAMP" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="withdrawal_passwd" property="withdrawalPasswd" jdbcType="CHAR" />
+    <result column="notes" property="notes" jdbcType="VARCHAR" />
+    <result column="agopen" property="agopen" jdbcType="BIT" />
+    <result column="cpopen" property="cpopen" jdbcType="BIT" />
+    <result column="mgopen" property="mgopen" jdbcType="BIT" />
+    <result column="alias" property="alias" jdbcType="CHAR" />
+    <result column="test_flag" property="testFlag" jdbcType="BIT" />
+    <result column="reg_ip" property="regIp" jdbcType="VARCHAR" />
+    <result column="bank_id" property="bankId" jdbcType="INTEGER" />
+    <result column="vip_level" property="vipLevel" jdbcType="INTEGER" />
+    <result column="question" property="question" jdbcType="BIT" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="collection" property="collection" jdbcType="OTHER" />
+    <result column="message_time" property="messageTime" jdbcType="TIMESTAMP" />
+    <result column="his_loss" property="hisLoss" jdbcType="BIGINT" />
+    <result column="his_bets" property="hisBets" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userid, add_date, birthday, withdrawal_passwd, notes, agopen, cpopen, mgopen, alias, 
+    test_flag, reg_ip, bank_id, vip_level, question, answer, collection, message_time, 
+    his_loss, his_bets
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_member_info
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_member_info
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.MemberInfo" >
+    insert into web_member_info (userid, add_date, birthday, 
+      withdrawal_passwd, notes, agopen, 
+      cpopen, mgopen, alias, test_flag, 
+      reg_ip, bank_id, vip_level, 
+      question, answer, collection, 
+      message_time, his_loss, his_bets
+      )
+    values (#{userid,jdbcType=INTEGER}, #{addDate,jdbcType=TIMESTAMP}, #{birthday,jdbcType=VARCHAR}, 
+      #{withdrawalPasswd,jdbcType=CHAR}, #{notes,jdbcType=VARCHAR}, #{agopen,jdbcType=BIT}, 
+      #{cpopen,jdbcType=BIT}, #{mgopen,jdbcType=BIT}, #{alias,jdbcType=CHAR}, #{testFlag,jdbcType=BIT}, 
+      #{regIp,jdbcType=VARCHAR}, #{bankId,jdbcType=INTEGER}, #{vipLevel,jdbcType=INTEGER}, 
+      #{question,jdbcType=BIT}, #{answer,jdbcType=VARCHAR}, #{collection,jdbcType=OTHER}, 
+      #{messageTime,jdbcType=TIMESTAMP}, #{hisLoss,jdbcType=BIGINT}, #{hisBets,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MemberInfo" >
+    insert into web_member_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="addDate != null" >
+        add_date,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="withdrawalPasswd != null" >
+        withdrawal_passwd,
+      </if>
+      <if test="notes != null" >
+        notes,
+      </if>
+      <if test="agopen != null" >
+        agopen,
+      </if>
+      <if test="cpopen != null" >
+        cpopen,
+      </if>
+      <if test="mgopen != null" >
+        mgopen,
+      </if>
+      <if test="alias != null" >
+        alias,
+      </if>
+      <if test="testFlag != null" >
+        test_flag,
+      </if>
+      <if test="regIp != null" >
+        reg_ip,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="vipLevel != null" >
+        vip_level,
+      </if>
+      <if test="question != null" >
+        question,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="collection != null" >
+        collection,
+      </if>
+      <if test="messageTime != null" >
+        message_time,
+      </if>
+      <if test="hisLoss != null" >
+        his_loss,
+      </if>
+      <if test="hisBets != null" >
+        his_bets,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="addDate != null" >
+        #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawalPasswd != null" >
+        #{withdrawalPasswd,jdbcType=CHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="agopen != null" >
+        #{agopen,jdbcType=BIT},
+      </if>
+      <if test="cpopen != null" >
+        #{cpopen,jdbcType=BIT},
+      </if>
+      <if test="mgopen != null" >
+        #{mgopen,jdbcType=BIT},
+      </if>
+      <if test="alias != null" >
+        #{alias,jdbcType=CHAR},
+      </if>
+      <if test="testFlag != null" >
+        #{testFlag,jdbcType=BIT},
+      </if>
+      <if test="regIp != null" >
+        #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="vipLevel != null" >
+        #{vipLevel,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=BIT},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="collection != null" >
+        #{collection,jdbcType=OTHER},
+      </if>
+      <if test="messageTime != null" >
+        #{messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hisLoss != null" >
+        #{hisLoss,jdbcType=BIGINT},
+      </if>
+      <if test="hisBets != null" >
+        #{hisBets,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.MemberInfo" >
+    update web_member_info
+    <set >
+      <if test="addDate != null" >
+        add_date = #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawalPasswd != null" >
+        withdrawal_passwd = #{withdrawalPasswd,jdbcType=CHAR},
+      </if>
+      <if test="notes != null" >
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="agopen != null" >
+        agopen = #{agopen,jdbcType=BIT},
+      </if>
+      <if test="cpopen != null" >
+        cpopen = #{cpopen,jdbcType=BIT},
+      </if>
+      <if test="mgopen != null" >
+        mgopen = #{mgopen,jdbcType=BIT},
+      </if>
+      <if test="alias != null" >
+        alias = #{alias,jdbcType=CHAR},
+      </if>
+      <if test="testFlag != null" >
+        test_flag = #{testFlag,jdbcType=BIT},
+      </if>
+      <if test="regIp != null" >
+        reg_ip = #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="vipLevel != null" >
+        vip_level = #{vipLevel,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        question = #{question,jdbcType=BIT},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="collection != null" >
+        collection = #{collection,jdbcType=OTHER},
+      </if>
+      <if test="messageTime != null" >
+        message_time = #{messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hisLoss != null" >
+        his_loss = #{hisLoss,jdbcType=BIGINT},
+      </if>
+      <if test="hisBets != null" >
+        his_bets = #{hisBets,jdbcType=BIGINT},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.MemberInfo" >
+    update web_member_info
+    set add_date = #{addDate,jdbcType=TIMESTAMP},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      withdrawal_passwd = #{withdrawalPasswd,jdbcType=CHAR},
+      notes = #{notes,jdbcType=VARCHAR},
+      agopen = #{agopen,jdbcType=BIT},
+      cpopen = #{cpopen,jdbcType=BIT},
+      mgopen = #{mgopen,jdbcType=BIT},
+      alias = #{alias,jdbcType=CHAR},
+      test_flag = #{testFlag,jdbcType=BIT},
+      reg_ip = #{regIp,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=INTEGER},
+      vip_level = #{vipLevel,jdbcType=INTEGER},
+      question = #{question,jdbcType=BIT},
+      answer = #{answer,jdbcType=VARCHAR},
+      collection = #{collection,jdbcType=OTHER},
+      message_time = #{messageTime,jdbcType=TIMESTAMP},
+      his_loss = #{hisLoss,jdbcType=BIGINT},
+      his_bets = #{hisBets,jdbcType=BIGINT}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

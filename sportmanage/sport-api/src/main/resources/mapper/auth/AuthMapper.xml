@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.auth.AuthMapper">
+
+    <resultMap id="auths" type="com.cn.great.model.auth.AuthInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="auth_name_CN" property="authNameCN"/>
+        <result column="auth_name_EN" property="authNameEN"/>
+        <result column="auth_type" property="authType"/>
+        <result column="auth_desc" property="authDesc"/>
+        <result column="auth_url" property="authUrl"/>
+        <result column="parent" property="parent"/>
+    </resultMap>
+
+    <resultMap id="mappers" type="com.cn.great.model.auth.RoleAuthMapper">
+        <result column="role_id" property="roleId"/>
+        <result column="auth_id" property="authId"/>
+    </resultMap>
+
+    <select id="fetchParentAuths" resultMap="auths">
+        select * from web_auth_info where 1=1 and parent = 0;
+    </select>
+
+    <select id="fetchAuthList" resultMap="auths" parameterType="com.cn.great.req.auth.AuthReq">
+        select * from web_auth_info
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="authNameCN!=null">
+                and auth_name_CN like concat(concat('%',#{authNameCN}),'%')
+            </if>
+            <if test="authNameEN!=null">
+                and auth_name_EN like concat(concat('%',#{authNameEN}),'%')
+            </if>
+            <if test="authType!=-1">
+                and auth_type = #{authType}
+            </if>
+            <if test="parent!=-1">
+                and parent = #{parent}
+            </if>
+        </trim>
+        order by id asc limit #{start}, #{length}
+    </select>
+
+    <select id="countAuths" resultType="java.lang.Integer" parameterType="com.cn.great.req.auth.AuthReq">
+        select count(id) from web_auth_info
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="authNameCN!=null">
+                and auth_name_CN like concat(concat('%',#{authNameCN}),'%')
+            </if>
+            <if test="authNameEN!=null">
+                and auth_name_EN like concat(concat('%',#{authNameEN}),'%')
+            </if>
+            <if test="authType!=-1">
+                and auth_type = #{authType}
+            </if>
+            <if test="parent!=-1">
+                and parent = #{parent}
+            </if>
+        </trim>
+    </select>
+
+    <select id="validAuthNameExists" resultMap="auths" parameterType="com.cn.great.req.auth.AuthAddReq">
+        select * from web_auth_info
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="authNameCN!=null">
+                and auth_name_CN = #{authNameCN}
+            </if>
+            <if test="authNameEN!=null">
+                or auth_name_EN = #{authNameEN}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addAuthInfo" parameterType="com.cn.great.req.auth.AuthAddReq" useGeneratedKeys="true" keyProperty="id">
+        insert into web_auth_info(auth_name_CN, auth_name_EN, auth_type, auth_desc, auth_url, parent)
+        values(#{authNameCN},#{authNameEN},#{authType}, #{authDesc},#{authUrl},#{parent})
+    </insert>
+
+    <update id="updateAuthInfo" parameterType="com.cn.great.req.auth.AuthAddReq">
+        update web_auth_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="null != authNameCN and '' != authNameCN">
+                auth_name_CN=#{authNameCN},
+            </if>
+            <if test="null != authNameEN and '' != authNameEN">
+                auth_name_EN=#{authNameEN},
+            </if>
+            <if test="authType != -1">
+                auth_type=#{authType},
+            </if>
+            <if test="null != authDesc and '' != authDesc">
+                auth_desc=#{authDesc},
+            </if>
+            <if test="null != authUrl and '' != authUrl">
+                auth_url=#{authUrl},
+            </if>
+            <if test="parent != -1">
+                parent=#{parent}
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteAuthInfo" parameterType="java.lang.Integer">
+        delete from web_auth_info where id = #{id}
+    </delete>
+
+    <select id="fetchAuthsAll" resultMap="auths">
+        select * from web_auth_info
+    </select>
+
+    <select id="fetchSelectedAuths" parameterType="java.lang.Integer" resultMap="mappers">
+        select role_id, auth_id from web_role_auth_map where role_id = #{id}
+    </select>
+
+    <insert id="configAuths" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into web_role_auth_map(role_id, auth_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.roleId}, #{item.authId})
+        </foreach>
+    </insert>
+
+    <delete id="deleteMapperByRoleId" parameterType="java.lang.Integer">
+        delete from web_role_auth_map where role_id = #{roleId}
+    </delete>
+
+    <delete id="deleteMapperByAuthId" parameterType="java.lang.Integer">
+        delete from web_role_auth_map where auth_id = #{authId}
+    </delete>
+
+</mapper>

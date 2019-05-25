@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.discount.ReceiveMapper">
+
+    <select id="receiveBoolean" resultType="java.lang.Integer">
+        select COUNT(1) from web_activity_condition c,web_activity_receive r
+        <where>
+            c.id=r.activity_id
+            <choose>
+                <when test="userId > 0 ">
+                    and r.userid=#{userId} and c.id=#{conditionId}
+                </when>
+                <when test="ip != null and ip != '' ">
+                    and r.ip=#{ip} and c.id=#{conditionId}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <insert id="addReceive">
+        insert into web_activity_receive (userid,money,ip,add_time,activity_id,server_admin) VALUES (#{userId},#{num},#{ip},#{format},#{id},#{admin})
+    </insert>
+
+</mapper>

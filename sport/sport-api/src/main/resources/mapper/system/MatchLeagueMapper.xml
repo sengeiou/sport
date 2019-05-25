@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MatchLeagueMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MatchLeague" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="m_league" property="mLeague" jdbcType="VARCHAR" />
+    <result column="m_league_tw" property="mLeagueTw" jdbcType="VARCHAR" />
+    <result column="m_league_en" property="mLeagueEn" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="r" property="r" jdbcType="INTEGER" />
+    <result column="ou" property="ou" jdbcType="INTEGER" />
+    <result column="m" property="m" jdbcType="INTEGER" />
+    <result column="eo" property="eo" jdbcType="INTEGER" />
+    <result column="vr" property="vr" jdbcType="INTEGER" />
+    <result column="vou" property="vou" jdbcType="INTEGER" />
+    <result column="vm" property="vm" jdbcType="INTEGER" />
+    <result column="rb" property="rb" jdbcType="INTEGER" />
+    <result column="rou" property="rou" jdbcType="INTEGER" />
+    <result column="rm" property="rm" jdbcType="INTEGER" />
+    <result column="vrb" property="vrb" jdbcType="INTEGER" />
+    <result column="vrou" property="vrou" jdbcType="INTEGER" />
+    <result column="vrm" property="vrm" jdbcType="INTEGER" />
+    <result column="pd" property="pd" jdbcType="INTEGER" />
+    <result column="t" property="t" jdbcType="INTEGER" />
+    <result column="f" property="f" jdbcType="INTEGER" />
+    <result column="cs" property="cs" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, m_league, m_league_tw, m_league_en, type, r, ou, m, eo, vr, vou, vm, rb, rou, 
+    rm, vrb, vrou, vrm, pd, t, f, cs
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_match_league
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_match_league
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.MatchLeague" >
+    insert into web_match_league (id, m_league, m_league_tw, 
+      m_league_en, type, r, ou, 
+      m, eo, vr, vou, 
+      vm, rb, rou, rm, 
+      vrb, vrou, vrm, pd, 
+      t, f, cs)
+    values (#{id,jdbcType=INTEGER}, #{mLeague,jdbcType=VARCHAR}, #{mLeagueTw,jdbcType=VARCHAR}, 
+      #{mLeagueEn,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{r,jdbcType=INTEGER}, #{ou,jdbcType=INTEGER}, 
+      #{m,jdbcType=INTEGER}, #{eo,jdbcType=INTEGER}, #{vr,jdbcType=INTEGER}, #{vou,jdbcType=INTEGER}, 
+      #{vm,jdbcType=INTEGER}, #{rb,jdbcType=INTEGER}, #{rou,jdbcType=INTEGER}, #{rm,jdbcType=INTEGER}, 
+      #{vrb,jdbcType=INTEGER}, #{vrou,jdbcType=INTEGER}, #{vrm,jdbcType=INTEGER}, #{pd,jdbcType=INTEGER}, 
+      #{t,jdbcType=INTEGER}, #{f,jdbcType=INTEGER}, #{cs,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MatchLeague" >
+    insert into web_match_league
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mLeague != null" >
+        m_league,
+      </if>
+      <if test="mLeagueTw != null" >
+        m_league_tw,
+      </if>
+      <if test="mLeagueEn != null" >
+        m_league_en,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="r != null" >
+        r,
+      </if>
+      <if test="ou != null" >
+        ou,
+      </if>
+      <if test="m != null" >
+        m,
+      </if>
+      <if test="eo != null" >
+        eo,
+      </if>
+      <if test="vr != null" >
+        vr,
+      </if>
+      <if test="vou != null" >
+        vou,
+      </if>
+      <if test="vm != null" >
+        vm,
+      </if>
+      <if test="rb != null" >
+        rb,
+      </if>
+      <if test="rou != null" >
+        rou,
+      </if>
+      <if test="rm != null" >
+        rm,
+      </if>
+      <if test="vrb != null" >
+        vrb,
+      </if>
+      <if test="vrou != null" >
+        vrou,
+      </if>
+      <if test="vrm != null" >
+        vrm,
+      </if>
+      <if test="pd != null" >
+        pd,
+      </if>
+      <if test="t != null" >
+        t,
+      </if>
+      <if test="f != null" >
+        f,
+      </if>
+      <if test="cs != null" >
+        cs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mLeague != null" >
+        #{mLeague,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeagueTw != null" >
+        #{mLeagueTw,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeagueEn != null" >
+        #{mLeagueEn,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="r != null" >
+        #{r,jdbcType=INTEGER},
+      </if>
+      <if test="ou != null" >
+        #{ou,jdbcType=INTEGER},
+      </if>
+      <if test="m != null" >
+        #{m,jdbcType=INTEGER},
+      </if>
+      <if test="eo != null" >
+        #{eo,jdbcType=INTEGER},
+      </if>
+      <if test="vr != null" >
+        #{vr,jdbcType=INTEGER},
+      </if>
+      <if test="vou != null" >
+        #{vou,jdbcType=INTEGER},
+      </if>
+      <if test="vm != null" >
+        #{vm,jdbcType=INTEGER},
+      </if>
+      <if test="rb != null" >
+        #{rb,jdbcType=INTEGER},
+      </if>
+      <if test="rou != null" >
+        #{rou,jdbcType=INTEGER},
+      </if>
+      <if test="rm != null" >
+        #{rm,jdbcType=INTEGER},
+      </if>
+      <if test="vrb != null" >
+        #{vrb,jdbcType=INTEGER},
+      </if>
+      <if test="vrou != null" >
+        #{vrou,jdbcType=INTEGER},
+      </if>
+      <if test="vrm != null" >
+        #{vrm,jdbcType=INTEGER},
+      </if>
+      <if test="pd != null" >
+        #{pd,jdbcType=INTEGER},
+      </if>
+      <if test="t != null" >
+        #{t,jdbcType=INTEGER},
+      </if>
+      <if test="f != null" >
+        #{f,jdbcType=INTEGER},
+      </if>
+      <if test="cs != null" >
+        #{cs,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.MatchLeague" >
+    update web_match_league
+    <set >
+      <if test="mLeague != null" >
+        m_league = #{mLeague,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeagueTw != null" >
+        m_league_tw = #{mLeagueTw,jdbcType=VARCHAR},
+      </if>
+      <if test="mLeagueEn != null" >
+        m_league_en = #{mLeagueEn,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="r != null" >
+        r = #{r,jdbcType=INTEGER},
+      </if>
+      <if test="ou != null" >
+        ou = #{ou,jdbcType=INTEGER},
+      </if>
+      <if test="m != null" >
+        m = #{m,jdbcType=INTEGER},
+      </if>
+      <if test="eo != null" >
+        eo = #{eo,jdbcType=INTEGER},
+      </if>
+      <if test="vr != null" >
+        vr = #{vr,jdbcType=INTEGER},
+      </if>
+      <if test="vou != null" >
+        vou = #{vou,jdbcType=INTEGER},
+      </if>
+      <if test="vm != null" >
+        vm = #{vm,jdbcType=INTEGER},
+      </if>
+      <if test="rb != null" >
+        rb = #{rb,jdbcType=INTEGER},
+      </if>
+      <if test="rou != null" >
+        rou = #{rou,jdbcType=INTEGER},
+      </if>
+      <if test="rm != null" >
+        rm = #{rm,jdbcType=INTEGER},
+      </if>
+      <if test="vrb != null" >
+        vrb = #{vrb,jdbcType=INTEGER},
+      </if>
+      <if test="vrou != null" >
+        vrou = #{vrou,jdbcType=INTEGER},
+      </if>
+      <if test="vrm != null" >
+        vrm = #{vrm,jdbcType=INTEGER},
+      </if>
+      <if test="pd != null" >
+        pd = #{pd,jdbcType=INTEGER},
+      </if>
+      <if test="t != null" >
+        t = #{t,jdbcType=INTEGER},
+      </if>
+      <if test="f != null" >
+        f = #{f,jdbcType=INTEGER},
+      </if>
+      <if test="cs != null" >
+        cs = #{cs,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.MatchLeague" >
+    update web_match_league
+    set m_league = #{mLeague,jdbcType=VARCHAR},
+      m_league_tw = #{mLeagueTw,jdbcType=VARCHAR},
+      m_league_en = #{mLeagueEn,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      r = #{r,jdbcType=INTEGER},
+      ou = #{ou,jdbcType=INTEGER},
+      m = #{m,jdbcType=INTEGER},
+      eo = #{eo,jdbcType=INTEGER},
+      vr = #{vr,jdbcType=INTEGER},
+      vou = #{vou,jdbcType=INTEGER},
+      vm = #{vm,jdbcType=INTEGER},
+      rb = #{rb,jdbcType=INTEGER},
+      rou = #{rou,jdbcType=INTEGER},
+      rm = #{rm,jdbcType=INTEGER},
+      vrb = #{vrb,jdbcType=INTEGER},
+      vrou = #{vrou,jdbcType=INTEGER},
+      vrm = #{vrm,jdbcType=INTEGER},
+      pd = #{pd,jdbcType=INTEGER},
+      t = #{t,jdbcType=INTEGER},
+      f = #{f,jdbcType=INTEGER},
+      cs = #{cs,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

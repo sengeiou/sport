@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.sportbill.SportsHotMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.match.SportHotEntity" >
+    <result column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="mleagueid" property="mLeagueId" jdbcType="INTEGER" />
+    <result column="mleague" property="mLeague" jdbcType="VARCHAR" />
+    <result column="mbteam" property="mbTeam" jdbcType="VARCHAR" />
+    <result column="tgteam" property="tgTeam" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="mdate" property="mDate"/>
+    <result column="mtime" property="mTime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="queryAll" resultMap="BaseResultMap">
+    select mid, mleagueid, mleague,
+      mbteam, tgteam, type,
+      mdate, mtime, status, server_admin from web_sports_hot where status=0
+  </select>
+  <insert id="insert" parameterType="com.cn.great.model.match.SportHotEntity" >
+    insert into web_sports_hot (mid, mleagueid, mleague, 
+      mbteam, tgteam, type, 
+      mdate, mtime, status, server_admin
+      )
+    values (#{mid,jdbcType=INTEGER}, #{mleagueid,jdbcType=INTEGER}, #{mleague,jdbcType=VARCHAR}, 
+      #{mbteam,jdbcType=VARCHAR}, #{tgteam,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{mdate}, #{mtime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{serverAdmin,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.match.SportHotEntity" >
+    insert into web_sports_hot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="mleagueid != null" >
+        mleagueid,
+      </if>
+      <if test="mleague != null" >
+        mleague,
+      </if>
+      <if test="mbteam != null" >
+        mbteam,
+      </if>
+      <if test="tgteam != null" >
+        tgteam,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="mdate != null" >
+        mdate,
+      </if>
+      <if test="mtime != null" >
+        mtime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mleagueid != null" >
+        #{mleagueid,jdbcType=INTEGER},
+      </if>
+      <if test="mleague != null" >
+        #{mleague,jdbcType=VARCHAR},
+      </if>
+      <if test="mbteam != null" >
+        #{mbteam,jdbcType=VARCHAR},
+      </if>
+      <if test="tgteam != null" >
+        #{tgteam,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="mdate != null" >
+        #{mdate},
+      </if>
+      <if test="mtime != null" >
+        #{mtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.DictMapper">
+    
+    <select id="listByObj" resultType="com.cn.great.model.system.DictEntity">
+      select d.code,d.type_code typeCode,d.name,d.value,d.fixed,t.name typeName,d.sort from web_dict d left join web_dict_type t on d.type_code=t.code  where d.status=1
+      <if test="dict.code!=null and dict.code!=''">
+          and d.code=#{dict.code}
+      </if>
+       <if test="dict.typeCode!=null and dict.typeCode!=''">
+          and d.type_code=#{dict.typeCode}
+      </if>
+    </select>
+
+</mapper>

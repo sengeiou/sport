@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MessageInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MessageInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="message_id" property="messageId" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="read_status" property="readStatus" jdbcType="BIT" />
+    <result column="del_status" property="delStatus" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, message_id, userid, read_status, del_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_message_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    UPDATE web_message_info 
+         set del_status=1
+       where message_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.MessageInfo" >
+    insert into web_message_info (id, message_id, userid, 
+      read_status, del_status)
+    values (#{id,jdbcType=INTEGER}, #{messageId,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, 
+      #{readStatus,jdbcType=BIT}, #{delStatus,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MessageInfo" >
+    insert into web_message_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="readStatus != null" >
+        read_status,
+      </if>
+      <if test="delStatus != null" >
+        del_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="messageId != null" >
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="readStatus != null" >
+        #{readStatus,jdbcType=BIT},
+      </if>
+      <if test="delStatus != null" >
+        #{delStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+    
+    <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.MessageInfo" >
+    update web_message_info
+    <set >
+      <if test="messageId != null" >
+        message_id = #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="readStatus != null" >
+        read_status = #{readStatus,jdbcType=BIT},
+      </if>
+      <if test="delStatus != null" >
+        del_status = #{delStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.MessageInfo" >
+    update web_message_info
+    set message_id = #{messageId,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=VARCHAR},
+      read_status = #{readStatus,jdbcType=BIT},
+      del_status = #{delStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="addMessageInfo">
+    insert into web_message_info (message_id,userid) value (#{id},#{userId})
+  </insert>
+</mapper>

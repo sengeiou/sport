@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.user.MoneyChangeMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.user.MoneyChangeEntity">
+        <id column="id" property="id"/>
+        <result column="userid" property="userid"/>
+        <result column="goldf" property="goldf"/>
+        <result column="gold" property="gold"/>
+        <result column="golds" property="golds"/>
+        <result column="order_code" property="order_code"/>
+        <result column="add_date" property="add_date"/>
+        <result column="change_type_id" property="changeTypeId"/>
+        <result column="ip" property="ip"/>
+        <result column="status" property="status"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="name" property="type"/>
+    </resultMap>
+    <select id="getTransferLog" resultMap="BaseResultMap" parameterType="com.cn.great.req.user.TransferLogReq">
+        select a.id,gold,goldf,golds,b.name,status,order_code,add_date from web_moneychange a
+          inner join web_moneychange_type b on a.change_type_id = b.id
+          where userid = #{userid} and add_date between #{start_date} and #{end_date}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.cn.great.model.user.MoneyChangeEntity">
+    insert into web_moneychange (userid, goldf,
+      gold, golds, order_code, 
+      add_date, change_type_id, ip, 
+      status, server_admin)
+    values (#{userid,jdbcType=INTEGER}, #{goldf,jdbcType=DECIMAL},
+      #{gold,jdbcType=DECIMAL}, #{golds,jdbcType=DECIMAL}, #{orderCode,jdbcType=VARCHAR}, 
+      #{addDate,jdbcType=TIMESTAMP}, #{changeTypeId,jdbcType=TINYINT}, #{ip,jdbcType=BIGINT}, 
+      #{status,jdbcType=BIT}, #{serverAdmin,jdbcType=VARCHAR})
+    </insert>
+</mapper>

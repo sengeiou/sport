@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.SportsSumMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.SportsSum" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="agents_id" property="agentsId" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="nums" property="nums" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="user_win" property="userWin" jdbcType="DECIMAL" />
+    <result column="bets_money" property="betsMoney" jdbcType="DECIMAL" />
+    <result column="valid_money" property="validMoney" jdbcType="DECIMAL" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, agents_id, userid, nums, date, user_win, bets_money, valid_money, server_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_sports_sum
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_sports_sum
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.SportsSum" >
+    insert into web_sports_sum (id, agents_id, userid, 
+      nums, date, user_win, bets_money, 
+      valid_money, server_admin)
+    values (#{id,jdbcType=INTEGER}, #{agentsId,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{nums,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{userWin,jdbcType=DECIMAL}, #{betsMoney,jdbcType=DECIMAL}, 
+      #{validMoney,jdbcType=DECIMAL}, #{serverAdmin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.SportsSum" >
+    insert into web_sports_sum
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="agentsId != null" >
+        agents_id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="nums != null" >
+        nums,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="userWin != null" >
+        user_win,
+      </if>
+      <if test="betsMoney != null" >
+        bets_money,
+      </if>
+      <if test="validMoney != null" >
+        valid_money,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="agentsId != null" >
+        #{agentsId,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nums != null" >
+        #{nums,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="userWin != null" >
+        #{userWin,jdbcType=DECIMAL},
+      </if>
+      <if test="betsMoney != null" >
+        #{betsMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="validMoney != null" >
+        #{validMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.SportsSum" >
+    update web_sports_sum
+    <set >
+      <if test="agentsId != null" >
+        agents_id = #{agentsId,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nums != null" >
+        nums = #{nums,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="userWin != null" >
+        user_win = #{userWin,jdbcType=DECIMAL},
+      </if>
+      <if test="betsMoney != null" >
+        bets_money = #{betsMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="validMoney != null" >
+        valid_money = #{validMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.SportsSum" >
+    update web_sports_sum
+    set agents_id = #{agentsId,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      nums = #{nums,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      user_win = #{userWin,jdbcType=DECIMAL},
+      bets_money = #{betsMoney,jdbcType=DECIMAL},
+      valid_money = #{validMoney,jdbcType=DECIMAL},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

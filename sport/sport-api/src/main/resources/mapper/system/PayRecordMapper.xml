@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.PayRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.PayRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="TINYINT" />
+    <result column="pay_id" property="payId" jdbcType="INTEGER" />
+    <result column="payment_name_id" property="paymentNameId" jdbcType="INTEGER" />
+    <result column="return_para" property="returnPara" jdbcType="OTHER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="bank_id" property="bankId" jdbcType="INTEGER" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, money, created_time, ip, pay_type, pay_id, payment_name_id, return_para, 
+    order_number, status, type, bank_id, server_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_pay_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_pay_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.PayRecord" >
+    insert into web_pay_record (id, userid, money, 
+      created_time, ip, pay_type, 
+      pay_id, payment_name_id, return_para, 
+      order_number, status, type, 
+      bank_id, server_admin)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT}, 
+      #{payId,jdbcType=INTEGER}, #{paymentNameId,jdbcType=INTEGER}, #{returnPara,jdbcType=OTHER}, 
+      #{orderNumber,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{type,jdbcType=BIT}, 
+      #{bankId,jdbcType=INTEGER}, #{serverAdmin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.PayRecord" >
+    insert into web_pay_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="paymentNameId != null" >
+        payment_name_id,
+      </if>
+      <if test="returnPara != null" >
+        return_para,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentNameId != null" >
+        #{paymentNameId,jdbcType=INTEGER},
+      </if>
+      <if test="returnPara != null" >
+        #{returnPara,jdbcType=OTHER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.PayRecord" >
+    update web_pay_record
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentNameId != null" >
+        payment_name_id = #{paymentNameId,jdbcType=INTEGER},
+      </if>
+      <if test="returnPara != null" >
+        return_para = #{returnPara,jdbcType=OTHER},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.PayRecord" >
+    update web_pay_record
+    set userid = #{userid,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=TINYINT},
+      pay_id = #{payId,jdbcType=INTEGER},
+      payment_name_id = #{paymentNameId,jdbcType=INTEGER},
+      return_para = #{returnPara,jdbcType=OTHER},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      type = #{type,jdbcType=BIT},
+      bank_id = #{bankId,jdbcType=INTEGER},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

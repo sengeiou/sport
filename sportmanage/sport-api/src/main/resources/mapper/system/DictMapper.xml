@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.DictMapper">
+
+    <select id="listByObj" resultType="com.cn.great.model.system.DictEntity">
+        select d.code,d.type_code typeCode,d.name,d.value,d.fixed,t.name typeName,d.sort from web_dict d left join
+        web_dict_type t on d.type_code=t.code where d.status=1
+        <if test="dict.code!=null and dict.code!=''">
+            and d.code=#{dict.code}
+        </if>
+        <if test="dict.typeCode!=null and dict.typeCode!=''">
+            and d.type_code=#{dict.typeCode}
+        </if>
+    </select>
+    <update id="updateValue">
+        update web_dict d set d.value=#{dict.value} where d.code=#{dict.code}
+    </update>
+
+    <select id="fetchAllEnumTypes" resultType="com.cn.great.model.system.EnumType">
+        select * from web_dict_type
+    </select>
+
+    <select id="fetchEnumList" resultType="com.cn.great.model.system.DictEntity"
+            parameterType="com.cn.great.req.system.EnumOpeReq">
+        select d.id,d.code,d.type_code typeCode,d.name,d.value,d.fixed,t.name typeName,d.sort
+        from web_dict d
+        left join web_dict_type t
+        on d.type_code=t.code
+        where d.type_code=#{typeCode}
+        and (d.name=#{name} or d.code=#{code})
+        <if test="id!=null and id!=''">
+            and d.id != #{id}
+        </if>
+    </select>
+
+    <select id="fetchEnums" resultType="com.cn.great.model.system.DictEntity"
+            parameterType="com.cn.great.req.system.EnumReq">
+        select d.id,d.code,d.type_code typeCode,d.name,d.value,d.fixed,t.name typeName,d.sort from web_dict d
+        left join web_dict_type t
+        on d.type_code=t.code
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="code!=null and code!=''">
+                and d.code=#{code}
+            </if>
+            <if test="typeCode!=null and typeCode!=''">
+                and d.type_code=#{typeCode}
+            </if>
+            <if test="name!=null and name!=''">
+                and d.name like concat(concat('%',#{name}),'%')
+            </if>
+        </trim>
+        order by d.type_code asc limit #{start}, #{length}
+    </select>
+
+    <select id="countEnums" resultType="java.lang.Integer" parameterType="com.cn.great.req.system.EnumReq">
+        select count(code) from web_dict d
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="code!=null and code!=''">
+                and d.code=#{code}
+            </if>
+            <if test="typeCode!=null and typeCode!=''">
+                and d.type_code=#{typeCode}
+            </if>
+            <if test="name!=null and name!=''">
+                and d.name like concat(concat('%',#{name}),'%')
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addEnum" parameterType="com.cn.great.req.system.EnumOpeReq" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into web_dict(code, type_code, name, value, sort)
+        values(#{code},#{typeCode},#{name},#{value}, #{sort})
+    </insert>
+
+    <update id="updateEnum" parameterType="com.cn.great.req.system.EnumOpeReq">
+        update web_dict
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="code!=null and code!=''">
+                code=#{code},
+            </if>
+            <if test="typeCode!=null and typeCode!=''">
+                type_code=#{typeCode},
+            </if>
+            <if test="value!=null and value!=''">
+                value=#{value},
+            </if>
+            <if test="sort!=null and sort!=''">
+                sort=#{sort}
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteEnum" parameterType="java.lang.Integer">
+        delete from web_dict where id = #{id}
+    </delete>
+
+    <select id="fetchEnumTypes" resultType="com.cn.great.model.system.EnumType"
+            parameterType="com.cn.great.req.system.EnumReq">
+        select code,name from web_dict_type
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="code!=null and code!=''">
+                and code=#{code}
+            </if>
+            <if test="name!=null and name!=''">
+                and name like concat(concat('%',#{name}),'%')
+            </if>
+        </trim>
+        order by code asc limit #{start}, #{length}
+    </select>
+
+    <select id="countEnumTypes" resultType="java.lang.Integer" parameterType="com.cn.great.req.system.EnumReq">
+        select count(*) from web_dict_type
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="code!=null and code!=''">
+                and code=#{code}
+            </if>
+            <if test="name!=null and name!=''">
+                and name like concat(concat('%',#{name}),'%')
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addEnumType" parameterType="com.cn.great.req.system.EnumOpeReq">
+        insert into web_dict_type(code, name) values(#{code},#{name})
+    </insert>
+
+    <update id="updateEnumType" parameterType="com.cn.great.req.system.EnumOpeReq">
+        update web_dict_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code!=null and code!=''">
+                code=#{code}
+            </if>
+        </trim>
+        where name = #{name}
+    </update>
+
+    <delete id="deleteEnumType" parameterType="java.lang.String">
+        delete from web_dict_type where code = #{code}
+    </delete>
+
+    <select id="fetchTypes" resultType="com.cn.great.model.system.EnumType"
+            parameterType="com.cn.great.req.system.EnumOpeReq">
+        select code,name from web_dict_type where code=#{code} or name=#{name}
+    </select>
+
+</mapper>

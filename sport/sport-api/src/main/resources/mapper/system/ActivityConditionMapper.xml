@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.ActivityConditionMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.ActivityCondition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="condition" property="condition" jdbcType="OTHER" />
+    <result column="white" property="white" jdbcType="OTHER" />
+    <result column="black" property="black" jdbcType="VARCHAR" />
+    <result column="beta" property="beta" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="get_money" property="getMoney" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, condition, white, black, beta, start_time, end_time, total, get_money, 
+    status, server_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_activity_condition
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_activity_condition
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.ActivityCondition" >
+    insert into web_activity_condition (id, name, condition, 
+      white, black, beta, start_time, 
+      end_time, total, get_money, 
+      status, server_admin)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{condition,jdbcType=OTHER}, 
+      #{white,jdbcType=OTHER}, #{black,jdbcType=VARCHAR}, #{beta,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{total,jdbcType=INTEGER}, #{getMoney,jdbcType=INTEGER}, 
+      #{status,jdbcType=BIT}, #{serverAdmin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.ActivityCondition" >
+    insert into web_activity_condition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="condition != null" >
+        condition,
+      </if>
+      <if test="white != null" >
+        white,
+      </if>
+      <if test="black != null" >
+        black,
+      </if>
+      <if test="beta != null" >
+        beta,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="getMoney != null" >
+        get_money,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        #{condition,jdbcType=OTHER},
+      </if>
+      <if test="white != null" >
+        #{white,jdbcType=OTHER},
+      </if>
+      <if test="black != null" >
+        #{black,jdbcType=VARCHAR},
+      </if>
+      <if test="beta != null" >
+        #{beta,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="getMoney != null" >
+        #{getMoney,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="serverAdmin != null" >
+        #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.ActivityCondition" >
+    update web_activity_condition
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        condition = #{condition,jdbcType=OTHER},
+      </if>
+      <if test="white != null" >
+        white = #{white,jdbcType=OTHER},
+      </if>
+      <if test="black != null" >
+        black = #{black,jdbcType=VARCHAR},
+      </if>
+      <if test="beta != null" >
+        beta = #{beta,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="getMoney != null" >
+        get_money = #{getMoney,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="serverAdmin != null" >
+        server_admin = #{serverAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.ActivityCondition" >
+    update web_activity_condition
+    set name = #{name,jdbcType=VARCHAR},
+      condition = #{condition,jdbcType=OTHER},
+      white = #{white,jdbcType=OTHER},
+      black = #{black,jdbcType=VARCHAR},
+      beta = #{beta,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      total = #{total,jdbcType=INTEGER},
+      get_money = #{getMoney,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT},
+      server_admin = #{serverAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

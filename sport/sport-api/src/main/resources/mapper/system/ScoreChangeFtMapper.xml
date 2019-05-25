@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.ScoreChangeFtMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.ScoreChangeFt" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="mb_team" property="mbTeam" jdbcType="VARCHAR" />
+    <result column="tg_team" property="tgTeam" jdbcType="VARCHAR" />
+    <result column="mb_score" property="mbScore" jdbcType="TINYINT" />
+    <result column="tg_score" property="tgScore" jdbcType="TINYINT" />
+    <result column="m_time" property="mTime" jdbcType="TIMESTAMP" />
+    <result column="m_start" property="mStart" jdbcType="TIMESTAMP" />
+    <result column="now_play" property="nowPlay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mid, mb_team, tg_team, mb_score, tg_score, m_time, m_start, now_play
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_score_change_ft
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_score_change_ft
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.system.ScoreChangeFt" >
+    insert into web_score_change_ft (id, mid, mb_team, 
+      tg_team, mb_score, tg_score, 
+      m_time, m_start, now_play
+      )
+    values (#{id,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{mbTeam,jdbcType=VARCHAR}, 
+      #{tgTeam,jdbcType=VARCHAR}, #{mbScore,jdbcType=TINYINT}, #{tgScore,jdbcType=TINYINT}, 
+      #{mTime,jdbcType=TIMESTAMP}, #{mStart,jdbcType=TIMESTAMP}, #{nowPlay,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.ScoreChangeFt" >
+    insert into web_score_change_ft
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="mbTeam != null" >
+        mb_team,
+      </if>
+      <if test="tgTeam != null" >
+        tg_team,
+      </if>
+      <if test="mbScore != null" >
+        mb_score,
+      </if>
+      <if test="tgScore != null" >
+        tg_score,
+      </if>
+      <if test="mTime != null" >
+        m_time,
+      </if>
+      <if test="mStart != null" >
+        m_start,
+      </if>
+      <if test="nowPlay != null" >
+        now_play,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mbTeam != null" >
+        #{mbTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="tgTeam != null" >
+        #{tgTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="mbScore != null" >
+        #{mbScore,jdbcType=TINYINT},
+      </if>
+      <if test="tgScore != null" >
+        #{tgScore,jdbcType=TINYINT},
+      </if>
+      <if test="mTime != null" >
+        #{mTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mStart != null" >
+        #{mStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nowPlay != null" >
+        #{nowPlay,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.system.ScoreChangeFt" >
+    update web_score_change_ft
+    <set >
+      <if test="mid != null" >
+        mid = #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mbTeam != null" >
+        mb_team = #{mbTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="tgTeam != null" >
+        tg_team = #{tgTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="mbScore != null" >
+        mb_score = #{mbScore,jdbcType=TINYINT},
+      </if>
+      <if test="tgScore != null" >
+        tg_score = #{tgScore,jdbcType=TINYINT},
+      </if>
+      <if test="mTime != null" >
+        m_time = #{mTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mStart != null" >
+        m_start = #{mStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nowPlay != null" >
+        now_play = #{nowPlay,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.system.ScoreChangeFt" >
+    update web_score_change_ft
+    set mid = #{mid,jdbcType=INTEGER},
+      mb_team = #{mbTeam,jdbcType=VARCHAR},
+      tg_team = #{tgTeam,jdbcType=VARCHAR},
+      mb_score = #{mbScore,jdbcType=TINYINT},
+      tg_score = #{tgScore,jdbcType=TINYINT},
+      m_time = #{mTime,jdbcType=TIMESTAMP},
+      m_start = #{mStart,jdbcType=TIMESTAMP},
+      now_play = #{nowPlay,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.payment.BankNameMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cn.great.model.payment.BankNameEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bank_name" property="bank" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="getBankName" resultMap="BaseResultMap">
+      select bank_name,code from web_bank_name
+  </select>
+
+  <select id="checkBankCode" resultType="java.lang.Integer">
+      select count(*) from web_bank_name where code = #{code}
+  </select>
+
+</mapper>

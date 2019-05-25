@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MatchSportsVideoMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MatchSportsVideo" >
+    <result column="vmid" property="vmid" jdbcType="INTEGER" />
+    <result column="vm_date" property="vmDate" jdbcType="DATE" />
+    <result column="mpid" property="mpid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cn.great.model.system.MatchSportsVideo" >
+    insert into web_match_sports_video (vmid, vm_date, mpid
+      )
+    values (#{vmid,jdbcType=INTEGER}, #{vmDate,jdbcType=DATE}, #{mpid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MatchSportsVideo" >
+    insert into web_match_sports_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vmid != null" >
+        vmid,
+      </if>
+      <if test="vmDate != null" >
+        vm_date,
+      </if>
+      <if test="mpid != null" >
+        mpid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vmid != null" >
+        #{vmid,jdbcType=INTEGER},
+      </if>
+      <if test="vmDate != null" >
+        #{vmDate,jdbcType=DATE},
+      </if>
+      <if test="mpid != null" >
+        #{mpid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.MgBillMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.MgBill" >
+    <result column="key" property="key" jdbcType="CHAR" />
+    <result column="colId" property="colid" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="transactionTimestampDate" property="transactiontimestampdate" jdbcType="BIGINT" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="mbrCode" property="mbrcode" jdbcType="VARCHAR" />
+    <result column="gameCasinoId" property="gamecasinoid" jdbcType="VARCHAR" />
+    <result column="afterTxWalletAmount" property="aftertxwalletamount" jdbcType="DECIMAL" />
+    <result column="mgsGameId" property="mgsgameid" jdbcType="INTEGER" />
+    <result column="gamePlatformType" property="gameplatformtype" jdbcType="CHAR" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cn.great.model.system.MgBill" >
+    insert into web_mg_bill (key, colId, type, transactionTimestampDate, 
+      amount, mbrCode, gameCasinoId, 
+      afterTxWalletAmount, mgsGameId, gamePlatformType, 
+      userid)
+    values (#{key,jdbcType=CHAR}, #{colid,jdbcType=BIGINT}, #{type,jdbcType=CHAR}, #{transactiontimestampdate,jdbcType=BIGINT}, 
+      #{amount,jdbcType=DECIMAL}, #{mbrcode,jdbcType=VARCHAR}, #{gamecasinoid,jdbcType=VARCHAR}, 
+      #{aftertxwalletamount,jdbcType=DECIMAL}, #{mgsgameid,jdbcType=INTEGER}, #{gameplatformtype,jdbcType=CHAR}, 
+      #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.MgBill" >
+    insert into web_mg_bill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        key,
+      </if>
+      <if test="colid != null" >
+        colId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="transactiontimestampdate != null" >
+        transactionTimestampDate,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="mbrcode != null" >
+        mbrCode,
+      </if>
+      <if test="gamecasinoid != null" >
+        gameCasinoId,
+      </if>
+      <if test="aftertxwalletamount != null" >
+        afterTxWalletAmount,
+      </if>
+      <if test="mgsgameid != null" >
+        mgsGameId,
+      </if>
+      <if test="gameplatformtype != null" >
+        gamePlatformType,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        #{key,jdbcType=CHAR},
+      </if>
+      <if test="colid != null" >
+        #{colid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="transactiontimestampdate != null" >
+        #{transactiontimestampdate,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="mbrcode != null" >
+        #{mbrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gamecasinoid != null" >
+        #{gamecasinoid,jdbcType=VARCHAR},
+      </if>
+      <if test="aftertxwalletamount != null" >
+        #{aftertxwalletamount,jdbcType=DECIMAL},
+      </if>
+      <if test="mgsgameid != null" >
+        #{mgsgameid,jdbcType=INTEGER},
+      </if>
+      <if test="gameplatformtype != null" >
+        #{gameplatformtype,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

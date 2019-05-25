@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.message.NoticesMapper">
+    <resultMap id="notices" type="com.cn.great.model.user.NoticesEntity">
+        <id column="id" property="id"/>
+        <result column="context" property="context"/>
+        <result column="title" property="title"/>
+        <result column="add_date" property="addDate"/>
+        <result column="alert" property="alert"/>
+        <result column="type" property="type"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+    <select id="listAll" resultMap="notices">
+      select id,context,title,add_date,alert,type,server_admin from web_notices where status=0
+      <if test="alert !=null">
+         and alert=#{alert}
+      </if>
+    </select>
+
+</mapper>

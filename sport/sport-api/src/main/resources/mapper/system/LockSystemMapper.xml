@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.LockSystemMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.system.LockSystem" >
+    <result column="id" property="id" jdbcType="BIT" />
+    <result column="lock" property="lock" jdbcType="BIT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.cn.great.model.system.LockSystem" >
+    insert into web_lock_system (id, lock)
+    values (#{id,jdbcType=BIT}, #{lock,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.system.LockSystem" >
+    insert into web_lock_system
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lock != null" >
+        lock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIT},
+      </if>
+      <if test="lock != null" >
+        #{lock,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

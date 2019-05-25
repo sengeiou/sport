@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.payment.PayLevelMapper">
+    <resultMap id="BaseResultMap" type="com.cn.great.model.payment.PayLevelEntity">
+        <id column="id" property="id"/>
+        <result column="level_name" property="levelName"/>
+        <result column="reg_start" property="regStart"/>
+        <result column="reg_end" property="regEnd"/>
+        <result column="mix_ctime" property="mixCtime"/>
+        <result column="max_ctime" property="maxCtime"/>
+        <result column="mix_amount" property="mixAmount"/>
+        <result column="max_amount" property="maxAmount"/>
+        <result column="notes" property="notes"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+
+    <select id="getLevels" resultMap="BaseResultMap">
+        select * from web_pay_level
+    </select>
+
+</mapper>

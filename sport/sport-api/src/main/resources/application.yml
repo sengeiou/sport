@@ -1,0 +1,26 @@
+
+spring:
+  profiles:
+    active: dev  #配置文件切换 dev 测试环境；pro 线上环境
+
+
+server:
+    port: 8099
+    servlet:
+      session:
+        timeout: 43200s  # session 超时时间12小时
+
+    # 支持https配置
+    tomcat:
+      remote-ip-header: "X-Forwarded-For"
+      protocol-header: "X-Forwarded-Proto"
+      protocol-header-https-value: "https"
+      uri-encoding: "UTF-8"
+
+
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count = countSql

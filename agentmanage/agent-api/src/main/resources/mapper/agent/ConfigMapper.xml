@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.agent.ConfigMapper">
+
+    <resultMap id="agents" type="com.cn.great.model.user.AgentInfoEntity">
+        <id column="id" property="id"></id>
+        <result column="username" property="userName"/>
+        <result column="money" property="money"/>
+        <result column="password" property="password"/>
+        <result column="password_safe" property="passwordSafe"/>
+        <result column="add_date" property="addDate"/>
+        <result column="alias" property="alias"/>
+        <result column="bank_id" property="bankId"/>
+        <result column="notes" property="notes"/>
+        <result column="server_admin" property="serverAdmin"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <resultMap id="agentUrls" type="com.cn.great.model.user.AgentUrlEntity">
+        <id column="id" property="id"></id>
+        <result column="agents_id" property="agentId"/>
+        <result column="agents_url" property="agentUrl"/>
+        <result column="notes" property="notes"/>
+        <result column="status" property="status"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+
+    <select id="fetchAllAgents" resultMap="agents">
+        select * from web_agents_data where status = 0 order by id
+    </select>
+
+    <select id="fetchAgentUrlsList" resultMap="agentUrls" parameterType="com.cn.great.req.agent.AgentUrlReq">
+        select * from web_agents_url
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="agentId!=-1">
+                and agents_id = #{agentId}
+            </if>
+            <if test="status!=-1">
+                and status = #{status}
+            </if>
+        </trim>
+        order by id asc limit #{start}, #{length}
+    </select>
+
+    <select id="countAgents" resultType="java.lang.Integer" parameterType="com.cn.great.req.agent.AgentUrlReq">
+        select count(id) from web_agents_url
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="agentId!=-1">
+                and agents_id = #{agentId}
+            </if>
+            <if test="status!=-1">
+                and status = #{status}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addAgentInfo" parameterType="com.cn.great.req.agent.AgentUrlOpeReq" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into web_agents_url(agents_id, agents_url, notes, status, server_admin)
+        values(#{agentId},#{agentUrl},#{notes},#{status}, #{serverAdmin})
+    </insert>
+
+    <update id="updateAgentInfo" parameterType="com.cn.great.req.agent.AgentUrlOpeReq">
+        update web_agents_url
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="agentId != 0">
+                agents_id=#{agentId},
+            </if>
+            <if test="null != agentUrl and '' != agentUrl">
+                agents_url=#{agentUrl},
+            </if>
+            <if test="null != serverAdmin and '' != serverAdmin">
+                server_admin=#{serverAdmin},
+            </if>
+            <if test="status != -1">
+                status=#{status},
+            </if>
+            <if test="null != notes and '' != notes">
+                notes=#{notes},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteAgentInfo" parameterType="java.lang.Integer">
+        delete from web_agents_url where id = #{id}
+    </delete>
+
+</mapper>

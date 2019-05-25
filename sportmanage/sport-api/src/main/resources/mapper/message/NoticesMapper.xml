@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.message.NoticesMapper">
+    <resultMap id="notices" type="com.cn.great.model.user.NoticesEntity">
+        <id column="id" property="id"></id>
+        <result column="context" property="context"/>
+        <result column="title" property="title"/>
+        <result column="add_date" property="addDate"/>
+        <result column="alert" property="alert"/>
+        <result column="type" property="type"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+    <select id="listAll" resultMap="notices">
+      select id,context,title,add_date,alert,type,server_admin from web_notices where status=0
+      <if test="alert !=null">
+         and alert=#{alert}
+      </if>
+        order by id desc;
+    </select>
+    <select id="count" resultType="int">
+        select count(1) from web_notices  where status=0
+        <if test="notices.title!=null and notices.title!=''">
+            and title like CONCAT('%', #{notices.title}, '%')
+        </if>
+        <if test="notices.beginTime!=null and notices.endTime!=null">
+            and add_date BETWEEN  #{notices.beginTime} and #{notices.endTime}
+        </if>
+    </select>
+    <select id="selectByReq" resultMap="notices">
+        select id,context,title,add_date,alert,type,server_admin from web_notices where status=0
+        <if test="notices.title!=null and notices.title!=''">
+            and title like CONCAT('%', #{notices.title}, '%')
+        </if>
+        <if test="notices.beginTime!=null and notices.endTime!=null">
+            and add_date BETWEEN  #{notices.beginTime} and #{notices.endTime}
+        </if>
+        order by id desc limit #{notices.start}, #{notices.length}
+    </select>
+    <update id="deleteById">
+      update web_notices set  status=1 where id=#{id}
+    </update>
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into web_notices(context,title,add_date,alert,type,server_admin) values(#{context},#{title},#{addDate},#{alert},#{type},#{serverAdmin});
+    </insert>
+    <update id="update" parameterType="com.cn.great.model.user.NoticesEntity">
+        update web_notices
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="null != context and '' != context">
+                context=#{context},
+            </if>
+            <if test="null != title and '' != title">
+                title=#{title},
+            </if>
+            <if test="null != alert and '' != alert">
+                alert=#{alert},
+            </if>
+            <if test="null != type and '' != type">
+                type=#{type},
+            </if>
+            <if test="null != serverAdmin and '' != serverAdmin">
+                server_admin=#{serverAdmin}
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+    <select id="getMaxId" resultType="int">
+        select max(id) from web_notices
+    </select>
+</mapper>

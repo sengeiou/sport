@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.user.MgGamesMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.user.MgGamesEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="game_item_id" property="gameItemId" jdbcType="INTEGER" />
+    <result column="swa_app_id" property="swaAppId" jdbcType="INTEGER" />
+    <result column="h5_item_id" property="h5ItemId" jdbcType="INTEGER" />
+    <result column="h5_app_id" property="h5AppId" jdbcType="INTEGER" />
+    <result column="game_name" property="gameName" jdbcType="VARCHAR" />
+    <result column="name_cn" property="nameCn" jdbcType="VARCHAR" />
+    <result column="game_category" property="gameCategory" jdbcType="VARCHAR" />
+    <result column="game_category2" property="gameCategory2" jdbcType="VARCHAR" />
+    <result column="game_category3" property="gameCategory3" jdbcType="VARCHAR" />
+    <result column="game_img" property="gameImg" jdbcType="VARCHAR" />
+    <result column="is_cn" property="isCn" jdbcType="BIT" />
+    <result column="flash" property="flash" jdbcType="BIT" />
+    <result column="is_html5" property="isHtml5" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, game_item_id, swa_app_id, h5_item_id, h5_app_id, game_name, name_cn, game_category, 
+    game_category2, game_category3, game_img, is_cn, flash, is_html5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_mg_games
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_mg_games
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.great.model.user.MgGamesEntity" >
+    insert into web_mg_games (id, game_item_id, swa_app_id, 
+      h5_item_id, h5_app_id, game_name, 
+      name_cn, game_category, game_category2, 
+      game_category3, game_img, is_cn, 
+      flash, is_html5)
+    values (#{id,jdbcType=INTEGER}, #{gameItemId,jdbcType=INTEGER}, #{swaAppId,jdbcType=INTEGER}, 
+      #{h5ItemId,jdbcType=INTEGER}, #{h5AppId,jdbcType=INTEGER}, #{gameName,jdbcType=VARCHAR}, 
+      #{nameCn,jdbcType=VARCHAR}, #{gameCategory,jdbcType=VARCHAR}, #{gameCategory2,jdbcType=VARCHAR}, 
+      #{gameCategory3,jdbcType=VARCHAR}, #{gameImg,jdbcType=VARCHAR}, #{isCn,jdbcType=BIT}, 
+      #{flash,jdbcType=BIT}, #{isHtml5,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.great.model.user.MgGamesEntity" >
+    insert into web_mg_games
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gameItemId != null" >
+        game_item_id,
+      </if>
+      <if test="swaAppId != null" >
+        swa_app_id,
+      </if>
+      <if test="h5ItemId != null" >
+        h5_item_id,
+      </if>
+      <if test="h5AppId != null" >
+        h5_app_id,
+      </if>
+      <if test="gameName != null" >
+        game_name,
+      </if>
+      <if test="nameCn != null" >
+        name_cn,
+      </if>
+      <if test="gameCategory != null" >
+        game_category,
+      </if>
+      <if test="gameCategory2 != null" >
+        game_category2,
+      </if>
+      <if test="gameCategory3 != null" >
+        game_category3,
+      </if>
+      <if test="gameImg != null" >
+        game_img,
+      </if>
+      <if test="isCn != null" >
+        is_cn,
+      </if>
+      <if test="flash != null" >
+        flash,
+      </if>
+      <if test="isHtml5 != null" >
+        is_html5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gameItemId != null" >
+        #{gameItemId,jdbcType=INTEGER},
+      </if>
+      <if test="swaAppId != null" >
+        #{swaAppId,jdbcType=INTEGER},
+      </if>
+      <if test="h5ItemId != null" >
+        #{h5ItemId,jdbcType=INTEGER},
+      </if>
+      <if test="h5AppId != null" >
+        #{h5AppId,jdbcType=INTEGER},
+      </if>
+      <if test="gameName != null" >
+        #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCn != null" >
+        #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCategory != null" >
+        #{gameCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCategory2 != null" >
+        #{gameCategory2,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCategory3 != null" >
+        #{gameCategory3,jdbcType=VARCHAR},
+      </if>
+      <if test="gameImg != null" >
+        #{gameImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isCn != null" >
+        #{isCn,jdbcType=BIT},
+      </if>
+      <if test="flash != null" >
+        #{flash,jdbcType=BIT},
+      </if>
+      <if test="isHtml5 != null" >
+        #{isHtml5,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.great.model.user.MgGamesEntity" >
+    update web_mg_games
+    <set >
+      <if test="gameItemId != null" >
+        game_item_id = #{gameItemId,jdbcType=INTEGER},
+      </if>
+      <if test="swaAppId != null" >
+        swa_app_id = #{swaAppId,jdbcType=INTEGER},
+      </if>
+      <if test="h5ItemId != null" >
+        h5_item_id = #{h5ItemId,jdbcType=INTEGER},
+      </if>
+      <if test="h5AppId != null" >
+        h5_app_id = #{h5AppId,jdbcType=INTEGER},
+      </if>
+      <if test="gameName != null" >
+        game_name = #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCn != null" >
+        name_cn = #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCategory != null" >
+        game_category = #{gameCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCategory2 != null" >
+        game_category2 = #{gameCategory2,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCategory3 != null" >
+        game_category3 = #{gameCategory3,jdbcType=VARCHAR},
+      </if>
+      <if test="gameImg != null" >
+        game_img = #{gameImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isCn != null" >
+        is_cn = #{isCn,jdbcType=BIT},
+      </if>
+      <if test="flash != null" >
+        flash = #{flash,jdbcType=BIT},
+      </if>
+      <if test="isHtml5 != null" >
+        is_html5 = #{isHtml5,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.great.model.user.MgGamesEntity" >
+    update web_mg_games
+    set game_item_id = #{gameItemId,jdbcType=INTEGER},
+      swa_app_id = #{swaAppId,jdbcType=INTEGER},
+      h5_item_id = #{h5ItemId,jdbcType=INTEGER},
+      h5_app_id = #{h5AppId,jdbcType=INTEGER},
+      game_name = #{gameName,jdbcType=VARCHAR},
+      name_cn = #{nameCn,jdbcType=VARCHAR},
+      game_category = #{gameCategory,jdbcType=VARCHAR},
+      game_category2 = #{gameCategory2,jdbcType=VARCHAR},
+      game_category3 = #{gameCategory3,jdbcType=VARCHAR},
+      game_img = #{gameImg,jdbcType=VARCHAR},
+      is_cn = #{isCn,jdbcType=BIT},
+      flash = #{flash,jdbcType=BIT},
+      is_html5 = #{isHtml5,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="listByType" resultType="map">
+    select game_item_id game_id ,game_name,name_cn game_ename, game_img,case when 1=${terminal} then h5_app_id else swa_app_id end app_id from web_mg_games where 1=1
+    and is_html5=${terminal}
+  </select>
+</mapper>

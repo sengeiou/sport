@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.payment.PayInMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.great.model.payment.PayInEntity" >
+    <id column="id" property="id" />
+    <result column="userid" property="userid" />
+    <result column="goldf" property="goldf" />
+    <result column="gold" property="gold" />
+    <result column="golds" property="golds" />
+    <result column="order_code" property="order_code" />
+    <result column="youhui_gold" property="youhuiGold" />
+    <result column="add_date" property="add_date" />
+    <result column="notes" property="notes" />
+    <result column="operator" property="operator" />
+    <result column="pay_id" property="payId" />
+    <result column="pay_type_id" property="pay_type_id" />
+    <result column="payment_name_id" property="paymentNameId" />
+    <result column="status" property="status" />
+    <result column="ip" property="ip" />
+    <result column="type" property="type" />
+    <result column="server_admin" property="serverAdmin" />
+  </resultMap>
+
+  <select id="checkNotApprovalIn" resultType="java.lang.Integer">
+    select count(*) from web_pay_in where status = 0 and userid = #{userId}
+  </select>
+  
+  <select id="getDepositLogs" resultMap="BaseResultMap" parameterType="com.cn.great.req.payment.DepositReq">
+      select id,gold,goldf,golds,status,order_code,notes,add_date,pay_type_id from web_pay_in
+        where userid = #{userId} and add_date between #{start_date} and #{end_date}
+  </select>
+
+  <insert id="insert" parameterType="com.cn.great.model.payment.PayInEntity" >
+    insert into web_pay_in (userid, goldf,
+      gold, golds, order_code, 
+      youhui_gold, add_date, notes, 
+      operator, pay_id, pay_type_id, 
+      payment_name_id, status, ip, 
+      type, server_admin)
+    values (
+      #{userid},
+      #{goldf},
+      #{gold},
+      #{golds},
+      #{orderCode},
+      #{youhuiGold},
+      #{addDate},
+      #{notes},
+      #{operator},
+      #{payId},
+      #{payTypeId},
+      #{paymentNameId},
+      #{status},
+      #{ip},
+      #{type},
+      #{serverAdmin})
+  </insert>
+
+</mapper>
