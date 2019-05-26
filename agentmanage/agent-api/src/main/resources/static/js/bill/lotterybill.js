@@ -1,11 +1,5 @@
 $(function () {
 
-    var tableDatas = [];
-
-    function initTableDates() {
-        tableDatas = [];
-    }
-
     // init date tables
     var lotteryTable = $("#lottery_list").dataTable({
         "deferRender": true,

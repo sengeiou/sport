@@ -9,12 +9,9 @@ import com.cn.great.model.common.BaseEntity;
 import com.cn.great.model.common.Constant;
 import com.cn.great.model.common.ResponseEntity;
 import com.cn.great.req.auth.AuthAddReq;
-import com.cn.great.req.auth.AuthConfigReq;
 import com.cn.great.req.auth.AuthReq;
 import com.cn.great.service.AuthService;
-import com.cn.great.util.GeneralUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -168,22 +165,6 @@ public class AuthController {
         return ResponseEntity.initGeneralResponseRes(ids, ids.size());
     }
 
-    /** 
-    * @Description: 权限配置
-    * @Param: [authAddReq, request] 
-    * @return: com.cn.great.model.common.ResponseEntity 
-    * @Author: Stamp 
-    * @Date: 2019/4/16 
-    */
-    @PostMapping(value = "/config", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity config(@RequestBody AuthConfigReq authConfigReq, HttpServletRequest request) throws GeneralException {
 
-        if(StringUtils.isBlank(authConfigReq.getAuthIds()) || StringUtils.isBlank(authConfigReq.getRoleId()))
-            throw GeneralException.initEnumGeneralException(ResponseCodeEnum.FIELD_NOT_STANDARD_ERROR);
-        List<RoleAuthMapper> mappers = GeneralUtils.generalToMapper(authConfigReq);
-        authService.configAuths(mappers);
-        return ResponseEntity.initGeneralSuccessResponse();
-    }
     
 }

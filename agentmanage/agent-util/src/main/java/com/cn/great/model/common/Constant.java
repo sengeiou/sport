@@ -50,6 +50,12 @@ public class Constant {
     public static final String BANK_INFO_SESSION="banksInfoSession";
     //缓存代理信息
     public static final String AGENT_INFO_SESSION="agentInfoSession";
+    //缓存球赛类型信息
+    public static final String BALL_TYPE_SESSION="ballTypeSession";
+    //缓存玩法类型信息
+    public static final String PLAY_BALL_TYPE_SESSION="ballPlayTypeSession";
+    //缓存注单确认信息
+    public static final String BILL_CONFIRMED_SESSION="ballConfirmedSession";
     //缓存支付层级信息
     public static final String PAY_LEVEL_SESSION="payLevelSession";
 

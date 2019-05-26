@@ -5,7 +5,9 @@ import com.cn.great.model.bill.AgBill;
 import com.cn.great.model.bill.LotteryBill;
 import com.cn.great.model.bill.MgBill;
 import com.cn.great.model.bill.SportBillEntity;
+import com.cn.great.model.common.Constant;
 import com.cn.great.model.common.ResponseEntity;
+import com.cn.great.model.system.DictEntity;
 import com.cn.great.req.bill.AGBillReq;
 import com.cn.great.req.bill.LotteryBillReq;
 import com.cn.great.req.bill.MGBillReq;
@@ -16,6 +18,7 @@ import com.cn.great.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -184,10 +188,65 @@ public class BillController {
      * @Date: 2019/5/21
      */
     @RequestMapping("sportPage")
-    public String sportPage(HttpServletRequest request) {
+    public String sportPage(Model model, HttpServletRequest request) {
+        // 获取所有的球赛类型
+        List<DictEntity> ballTypes = billService.fetchEnumsByType("ball_type");
+        model.addAttribute("ballTypes", ballTypes);
+        // 获取所有的玩法类型
+        List<DictEntity> playTypes = billService.fetchEnumsByType("play_type_ball");
+        model.addAttribute("playTypes", playTypes);
+        request.getSession().setAttribute(Constant.PLAY_BALL_TYPE_SESSION, playTypes);
+        // 获取所有的注单确认
+        List<DictEntity> billConfirmeTypes = billService.fetchEnumsByType("bill_confirme_type");
+        model.addAttribute("billConfirmeTypes", billConfirmeTypes);
+        request.getSession().setAttribute(Constant.BILL_CONFIRMED_SESSION, billConfirmeTypes);
         return "bill/sportbill";
     }
 
+
+    /**
+     * @Description: 获取玩法类型
+     * @Param: [request]
+     * @return: com.cn.great.model.common.ResponseEntity
+     * @Author: Stamp
+     * @Date: 2019/5/25
+     */
+    @PostMapping(value = "playTypes", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity playTypes(HttpServletRequest request) throws GeneralException {
+        List<DictEntity> playTypes = new ArrayList<>();
+        Object obj = request.getSession().getAttribute(Constant.PLAY_BALL_TYPE_SESSION);
+        if (obj != null) {
+            playTypes.addAll((List<DictEntity>) obj);
+        }
+        return ResponseEntity.initGeneralResponseRes(playTypes, playTypes.size());
+    }
+
+    /**
+     * @Description: 获取所有的注单确认
+     * @Param: [request]
+     * @return: com.cn.great.model.common.ResponseEntity
+     * @Author: Stamp
+     * @Date: 2019/5/25
+     */
+    @PostMapping(value = "billConfirmeTypes", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity billConfirmeTypes(HttpServletRequest request) throws GeneralException {
+        List<DictEntity> billConfirmeTypes = new ArrayList<>();
+        Object obj = request.getSession().getAttribute(Constant.BILL_CONFIRMED_SESSION);
+        if (obj != null) {
+            billConfirmeTypes.addAll((List<DictEntity>) obj);
+        }
+        return ResponseEntity.initGeneralResponseRes(billConfirmeTypes, billConfirmeTypes.size());
+    }
+
+    /** 
+    * @Description: 球赛注单查询
+    * @Param: [sportBillReq, request] 
+    * @return: com.cn.great.model.common.ResponseEntity 
+    * @Author: Stamp 
+    * @Date: 2019/5/25 
+    */
     @PostMapping(value = "sportBills", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity sportBills(@RequestBody SportBillReq sportBillReq, HttpServletRequest request) throws GeneralException {
@@ -202,13 +261,13 @@ public class BillController {
         return ResponseEntity.initGeneralResponseRes(sportBillEntities, recordsTotal);
     }
 
-    /** 
-    * @Description: 体育赛事审核
-    * @Param: [sportBillReq, request] 
-    * @return: com.cn.great.model.common.ResponseEntity 
-    * @Author: Stamp 
-    * @Date: 2019/5/24 
-    */
+    /**
+     * @Description: 体育赛事审核
+     * @Param: [sportBillReq, request]
+     * @return: com.cn.great.model.common.ResponseEntity
+     * @Author: Stamp
+     * @Date: 2019/5/24
+     */
     @PostMapping(value = "audit", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity audit(@RequestBody SportBillReq sportBillReq, HttpServletRequest request) throws GeneralException {

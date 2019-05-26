@@ -232,9 +232,9 @@
         }
 
         .panel-group {
-            margin-bottom: 20px;
-            height: 100%;
-            width: 230px;
+            height: calc(100vh - 100px);
+            top: 0;
+            bottom: 0;
         }
     </style>
 

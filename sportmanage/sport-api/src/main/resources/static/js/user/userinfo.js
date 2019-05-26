@@ -85,13 +85,18 @@ $(function () {
             },
             {
                 "data": I18n.system_opt,
+                "visible": authOwenUrls.indexOf('adminUpdate') > -1 || authOwenUrls.indexOf('adminDelete') > -1 ? true : false,
                 "render": function (data, type, row) {
                     return function () {
                         tableData['key' + row.id] = row;
-                        var html = '<p id="' + row.id + '" >' +
-                            '<button class="btn btn-warning btn-xs update" type="button">' + I18n.system_opt_edit + '</button>  ' +
-                            '<button class="btn btn-danger btn-xs user_operate" _type="user_del" type="button">' + I18n.system_opt_del + '</button>  ' +
-                            '</p>';
+                        var html = '<p id="' + row.id + '" >';
+                        if (!!authOwenUrls && authOwenUrls.indexOf('adminUpdate') > -1) {
+                            html += '<button class="btn btn-warning btn-xs update" type="button">' + I18n.system_opt_edit + '</button>  ';
+                        }
+                        if (!!authOwenUrls && authOwenUrls.indexOf('adminDelete') > -1) {
+                            html += '<button class="btn btn-danger btn-xs user_operate" _type="user_del" type="button">' + I18n.system_opt_del + '</button>  ';
+                        }
+                        html += '</p>';
                         return html;
                     };
                 }
@@ -118,7 +123,7 @@ $(function () {
         rules: {
             userName: {
                 required: true,
-                minlength: 5,
+                minlength: 3,
                 maxlength: 18
             },
             alias: {

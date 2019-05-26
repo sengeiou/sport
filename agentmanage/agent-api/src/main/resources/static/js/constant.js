@@ -25,6 +25,13 @@ var language_table = {
 
 var authOwenUrls = $("#authOwenUrls").val();
 
+var tableDatas = [];
+
+function initTableDates() {
+    tableDatas = [];
+}
+
+
 function getFormDataForObj($form) {
     var unindexed_array = $form.serializeArray();
     var indexed_array = {};
@@ -115,24 +122,52 @@ function fetchAllAgentInfos(agentsUrl) {
     });
 }
 
+var billConfirmeTypes;
+
+function fetchAllConfirmeTypes() {
+    $.ajax({
+        type: 'POST',
+        url: base_url + "/bill/billConfirmeTypes",
+        async: false,
+        dataType: "json",
+        success: function (res) {
+            billConfirmeTypes = res.data;
+        }
+    });
+}
+
+var ballPlayTypes;
+
+function fetchAllPlayTypes() {
+    $.ajax({
+        type: 'POST',
+        url: base_url + "/bill/playTypes",
+        async: false,
+        dataType: "json",
+        success: function (res) {
+            ballPlayTypes = res.data;
+        }
+    });
+}
+
 var initSwitch = {
-    onText : "ON",
-    offText : "OFF",
-    onColor : "success",
-    offColor : "primary",
-    size : "normal"
+    onText: "ON",
+    offText: "OFF",
+    onColor: "success",
+    offColor: "primary",
+    size: "normal"
 };
 
 var initTestSwitch = {
-    onText : "测试",
-    offText : "会员",
-    onColor : "success",
-    offColor : "primary",
-    size : "normal"
+    onText: "测试",
+    offText: "会员",
+    onColor: "success",
+    offColor: "primary",
+    size: "normal"
 };
 
 
-function showWarnMessage(msg){
+function showWarnMessage(msg) {
     layer.open({
         title: I18n.system_tips,
         btn: [I18n.system_ok],
@@ -141,7 +176,7 @@ function showWarnMessage(msg){
     });
 }
 
-function showFailMessage(msg){
+function showFailMessage(msg) {
     layer.open({
         title: I18n.system_tips,
         btn: [I18n.system_ok],
@@ -152,34 +187,34 @@ function showFailMessage(msg){
 
 
 function initTestFlag(testFlag) {
-    if(testFlag === 0){
-        $("#updateModal .form input[name='testFlag']").bootstrapSwitch('state',false,true).delay(1000).bootstrapSwitch('readonly', true);
-    }else{
-        $("#updateModal .form input[name='testFlag']").bootstrapSwitch('state',true,true).delay(1000).bootstrapSwitch('readonly', true);
+    if (testFlag === 0) {
+        $("#updateModal .form input[name='testFlag']").bootstrapSwitch('state', false, true).delay(1000).bootstrapSwitch('readonly', true);
+    } else {
+        $("#updateModal .form input[name='testFlag']").bootstrapSwitch('state', true, true).delay(1000).bootstrapSwitch('readonly', true);
     }
 }
 
 function initAgopen(agopen) {
-    if(agopen === 0){
-        $("#updateModal .form input[name='agopen']").bootstrapSwitch('state',false,true);
-    }else{
-        $("#updateModal .form input[name='agopen']").bootstrapSwitch('state',true,true);
+    if (agopen === 0) {
+        $("#updateModal .form input[name='agopen']").bootstrapSwitch('state', false, true);
+    } else {
+        $("#updateModal .form input[name='agopen']").bootstrapSwitch('state', true, true);
     }
 }
 
 function initMgopen(mgopen) {
-    if(mgopen === 0){
-        $("#updateModal .form input[name='mgopen']").bootstrapSwitch('state',false,true);
-    }else{
-        $("#updateModal .form input[name='mgopen']").bootstrapSwitch('state',true,true);
+    if (mgopen === 0) {
+        $("#updateModal .form input[name='mgopen']").bootstrapSwitch('state', false, true);
+    } else {
+        $("#updateModal .form input[name='mgopen']").bootstrapSwitch('state', true, true);
     }
 }
 
 function initCpopen(cpopen) {
-    if(cpopen === 0){
-        $("#updateModal .form input[name='cpopen']").bootstrapSwitch('state',false,true);
-    }else{
-        $("#updateModal .form input[name='cpopen']").bootstrapSwitch('state',true,true);
+    if (cpopen === 0) {
+        $("#updateModal .form input[name='cpopen']").bootstrapSwitch('state', false, true);
+    } else {
+        $("#updateModal .form input[name='cpopen']").bootstrapSwitch('state', true, true);
     }
 }
 
@@ -204,9 +239,9 @@ function subFooterCount(tableDatas, fields) {
 }
 
 function sumFooterCount(tableDatas, len) {
-    var res= new Array(len);
+    var res = new Array(len);
     for (var i = 0; i < len; i++) {
-        res[i+1] = 0;
+        res[i + 1] = 0;
     }
     if (!!tableDatas && tableDatas.length > 0) {
         res = tableDatas[0].sumtotals;
@@ -300,7 +335,7 @@ jQuery.validator.addMethod("minNumber", function (value, element) {
 
 //格式化数据  保留2位小数(一般用于金额显示)
 function formatCurrency(num) {
-    if(!num) return '0.00';
+    if (!num) return '0.00';
     num = num.toString().replace(/\$|\,/g, '');
     if (isNaN(num))
         num = "0";

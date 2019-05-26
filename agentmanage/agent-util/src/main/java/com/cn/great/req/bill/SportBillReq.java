@@ -11,7 +11,11 @@ import lombok.Data;
  **/
 @Data
 public class SportBillReq extends BaseEntity {
-    private Integer orderNo;
+    private String orderNo;
     private String gType;
     private String pType;
+    //0-未结算1-结算
+    private Integer checked;
+    // 用户名
+    private String userName;
 }

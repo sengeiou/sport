@@ -79,13 +79,6 @@ $(function () {
         $.cookie('sport_manage_settings', sport_manage_settings, {expires: 7});	//$.cookie('the_cookie', '', { expires: -1 });
     });
 
-    // left menu status v1: js + cookie
-    /*
-     var sport_manage_settings = $.cookie('sport_manage_settings');
-     if (sport_manage_settings == 'off') {
-         $('body').addClass('sidebar-collapse');
-     }
-     */
 
     $.ajaxSetup({
         contentType: "application/json",
@@ -111,17 +104,6 @@ $(function () {
         }
     });
 
-    var initSideBar = true;
-    $('.sidebar-toggle').click(function () {
-        if (initSideBar) {
-            initSideBar = false;
-            $('.sidebar').hide();
-        } else {
-            initSideBar = true;
-            $('.sidebar').show();
-        }
-    });
-
     $(function () {
         changeCollapse($("#collapseListGroup1"));
         changeCollapse($("#collapseListGroup2"));
@@ -143,6 +125,5 @@ $(function () {
             $el.collapse('show');
         }
     }
-
 
 });

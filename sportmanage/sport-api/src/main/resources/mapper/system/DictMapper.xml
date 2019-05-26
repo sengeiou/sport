@@ -49,7 +49,7 @@
                 and d.name like concat(concat('%',#{name}),'%')
             </if>
         </trim>
-        order by d.type_code asc limit #{start}, #{length}
+        order by d.type_code,d.sort asc limit #{start}, #{length}
     </select>
 
     <select id="countEnums" resultType="java.lang.Integer" parameterType="com.cn.great.req.system.EnumReq">

@@ -4,11 +4,13 @@ import com.cn.great.model.bill.AgBill;
 import com.cn.great.model.bill.LotteryBill;
 import com.cn.great.model.bill.MgBill;
 import com.cn.great.model.bill.SportBillEntity;
+import com.cn.great.model.system.DictEntity;
 import com.cn.great.req.bill.AGBillReq;
 import com.cn.great.req.bill.LotteryBillReq;
 import com.cn.great.req.bill.MGBillReq;
 import com.cn.great.req.bill.SportBillReq;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,4 +31,6 @@ public interface BillMapper {
     List<SportBillEntity> fetchSportList(SportBillReq sportBillReq);
 
     String countSportBill(SportBillReq sportBillReq);
+
+    List<DictEntity> fetchEnumsByType(@Param("typeCode") String typeCode);
 }

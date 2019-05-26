@@ -103,18 +103,6 @@ $(function () {
         }
     });
 
-    var initSideBar = true;
-    $('.sidebar-toggle').click(function () {
-        if (initSideBar) {
-            initSideBar = false;
-            $('.sidebar').hide();
-        } else {
-            initSideBar = true;
-            $('.sidebar').show();
-        }
-    });
-
-
     $(function () {
         changeCollapse($("#collapseListGroup1"));
         changeCollapse($("#collapseListGroup2"));

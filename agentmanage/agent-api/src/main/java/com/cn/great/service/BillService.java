@@ -4,6 +4,7 @@ import com.cn.great.model.bill.AgBill;
 import com.cn.great.model.bill.LotteryBill;
 import com.cn.great.model.bill.MgBill;
 import com.cn.great.model.bill.SportBillEntity;
+import com.cn.great.model.system.DictEntity;
 import com.cn.great.req.bill.AGBillReq;
 import com.cn.great.req.bill.LotteryBillReq;
 import com.cn.great.req.bill.MGBillReq;
@@ -89,4 +90,13 @@ public interface BillService {
      * @Date: 2019/5/21
      */
     String countSportBill(SportBillReq sportBillReq);
+
+    /**
+     * @Description: 根据类型编码查询参数
+     * @Param: [typeName]
+     * @return: java.util.List<com.cn.great.model.system.DictEntity>
+     * @Author: Stamp
+     * @Date: 2019/5/25
+     */
+    List<DictEntity> fetchEnumsByType(String typeCode);
 }

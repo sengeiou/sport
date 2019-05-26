@@ -6,12 +6,13 @@ import com.cn.great.exception.GeneralException;
 import com.cn.great.model.auth.AuthInfoEntity;
 import com.cn.great.model.common.Constant;
 import com.cn.great.model.common.ResponseEntity;
+import com.cn.great.model.system.DictEntity;
 import com.cn.great.model.user.AdminInfoEntity;
 import com.cn.great.model.user.AgentInfoEntity;
-import com.cn.great.model.user.BankInfoEntity;
 import com.cn.great.req.user.LoginReq;
 import com.cn.great.req.user.UserReq;
 import com.cn.great.service.AgentService;
+import com.cn.great.service.BillService;
 import com.cn.great.service.UserService;
 import com.cn.great.util.GeneralUtils;
 import com.cn.great.util.MD5Utils;
@@ -43,16 +44,22 @@ public class LoginController {
 	private AgentService agentService;
 	@Resource
 	private UserService userService;
+	@Resource
+	private BillService billService;
 
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
-		//查询银行卡信息
-		List<BankInfoEntity> banks = agentService.fetchBanks();
-		model.addAttribute("banks", banks);
-		Object obj = request.getSession().getAttribute(Constant.USER_SESSION_NAME);
-		if(obj != null)
-			model.addAttribute("loginNameSession", obj);
-		request.getSession().setAttribute(Constant.BANK_INFO_SESSION, banks);
+		// 获取所有的球赛类型
+		List<DictEntity> ballTypes = billService.fetchEnumsByType("ball_type");
+		model.addAttribute("ballTypes", ballTypes);
+		// 获取所有的玩法类型
+		List<DictEntity> playTypes = billService.fetchEnumsByType("play_type_ball");
+		model.addAttribute("playTypes", playTypes);
+		request.getSession().setAttribute(Constant.PLAY_BALL_TYPE_SESSION, playTypes);
+		// 获取所有的注单确认
+		List<DictEntity> billConfirmeTypes = billService.fetchEnumsByType("bill_confirme_type");
+		model.addAttribute("billConfirmeTypes", billConfirmeTypes);
+		request.getSession().setAttribute(Constant.BILL_CONFIRMED_SESSION, billConfirmeTypes);
 		return "bill/sportbill";
 	}
 

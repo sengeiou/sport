@@ -70,12 +70,8 @@
         <result column="mleagueid" property="mLeagueId" jdbcType="INTEGER"/>
         <result column="mtype" property="mType" jdbcType="VARCHAR"/>
         <result column="m_result" property="mResult" jdbcType="DECIMAL"/>
-        <result column="linetype" property="lineType" jdbcType="INTEGER"/>
         <result column="bettime" property="bettime"  jdbcType="TIMESTAMP"/>
         <result column="gold" property="gold"  jdbcType="DECIMAL"/>
-        <result column="mdate" property="mDate"  jdbcType="TIMESTAMP"/>
-        <result column="mrate" property="mRate"  jdbcType="VARCHAR"/>
-        <result column="m_place" property="mPlace"  jdbcType="VARCHAR"/>
         <result column="gwin" property="gwin" jdbcType="DECIMAL"/>
         <result column="show_type" property="showType" jdbcType="VARCHAR"/>
         <result column="cancel" property="cancel" jdbcType="INTEGER"/>
@@ -87,30 +83,39 @@
         <result column="checked" property="checked" jdbcType="INTEGER"/>
         <result column="confirmed" property="confirmed" jdbcType="INTEGER"/>
         <result column="danger" property="danger" jdbcType="INTEGER"/>
-        <result column="score1" property="score1" jdbcType="VARCHAR"/>
-        <result column="score2" property="score2" jdbcType="VARCHAR"/>
         <result column="last_bet_money" property="lastBetMoney" jdbcType="DECIMAL"/>
         <result column="agent_id" property="agentId" jdbcType="INTEGER"/>
-        <result column="betip" property="betIp" jdbcType="INTEGER"/>
         <result column="server_admin" property="serverAdmin" jdbcType="VARCHAR"/>
         <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
         <result column="after_bet_credit" property="afterBetCredit" jdbcType="DECIMAL"/>
+        <result column="bill_val" property="billVal" jdbcType="VARCHAR"/>
+        <result column="mleague_name" property="mLeagueName" jdbcType="VARCHAR"/>
+        <result column="team" property="team" jdbcType="VARCHAR"/>
+        <result column="score" property="score" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="fetchSportList" resultMap="sportBill" parameterType="com.cn.great.req.bill.SportBillReq">
-        select id,userid,username,active,mid,mleagueid,mtype,m_result,linetype,bettime,gold,mdate,
-        mrate,m_place,gwin,show_type,cancel,type,ptype,gtype,mb_ball,tg_ball,checked,
-        confirmed,danger,score1,score2,last_bet_money,agent_id,betip,server_admin,order_no,after_bet_credit
+        select id,userid,username,active,mid,mleagueid,mtype,m_result,bettime,gold,
+        gwin,show_type,cancel,type,ptype,gtype,mb_ball,tg_ball,checked,confirmed,danger,
+        last_bet_money,agent_id,server_admin,order_no,after_bet_credit,bill_val,
+        concat(concat(mleague_name,' '),mdate) as mleague_name, concat(concat(mbteam,' vs '),tgteam) as team,
+        concat(concat(mb_ball,'-'),tg_ball) as score
         from web_sports_bill
         <trim prefix="WHERE" prefixOverrides="AND | OR">
             <if test="null != orderNo and '' != orderNo">
                 and order_no = #{orderNo}
+            </if>
+            <if test="userName!=null and '' != userName">
+                and username like concat(concat('%',#{userName}),'%')
             </if>
             <if test="null != gType and '' != gType">
                 and gtype = #{gType}
             </if>
             <if test="null != pType and '' != pType">
                 and ptype = #{pType}
+            </if>
+            <if test="checked != -1">
+                and checked = #{checked}
             </if>
             <if test="null != beginTime and '' != beginTime">
                 and bettime  <![CDATA[ >= ]]> #{beginTime}
@@ -127,14 +132,20 @@
         IFNULL(sum(last_bet_money),0),',',IFNULL(sum(after_bet_credit),0))
         from web_sports_bill
         <trim prefix="WHERE" prefixOverrides="AND | OR">
-            <if test="null != id and '' != id">
-                and id = #{id}
+            <if test="null != orderNo and '' != orderNo">
+                and order_no = #{orderNo}
+            </if>
+            <if test="userName!=null and '' != userName">
+                and username like concat(concat('%',#{userName}),'%')
             </if>
             <if test="null != gType and '' != gType">
                 and gtype = #{gType}
             </if>
             <if test="null != pType and '' != pType">
                 and ptype = #{pType}
+            </if>
+            <if test="checked != -1">
+                and checked = #{checked}
             </if>
             <if test="null != beginTime and '' != beginTime">
                 and bettime  <![CDATA[ >= ]]> #{beginTime}
@@ -276,6 +287,19 @@
                 and bet_time  <![CDATA[ <= ]]> #{endTime}
             </if>
         </trim>
+    </select>
+
+    <select id="fetchEnumsByType" resultType="com.cn.great.model.system.DictEntity"
+            parameterType="java.lang.String">
+        select d.id,d.code,d.type_code typeCode,d.name,d.value,d.fixed,t.name typeName,d.sort from web_dict d
+        left join web_dict_type t
+        on d.type_code=t.code
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="typeCode!=null and typeCode!=''">
+                and t.code=#{typeCode}
+            </if>
+        </trim>
+        order by d.type_code,d.sort asc
     </select>
 
 </mapper>

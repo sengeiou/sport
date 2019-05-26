@@ -33,14 +33,22 @@ $(function () {
             },
             {
                 "data": I18n.system_opt,
+                "visible": authOwenUrls.indexOf('roleUpdate') > -1 || authOwenUrls.indexOf('roleConfig') > -1
+                || authOwenUrls.indexOf('roleDelete') > -1 ? true : false,
                 "render": function (data, type, row) {
                     return function () {
                         tableData['key' + row.id] = row;
-                        var html = '<p id="' + row.id + '" >' +
-                            '<button class="btn btn-warning btn-xs update" type="button">' + I18n.system_opt_edit + '</button>  ' +
-                            '<button class="btn btn-success btn-xs user_operate" _type="role_config" type="button">' + I18n.role_config + '</button>  ' +
-                            '<button class="btn btn-danger btn-xs user_operate" _type="role_del" type="button">' + I18n.system_opt_del + '</button>  ' +
-                            '</p>';
+                        var html = '<p id="' + row.id + '" >';
+                        if (!!authOwenUrls && authOwenUrls.indexOf('roleUpdate') > -1) {
+                            html += '<button class="btn btn-warning btn-xs update" type="button">' + I18n.system_opt_edit + '</button>  ';
+                        }
+                        if (!!authOwenUrls && authOwenUrls.indexOf('roleConfig') > -1) {
+                            html += '<button class="btn btn-success btn-xs user_operate" _type="role_config" type="button">' + I18n.role_config + '</button>  ';
+                        }
+                        if (!!authOwenUrls && authOwenUrls.indexOf('roleDelete') > -1) {
+                            html += '<button class="btn btn-danger btn-xs user_operate" _type="role_del" type="button">' + I18n.system_opt_del + '</button>  ';
+                        }
+                        html += '</p>';
                         return html;
                     };
                 }
@@ -200,14 +208,16 @@ $(function () {
 
 
     // delete form
-    $("#role_list").on('click', '.user_operate', function () {
+    $("#role_list").unbind('click').on('click', '.user_operate', function () {
+        //初始化权限树形页面
+        $("#configModal .form")[0].reset();
         var typeName;
         var url;
         var needFresh = false;
         var type = $(this).attr("_type");
         if ("role_config" == type) {
             typeName = I18n.role_config;
-            url = base_url + "/auth/config";
+            url = base_url + "/role/config";
             needFresh = false;
         } else if ("role_del" == type) {
             typeName = I18n.system_opt_del;
@@ -221,34 +231,27 @@ $(function () {
         param.id = id;
         if ("role_config" == type) {
             loadAllAuths();
-            //初始化权限树形页面
-            $("#configModal .form")[0].reset();
             $('#configModal').modal({backdrop: false, keyboard: false}).modal('show');
-
             var zNodes = eval(allAuths);
             $.fn.zTree.init($("#authTree"), zTree_setting, zNodes);
             initSelectedTree(id);
-            $("#auth_config").click(function () {
+            $("#auth_config").unbind('click').click(function () {
                 var ids = fetchAllSelectedNode();
-                param.roleId=id.toString();
-                param.authIds=ids;
+                param.roleId = id.toString();
+                param.authIds = ids;
                 $.ajax({
                     type: 'POST',
                     url: url,
                     data: JSON.stringify(param),
                     dataType: "json",
                     success: function (data) {
+                        $("#configModal").modal('hide');
                         if (data.result === 0) {
                             layer.open({
                                 title: I18n.system_tips,
                                 btn: [I18n.system_ok],
                                 content: typeName + I18n.system_success,
-                                icon: '1',
-                                end: function (layero, index) {
-                                    if (needFresh) {
-                                        roleTable.fnDraw(false);
-                                    }
-                                }
+                                icon: '1'
                             });
                         } else {
                             layer.open({
@@ -258,10 +261,10 @@ $(function () {
                                 icon: '2'
                             });
                         }
-                    },
+                    }
                 });
             });
-        }else{
+        } else {
             layer.confirm(I18n.system_ok + typeName + '?', {
                 icon: 3,
                 title: I18n.system_tips,
@@ -298,8 +301,8 @@ $(function () {
                 });
             });
         }
-
     });
+
 
     $("#configModal").on('hide.bs.modal', function () {
         $("#configModal .form")[0].reset();
@@ -383,7 +386,7 @@ $(function () {
                 arr.push(treeData[i].id);
             }
         }
-        if(arr.length != 0){
+        if (arr.length != 0) {
             res = arr.join(",");
         }
         return res;

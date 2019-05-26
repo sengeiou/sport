@@ -1,11 +1,8 @@
 $(function () {
 
-    var tableDatas = [];
+    fetchAllPlayTypes();
+    fetchAllConfirmeTypes();
 
-    function initTableDates() {
-        tableDatas = [];
-    }
-    
     // init date tables
     var sportTable = $("#sport_list").dataTable({
         "deferRender": true,
@@ -29,6 +26,37 @@ $(function () {
             },
             {
                 "data": 'orderNo',
+                "bSortable": false,
+                "visible": true
+            },
+            {
+                "data": 'mLeagueName',
+                "bSortable": false,
+                "visible": true
+            },
+            {
+                "data": 'team',
+                "bSortable": false,
+                "visible": true
+            },
+            {
+                "data": 'pType',
+                "visible": true,
+                "render": function (data, type, row) {
+                    var res = "";
+                    if (!!data) {
+                        $.each(ballPlayTypes, function (idx, obj) {
+                            if (obj.value.toString() === data.toString()) {
+                                res = obj.name;
+                                return;
+                            }
+                        })
+                    }
+                    return res;
+                }
+            },
+            {
+                "data": 'billVal',
                 "bSortable": false,
                 "visible": true
             },
@@ -61,7 +89,7 @@ $(function () {
                 }
             },
             {
-                "data": 'mbBall',
+                "data": 'score',
                 "bSortable": false,
                 "visible": true
             },
@@ -73,29 +101,21 @@ $(function () {
                 }
             },
             {
-                "data": 'confirmed',
+                "data": 'cancel',
                 "bSortable": false,
-                "visible": true
-               /* "render": function (data, type, row) {
+                "visible": true,
+                "render": function (data, type, row) {
                     switch (parseInt(data)) {
                         case 0:
-                            return "未结算";
+                            return '正常';
                         case 1:
-                            return "已结算";
-                        case 3:
-                            return "已注销";
-                        case 4:
-                            return "已恢复";
-                        case 5:
-                            return "已撤销结算";
-                        case 6:
-                            return "已二次结算";
+                            return '取消';
                     }
-                }*/
+                }
             },
             {
                 "data": I18n.system_opt,
-                "visible": authOwenUrls.indexOf('sportsBillAudit')>-1?true:false,
+                "visible": authOwenUrls.indexOf('sportsBillAudit') > -1 ? true : false,
                 "render": function (data, type, row) {
                     return function () {
                         return html = '<p id="' + row.id + '" >' +

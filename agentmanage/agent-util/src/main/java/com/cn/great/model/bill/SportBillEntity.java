@@ -77,5 +77,18 @@ public class SportBillEntity extends SummaryEntity {
     private String orderNo;
     //下注后金额
     private BigDecimal afterBetCredit;
+    //联赛名称
+    private String mLeagueName;
+    private String eventName;
+    //主队名称
+    private String mbteam;
+    //客队名称
+    private String tgteam;
+    //比赛球队
+    private String team;
+    //注单
+    private String billVal;
+    //比分
+    private String score;
 
 }

@@ -5,6 +5,7 @@ import com.cn.great.model.bill.AgBill;
 import com.cn.great.model.bill.LotteryBill;
 import com.cn.great.model.bill.MgBill;
 import com.cn.great.model.bill.SportBillEntity;
+import com.cn.great.model.system.DictEntity;
 import com.cn.great.req.bill.AGBillReq;
 import com.cn.great.req.bill.LotteryBillReq;
 import com.cn.great.req.bill.MGBillReq;
@@ -67,6 +68,11 @@ public class BillServiceImpl implements BillService {
     @Override
     public String countSportBill(SportBillReq sportBillReq) {
         return billMapper.countSportBill(sportBillReq);
+    }
+
+    @Override
+    public List<DictEntity> fetchEnumsByType(String typeCode) {
+        return billMapper.fetchEnumsByType(typeCode);
     }
 
 }
