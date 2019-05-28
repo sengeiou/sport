@@ -76,7 +76,7 @@
         <result column="show_type" property="showType" jdbcType="VARCHAR"/>
         <result column="cancel" property="cancel" jdbcType="INTEGER"/>
         <result column="type" property="type" jdbcType="VARCHAR"/>
-        <result column="ptype" property="pType" jdbcType="VARCHAR"/>
+        <result column="ptype" property="ptype" jdbcType="VARCHAR"/>
         <result column="gtype" property="gType" jdbcType="VARCHAR"/>
         <result column="mb_ball" property="mbBall" jdbcType="INTEGER"/>
         <result column="tg_ball" property="tgBall" jdbcType="INTEGER"/>
@@ -89,7 +89,7 @@
         <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
         <result column="after_bet_credit" property="afterBetCredit" jdbcType="DECIMAL"/>
         <result column="bill_val" property="billVal" jdbcType="VARCHAR"/>
-        <result column="mleague_name" property="mLeagueName" jdbcType="VARCHAR"/>
+        <result column="mleague_name" property="leagueName" jdbcType="VARCHAR"/>
         <result column="team" property="team" jdbcType="VARCHAR"/>
         <result column="score" property="score" jdbcType="VARCHAR"/>
     </resultMap>
@@ -98,7 +98,7 @@
         select id,userid,username,active,mid,mleagueid,mtype,m_result,bettime,gold,
         gwin,show_type,cancel,type,ptype,gtype,mb_ball,tg_ball,checked,confirmed,danger,
         last_bet_money,agent_id,server_admin,order_no,after_bet_credit,bill_val,
-        concat(concat(mleague_name,' '),mdate) as mleague_name, concat(concat(mbteam,' vs '),tgteam) as team,
+        concat(concat(mleague_name,' '),date(mdate)) as mleague_name, concat(concat(mbteam,' vs '),tgteam) as team,
         concat(concat(mb_ball,'-'),tg_ball) as score
         from web_sports_bill
         <trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -301,5 +301,9 @@
         </trim>
         order by d.type_code,d.sort asc
     </select>
+
+    <update id="confirmedSportBill" parameterType="com.cn.great.req.bill.SportBillReq">
+        update web_sports_bill set cancel = 1, confirmed=#{confirmed} where id=#{id} and order_no = #{orderNo}
+    </update>
 
 </mapper>

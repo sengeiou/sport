@@ -18,4 +18,6 @@ public class SportBillReq extends BaseEntity {
     private Integer checked;
     // 用户名
     private String userName;
+
+    private Integer confirmed;
 }

@@ -286,6 +286,13 @@ public class UserServiceImpl implements UserService {
         return userMapper.fetchAdminByName(userName);
     }
 
+    @Transactional
+    @Override
+    public void updateAgentPwd(ResetPwdReq resetPwdReq) {
+        userMapper.updateAgentPwd(resetPwdReq);
+    }
+
+
     @Override
     public List<PayLevelEntity> fetchAllPayLevel() {
         return userMapper.fetchAllPayLevel();

@@ -4,6 +4,7 @@ import com.cn.great.model.user.AgentInfoEntity;
 import com.cn.great.model.user.BankInfoEntity;
 import com.cn.great.req.agent.AgentOpeReq;
 import com.cn.great.req.agent.AgentReq;
+import com.cn.great.req.user.ResetPwdReq;
 
 import java.util.List;
 
@@ -76,6 +77,15 @@ public interface AgentService {
      * @Date: 2019/4/19
      */
     List<AgentInfoEntity> fetchAgentByName(String userName);
+
+    /**
+    * @Description: 密码重置
+    * @Param: [resetPwdReq]
+    * @return: void
+    * @Author: Stamp
+    * @Date: 2019/5/26
+    */
+    void resetAgentPwd(ResetPwdReq resetPwdReq);
 
     /**
      * @Description: 代理更新

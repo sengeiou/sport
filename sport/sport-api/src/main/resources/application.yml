@@ -1,7 +1,7 @@
 
 spring:
   profiles:
-    active: dev  #配置文件切换 dev 测试环境；pro 线上环境
+    active: pro  #配置文件切换 dev 测试环境；pro 线上环境
 
 
 server:

@@ -48,7 +48,7 @@ public class SportBillEntity extends SummaryEntity {
     //补充类型 如：最先最后进球中的最先还是最后
     private String type;
     //注单种类
-    private String pType;
+    private String ptype;
     //FT：足球；BK：篮球；TN：网球；VB：排球、羽毛球、乒乓球；BS：棒球；OP：其他
     private String gType;
     //主队得分
@@ -78,7 +78,7 @@ public class SportBillEntity extends SummaryEntity {
     //下注后金额
     private BigDecimal afterBetCredit;
     //联赛名称
-    private String mLeagueName;
+    private String leagueName;
     private String eventName;
     //主队名称
     private String mbteam;

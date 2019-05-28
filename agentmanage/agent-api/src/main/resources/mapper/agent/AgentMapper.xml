@@ -140,6 +140,10 @@
         where id=#{id}
     </update>
 
+    <update id="resetAgentPwd" parameterType="com.cn.great.req.user.ResetPwdReq">
+        update web_agents_data set password=#{loginNewPassword} where username=#{userName}
+    </update>
+
     <delete id="deleteAgentInfo" parameterType="java.lang.Integer">
         delete from web_agents_data where id = #{id}
     </delete>

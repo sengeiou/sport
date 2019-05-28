@@ -13,6 +13,7 @@ import com.cn.great.req.bill.SportBillReq;
 import com.cn.great.service.BillService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -73,6 +74,12 @@ public class BillServiceImpl implements BillService {
     @Override
     public List<DictEntity> fetchEnumsByType(String typeCode) {
         return billMapper.fetchEnumsByType(typeCode);
+    }
+
+    @Transactional
+    @Override
+    public void confirmedSportBill(SportBillReq sportBillReq) {
+        billMapper.confirmedSportBill(sportBillReq);
     }
 
 }

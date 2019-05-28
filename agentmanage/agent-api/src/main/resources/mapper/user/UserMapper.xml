@@ -436,4 +436,8 @@
         update web_member_info set limit_ft=#{value} where username=#{userName}
     </update>
 
+    <update id="updateAgentPwd" parameterType="com.cn.great.req.user.ResetPwdReq">
+        update web_system_data set password=#{loginNewPassword} where username=#{userName} and agent_flag = #{flag}
+    </update>
+
 </mapper>

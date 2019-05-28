@@ -34,7 +34,7 @@ public class SportBillEntity implements Serializable {
     // 下注金额
     private BigDecimal gold;
     // 赛事日期
-    private Long mDate;
+    private String mDate;
     // 赔率
     private BigDecimal mRate;
     //
@@ -90,6 +90,7 @@ public class SportBillEntity implements Serializable {
     private String mLeagueName;
     //赛事名
     private String eventName;
+
 
 
 

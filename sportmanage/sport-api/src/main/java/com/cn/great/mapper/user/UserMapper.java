@@ -5,6 +5,7 @@ import com.cn.great.model.auth.AuthInfoEntity;
 import com.cn.great.model.auth.RoleInfoEntity;
 import com.cn.great.model.online.LoginInfoEntity;
 import com.cn.great.model.user.*;
+import com.cn.great.req.user.ResetPwdReq;
 import com.cn.great.req.user.UserAddReq;
 import com.cn.great.req.user.UserReq;
 import com.cn.great.req.user.UserUpdateReq;
@@ -93,4 +94,6 @@ public interface UserMapper {
     List<AuthInfoEntity> fetchOwenAuths(String userName);
 
     UserInfoEntity getMemberById(Integer userid);
+
+    void updateAdminPwd(ResetPwdReq resetPwdReq);
 }

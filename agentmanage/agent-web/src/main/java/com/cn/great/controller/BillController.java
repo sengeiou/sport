@@ -271,6 +271,11 @@ public class BillController {
     @PostMapping(value = "audit", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity audit(@RequestBody SportBillReq sportBillReq, HttpServletRequest request) throws GeneralException {
+
+        // 取消注单
+        billService.confirmedSportBill(sportBillReq);
+        // todo 退回用户注单金额
+
         return ResponseEntity.initGeneralSuccessResponse();
     }
 

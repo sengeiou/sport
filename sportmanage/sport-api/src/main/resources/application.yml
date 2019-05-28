@@ -19,6 +19,8 @@ server:
   servlet:
     session:
       timeout: 43200s  # session 超时时间12小时
+      cookie:
+        name: sessionid_s
 
   # 支持https配置
   tomcat:

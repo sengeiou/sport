@@ -30,7 +30,7 @@ $(function () {
                 "visible": true
             },
             {
-                "data": 'mLeagueName',
+                "data": 'leagueName',
                 "bSortable": false,
                 "visible": true
             },
@@ -40,7 +40,7 @@ $(function () {
                 "visible": true
             },
             {
-                "data": 'pType',
+                "data": 'ptype',
                 "visible": true,
                 "render": function (data, type, row) {
                     var res = "";
@@ -118,8 +118,17 @@ $(function () {
                 "visible": authOwenUrls.indexOf('sportsBillAudit') > -1 ? true : false,
                 "render": function (data, type, row) {
                     return function () {
-                        return html = '<p id="' + row.id + '" >' +
-                            '<button class="btn btn-info btn-xs user_operate" _type="user_lim" type="button"> 注单确认 </button>  ';
+                        var html = '<p id="' + row.id + '"; cancel="' + row.cancel + '"; orderNo="' + row.orderNo + '"; confirmed="' + row.confirmed + '" >';
+                        html += '<select class="form-control billConfirmeType" name="billConfirmeType"> ';
+                        $.each(billConfirmeTypes, function (idx, obj) {
+                            if (parseInt(obj.value) === parseInt(row.confirmed)) {
+                                html += '<option value= "' + obj.value + '" selected >' + obj.name + '</option> ';
+                            } else {
+                                html += '<option value= "' + obj.value + '" >' + obj.name + '</option> ';
+                            }
+                        });
+                        html += '</select>';
+                        return html;
                     };
                 }
             }
@@ -155,5 +164,56 @@ $(function () {
         initTableDates();
         sportTable.fnDraw();
     });
+
+    $("#sport_list").on('change', '.billConfirmeType', function () {
+        var id = $(this).parent('p').attr("id");
+        var cancel = $(this).parent('p').attr("cancel");
+        var orderNo = $(this).parent('p').attr("orderNo");
+        var originalVal = $(this).parent('p').attr("confirmed");
+        if (parseInt(cancel) === 1) {
+            showWarnMessage('注单已取消，不能更改');
+            $(this).find('option[value="'+originalVal+'"]').prop('selected', true);
+            return;
+        }
+        var confirmed = $(this).val();
+        var url = base_url + "/bill/audit";
+        var param = {};
+        param.id = id;
+        param.orderNo = orderNo;
+        param.confirmed = confirmed;
+        layer.confirm(I18n.system_ok + '操作注单 ' + orderNo + '?', {
+            icon: 3,
+            title: I18n.system_tips,
+            btn: [I18n.system_ok, I18n.system_cancel]
+        }, function (index) {
+            layer.close(index);
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(param),
+                dataType: "json",
+                success: function (data) {
+                    if (data.result === 0) {
+                        layer.open({
+                            title: I18n.system_tips,
+                            btn: [I18n.system_ok],
+                            content: I18n.system_ope_success,
+                            icon: '1',
+                            end: function (layero, index) {
+                                sportTable.fnDraw();
+                            }
+                        });
+                    } else {
+                        layer.open({
+                            title: I18n.system_tips,
+                            btn: [I18n.system_ok],
+                            content: (I18n.system_ope_failed),
+                            icon: '2'
+                        });
+                    }
+                },
+            });
+        });
+    })
 
 });

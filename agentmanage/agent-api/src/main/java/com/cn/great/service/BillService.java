@@ -99,4 +99,13 @@ public interface BillService {
      * @Date: 2019/5/25
      */
     List<DictEntity> fetchEnumsByType(String typeCode);
+
+    /**
+     * @Description: 取消注单
+     * @Param: [sportBillReq]
+     * @return: void
+     * @Author: Stamp
+     * @Date: 2019/5/26
+     */
+    void confirmedSportBill(SportBillReq sportBillReq);
 }

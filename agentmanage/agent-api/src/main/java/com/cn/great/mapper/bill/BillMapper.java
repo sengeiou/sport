@@ -33,4 +33,6 @@ public interface BillMapper {
     String countSportBill(SportBillReq sportBillReq);
 
     List<DictEntity> fetchEnumsByType(@Param("typeCode") String typeCode);
+
+    void confirmedSportBill(SportBillReq sportBillReq);
 }

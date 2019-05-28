@@ -26,6 +26,86 @@ $(function () {
         });
     });
 
+    //密码重置
+    $("#resetPswBtn").click(function () {
+        $("#resetPwdModal .form")[0].reset();
+        $('#resetPwdModal').modal({backdrop: false, keyboard: false}).modal('show');
+    });
+
+    var resetPwdModalValidate = $("#resetPwdModal .form").validate({
+        errorElement: 'span',
+        errorClass: 'help-block',
+        focusInvalid: true,
+        rules: {
+            loginOldPassword: {
+                required: true
+            },
+            loginNewPassword: {
+                required: true,
+                minlength: 6,
+                maxlength: 18,
+                equalTo: "#loginConfirmPassword"
+            },
+            loginConfirmPassword: {
+                required: true,
+                minlength: 6,
+                maxlength: 18,
+                equalTo: "#loginNewPassword"
+            }
+        },
+        messages: {
+            loginOldPassword: {
+                required: I18n.system_please_input + I18n.login_old_pwd
+            },
+            loginNewPassword: {
+                required: I18n.system_login_new_pwd,
+                equalTo: I18n.ADMIN_PASSWORD_NOT_SAME
+            },
+            loginConfirmPassword: {
+                required: I18n.login_password_confirm,
+                equalTo: I18n.ADMIN_PASSWORD_NOT_SAME
+            }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        success: function (label) {
+            label.closest('.form-group').removeClass('has-error');
+            label.remove();
+        },
+        errorPlacement: function (error, element) {
+            element.parent('div').append(error);
+        },
+        submitHandler: function (form) {
+            var param = getFormDataForJson($("#resetPwdModal .form"));
+            $.post(base_url + "/resetPwd", param, function (data, status) {
+                if (data.result === 0) {
+                    $('#resetPwdModal').modal('hide');
+                    layer.open({
+                        title: I18n.system_tips,
+                        btn: [I18n.system_ok],
+                        content: I18n.system_ope_success,
+                        icon: '1'
+                    });
+                } else {
+                    layer.open({
+                        title: I18n.system_tips,
+                        btn: [I18n.system_ok],
+                        content: (data.error_msg || I18n.system_ope_failed),
+                        icon: '2'
+                    });
+                }
+            });
+        }
+    });
+
+    $("#resetPwdModal").on('hide.bs.modal', function () {
+        $("#resetPwdModal .form")[0].reset();
+        resetPwdModalValidate.resetForm();
+        $("#resetPwdModal .form .form-group").removeClass("has-error");
+        $(".remote_panel").show();
+    });
+
     // slideToTop
     var slideToTop = $("<div />");
     slideToTop.html('<i class="fa fa-chevron-up"></i>');
@@ -110,7 +190,7 @@ $(function () {
     });
 
     function changeCollapse($el) {
-        if(!$el) return;
+        if (!$el) return;
         var actives = $el.find(".active");
         if (actives.length === 0) {
             $el.parent().find(".glyphicon-chevron-up").removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");

@@ -10,7 +10,7 @@ logging:
 
 mybatis:
   datasource:
-    jdbc-url: jdbc:mysql://192.168.0.2:3306/sports2?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false
+    jdbc-url: jdbc:mysql://localhost:3306/sports2?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false
     username: develop
     password: rBQHFGb=Z9he
     type: com.alibaba.druid.pool.DruidDataSource
@@ -19,9 +19,9 @@ mybatis:
 #待切换成线上的redis配置
 spring:
   redis:
-    host: 110.173.49.122
+    host: localhost
     port: 6379
-    password: x_Hi0huJRuMbPrm_q72tI4zg@
+    password: 1234qwer
     timeout: 1500 # 超时时间
     lettuce:
       pool:

@@ -6,6 +6,7 @@ import com.cn.great.model.user.AgentInfoEntity;
 import com.cn.great.model.user.BankInfoEntity;
 import com.cn.great.req.agent.AgentOpeReq;
 import com.cn.great.req.agent.AgentReq;
+import com.cn.great.req.user.ResetPwdReq;
 import com.cn.great.service.AgentService;
 import com.cn.great.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -71,6 +72,12 @@ public class AgentServiceImpl implements AgentService {
     @Override
     public List<AgentInfoEntity> fetchAgentByName(String userName) {
         return agentMapper.fetchAgentByName(userName);
+    }
+
+    @Transactional
+    @Override
+    public void resetAgentPwd(ResetPwdReq resetPwdReq) {
+        agentMapper.resetAgentPwd(resetPwdReq);
     }
 
     @Transactional

@@ -622,12 +622,11 @@ public class SportBillServiceImpl implements SportBillService {
                 .mid(sportBets.getMid())
                 .mLeagueId(sportBets.getMleagueid())
                 .mType(sportBets.getMtype())
-                .middle(json.toString())
                 .lineType(0)//
                 .bettime(DateUtils.dateCheckTimeStamp(bettime))
                 .gold(new BigDecimal(sportBets.getBetFormAmount()))
                 .mDate(DateUtils.getDate())
-                .mRate(sportBets.getOddsv())
+                .mRate(new BigDecimal(sportBets.getOddsv()))
                 .mPlace("0")//
                 .gwin(new BigDecimal("0.00"))
                 .mResult(new BigDecimal("0.00"))

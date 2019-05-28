@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.LogInfoMapper">
+
+    <resultMap id="logs" type="com.cn.great.model.system.LogInfo">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="ip" property="ip"/>
+        <result column="datetime" property="dateTime"/>
+        <result column="url" property="url"/>
+        <result column="param" property="param"/>
+        <result column="type" property="type"/>
+        <result column="server_admin" property="serverAdmin"/>
+    </resultMap>
+
+    <select id="fetchLogs" resultMap="logs" parameterType="com.cn.great.req.system.LogReq">
+        select * from web_system_log
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userName!=null">
+                and username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="serverAdmin!=null">
+                and server_admin like concat(concat('%',#{serverAdmin}),'%')
+            </if>
+            <if test="type!=-1">
+                and type = #{type}
+            </if>
+            <if test="beginTime!=null">
+                and datetime  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and datetime  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+        order by datetime desc limit #{start}, #{length}
+    </select>
+
+    <select id="countLogs" resultType="java.lang.Integer" parameterType="com.cn.great.req.system.LogReq">
+        select count(id) from web_system_log
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userName!=null">
+                and username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="serverAdmin!=null">
+                and server_admin like concat(concat('%',#{serverAdmin}),'%')
+            </if>
+            <if test="type!=-1">
+                and type = #{type}
+            </if>
+            <if test="beginTime!=null">
+                and datetime  <![CDATA[ >= ]]> #{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and datetime  <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addLogInfo" parameterType="com.cn.great.req.system.LogOpeReq" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into web_system_log(user_id, username, ip, datetime, url, param, type, server_admin)
+        values(#{userId},#{userName},#{ip},#{dateTime}, #{url}, #{param}, #{type}, #{serverAdmin})
+    </insert>
+
+</mapper>

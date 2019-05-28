@@ -13,9 +13,7 @@ $(function(){
         focusInvalid : true,  
         rules : {  
         	userName : {  
-        		required : true ,
-                minlength: 5,
-                maxlength: 18
+        		required : true
             },  
             password : {  
             	required : true ,
@@ -25,8 +23,7 @@ $(function(){
         }, 
         messages : {  
         	userName : {  
-                required  : I18n.login_username_empty,
-                minlength : I18n.login_username_lt_5
+                required  : I18n.login_username_empty
             },
             password : {
             	required  : I18n.login_password_empty,

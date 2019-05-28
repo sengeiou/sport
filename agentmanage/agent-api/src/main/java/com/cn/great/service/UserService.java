@@ -60,13 +60,13 @@ public interface UserService {
      */
     LoginInfoEntity getUserLoginInfo(String userName);
 
-    /** 
-    * @Description: 修改用户登录状态
-    * @Param: [loginInfoEntity] 
-    * @return: void 
-    * @Author: Stamp 
-    * @Date: 2019/5/19 
-    */
+    /**
+     * @Description: 修改用户登录状态
+     * @Param: [loginInfoEntity]
+     * @return: void
+     * @Author: Stamp
+     * @Date: 2019/5/19
+     */
     void updateLoginInfo(String userName);
 
     /**
@@ -311,6 +311,15 @@ public interface UserService {
      * @Date: 2019/4/17
      */
     List<AdminInfoEntity> fetchAdminByName(String userName);
+
+    /**
+     * @Description: 重置代理用户的密码
+     * @Param: [resetPwdReq]
+     * @return: void
+     * @Author: Stamp
+     * @Date: 2019/5/26
+     */
+    void updateAgentPwd(ResetPwdReq resetPwdReq);
 
     /**
      * @Description: 查询所有的支付层级信息

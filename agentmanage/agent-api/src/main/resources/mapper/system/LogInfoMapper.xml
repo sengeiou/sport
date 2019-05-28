@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.great.mapper.system.LogInfoMapper">
+
+    <insert id="addLogInfo" parameterType="com.cn.great.req.system.LogOpeReq" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into web_system_log(user_id, username, ip, datetime, url, param, type, server_admin)
+        values(#{userId},#{userName},#{ip},#{dateTime}, #{url}, #{param}, #{type}, #{serverAdmin})
+    </insert>
+
+</mapper>

@@ -5,7 +5,9 @@ import com.cn.great.enums.ResponseCodeEnum;
 import com.cn.great.exception.GeneralException;
 import com.cn.great.model.auth.AuthInfoEntity;
 import com.cn.great.model.auth.RoleAuthMapper;
+import com.cn.great.model.user.AdminInfoEntity;
 import com.cn.great.req.auth.AuthConfigReq;
+import com.cn.great.req.system.LogOpeReq;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -88,13 +90,13 @@ public class GeneralUtils {
         return res;
     }
 
-    public static List<RoleAuthMapper> generalToMapper(AuthConfigReq authConfigReq){
+    public static List<RoleAuthMapper> generalToMapper(AuthConfigReq authConfigReq) {
 
         String roleId = authConfigReq.getRoleId();
         String authIds = authConfigReq.getAuthIds();
         List<String> ids = Arrays.asList(authIds.split(","));
         List<RoleAuthMapper> mappers = new ArrayList<>();
-        ids.forEach(a->{
+        ids.forEach(a -> {
             RoleAuthMapper mapper = new RoleAuthMapper();
             mapper.setRoleId(Integer.valueOf(roleId));
             mapper.setAuthId(Integer.valueOf(a));
@@ -103,11 +105,11 @@ public class GeneralUtils {
         return mappers;
     }
 
-    public static Set<String> filterToList(List<AuthInfoEntity> auths){
+    public static Set<String> filterToList(List<AuthInfoEntity> auths) {
         Set<String> set = new HashSet<>();
-        auths.forEach(a->{
+        auths.forEach(a -> {
             String url = a.getAuthUrl();
-            if(StringUtils.isNotBlank(url)){
+            if (StringUtils.isNotBlank(url)) {
                 set.add(url);
             }
         });
@@ -140,6 +142,22 @@ public class GeneralUtils {
         } else {
             return false;
         }
+    }
+
+    public static LogOpeReq generateLogOpe(AdminInfoEntity admin, String ip, String url, String param) {
+
+        LogOpeReq logOpeReq = new LogOpeReq();
+        if (admin == null)
+            return logOpeReq;
+        logOpeReq.setUserId(admin.getId());
+        logOpeReq.setUserName(admin.getUserName());
+        logOpeReq.setServerAdmin(admin.getServerAdmin());
+        logOpeReq.setDateTime(DateUtils.getDateTime());
+        logOpeReq.setIp(ip);
+        logOpeReq.setUrl(url);
+        logOpeReq.setParam(param);
+        logOpeReq.setType(0);
+        return logOpeReq;
     }
 
 }

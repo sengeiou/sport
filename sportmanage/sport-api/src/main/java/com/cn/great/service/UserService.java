@@ -4,6 +4,7 @@ import com.cn.great.model.auth.AuthInfoEntity;
 import com.cn.great.model.auth.RoleInfoEntity;
 import com.cn.great.model.online.LoginInfoEntity;
 import com.cn.great.model.user.*;
+import com.cn.great.req.user.ResetPwdReq;
 import com.cn.great.req.user.UserAddReq;
 import com.cn.great.req.user.UserReq;
 import com.cn.great.req.user.UserUpdateReq;
@@ -304,4 +305,13 @@ public interface UserService {
      * @return
      */
     UserInfoEntity getUserById(Integer userId);
+
+    /**
+     * @Description: 重置代理用户的密码
+     * @Param: [resetPwdReq]
+     * @return: void
+     * @Author: Stamp
+     * @Date: 2019/5/26
+     */
+    void updateAdminPwd(ResetPwdReq resetPwdReq);
 }

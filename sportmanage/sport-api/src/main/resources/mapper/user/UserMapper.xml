@@ -319,4 +319,9 @@
     <select id="getMemberById" resultMap="users">
         select * from web_member_data where id = #{userid}
     </select>
+
+    <update id="updateAdminPwd" parameterType="com.cn.great.req.user.ResetPwdReq">
+        update web_system_data set password=#{loginNewPassword} where username=#{userName} and agent_flag = #{flag}
+    </update>
+
 </mapper>

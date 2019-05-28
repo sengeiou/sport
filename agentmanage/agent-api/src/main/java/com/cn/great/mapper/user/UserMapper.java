@@ -88,4 +88,6 @@ public interface UserMapper {
     void updateMemberBkLimit(UserInfoReq userInfoReq);
 
     void updateMemberFTLimit(UserInfoReq userInfoReq);
+
+    void updateAgentPwd(ResetPwdReq resetPwdReq);
 }

@@ -4,6 +4,9 @@ import com.cn.great.annotations.ParamCheck;
 import com.cn.great.enums.ResponseCodeEnum;
 import com.cn.great.exception.GeneralException;
 import com.cn.great.model.auth.AuthInfoEntity;
+import com.cn.great.model.user.AdminInfoEntity;
+import com.cn.great.model.user.AgentInfoEntity;
+import com.cn.great.req.system.LogOpeReq;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -129,6 +132,38 @@ public class GeneralUtils {
         } else {
             return false;
         }
+    }
+
+    public static LogOpeReq generateLogOpe(AdminInfoEntity admin, String ip, String url, String param) {
+
+        LogOpeReq logOpeReq = new LogOpeReq();
+        if (admin == null)
+            return logOpeReq;
+        logOpeReq.setUserId(admin.getId());
+        logOpeReq.setUserName(admin.getUserName());
+        logOpeReq.setServerAdmin(admin.getServerAdmin());
+        logOpeReq.setDateTime(DateUtils.getDateTime());
+        logOpeReq.setIp(ip);
+        logOpeReq.setUrl(url);
+        logOpeReq.setParam(param);
+        logOpeReq.setType(1);
+        return logOpeReq;
+    }
+
+    public static LogOpeReq generateAgentLogOpe(AgentInfoEntity agent, String ip, String url, String param) {
+
+        LogOpeReq logOpeReq = new LogOpeReq();
+        if (agent == null)
+            return logOpeReq;
+        logOpeReq.setUserId(agent.getId());
+        logOpeReq.setUserName(agent.getUserName());
+        logOpeReq.setServerAdmin(agent.getServerAdmin());
+        logOpeReq.setDateTime(DateUtils.getDateTime());
+        logOpeReq.setIp(ip);
+        logOpeReq.setUrl(url);
+        logOpeReq.setParam(param);
+        logOpeReq.setType(1);
+        return logOpeReq;
     }
 
 }

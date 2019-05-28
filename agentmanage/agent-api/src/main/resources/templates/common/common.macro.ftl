@@ -131,7 +131,6 @@
             <span class="logo-lg"><b style="color:#EAEBC0">SPORT</b>&nbsp;${I18n.admin_name}</span>
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
-
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -175,9 +174,48 @@
                     </a>
                 </#if>
             </div>
-
         </nav>
     </header>
+
+    <div class="modal fade" id="resetPwdModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="margin-top: 15%;">
+                <div class="modal-header">
+                    <h4 class="modal-title">${I18n.login_password_reset}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal form" role="form">
+                        <div class="form-group">
+                            <label for="loginOldPassword" class="col-sm-4 control-label">${I18n.login_old_pwd}<font
+                                        color="red">*</font></label>
+                            <div class="col-sm-6"><input type="password" class="form-control" name="loginOldPassword"
+                                                         placeholder="${I18n.system_login_old_pwd}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginNewPassword" class="col-sm-4 control-label">${I18n.login_new_pwd}<font
+                                        color="red">*</font></label>
+                            <div class="col-sm-6"><input type="password" class="form-control" id="loginNewPassword" name="loginNewPassword"
+                                                         placeholder="${I18n.login_new_pwd}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginConfirmPassword" class="col-sm-4 control-label">${I18n.login_confirm_pwd}<font
+                                        color="red">*</font></label>
+                            <div class="col-sm-6"><input type="password" class="form-control" id="loginConfirmPassword" name="loginConfirmPassword"
+                                                         placeholder="${I18n.login_confirm_pwd}"></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-6">
+                                <button type="submit" class="btn btn-primary">${I18n.system_save}</button>
+                                <button type="button" class="btn btn-default"
+                                        data-dismiss="modal">${I18n.system_cancel}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </#macro>
 
 <#macro commonLeft pageName >

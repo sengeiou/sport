@@ -5,6 +5,7 @@ import com.cn.great.model.user.AgentInfoEntity;
 import com.cn.great.model.user.BankInfoEntity;
 import com.cn.great.req.agent.AgentOpeReq;
 import com.cn.great.req.agent.AgentReq;
+import com.cn.great.req.user.ResetPwdReq;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface AgentMapper {
     List<AgentInfoEntity> fetchAgentByName(String userName);
 
     void addAgentInfo(AgentOpeReq agentOpeReq);
+
+    void resetAgentPwd(ResetPwdReq resetPwdReq);
 
     List<BankInfoEntity> fetchBanks();
 

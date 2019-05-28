@@ -36,6 +36,7 @@ public class Constant {
     public static final String SPLIT_STR="@88@";
     //session缓存userName
     public static final String USER_SESSION_NAME = "userNameSession";
+    public static final String LOGIN_INFO_SESSION = "loginInfoSession";
     //父权限缓存到session
     public static final String AUTH_PARENT_SESSION = "parentAuthsSession";
     //角色缓存到session
