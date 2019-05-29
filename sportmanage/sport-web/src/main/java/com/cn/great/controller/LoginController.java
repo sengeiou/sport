@@ -4,7 +4,6 @@ package com.cn.great.controller;
 import com.cn.great.enums.ResponseCodeEnum;
 import com.cn.great.exception.GeneralException;
 import com.cn.great.model.auth.AuthInfoEntity;
-import com.cn.great.model.auth.RoleInfoEntity;
 import com.cn.great.model.common.Constant;
 import com.cn.great.model.common.ResponseEntity;
 import com.cn.great.model.user.AdminInfoEntity;
@@ -48,12 +47,17 @@ public class LoginController {
 
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
+		return "index";
+	}
+
+	/*@RequestMapping("/")
+	public String index(Model model, HttpServletRequest request) {
 		//查询所有的角色
 		List<RoleInfoEntity> roles = userService.fetchAllRoles();
 		model.addAttribute("roles", roles);
 		request.getSession().setAttribute(Constant.ROLES_SESSION, roles);
 		return "user/userinfo";
-	}
+	}*/
 
 
 	@RequestMapping("/goLogin")

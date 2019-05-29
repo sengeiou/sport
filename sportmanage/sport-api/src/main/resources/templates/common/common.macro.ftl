@@ -291,7 +291,7 @@
         <section class="sidebar">
             <div class="panel-group table-responsive" role="tablist">
                 <input type="hidden" name="authOwenUrls" id="authOwenUrls" value="${authOwenUrls}">
-                <#--<div class="panel panel-primary leftMenu">
+                <div class="panel panel-primary leftMenu">
                     <div class="panel-heading" id="collapseListGroupHeading1" data-toggle="collapse" data-target="#collapseListGroup1" role="tab" >
                         <h4 class="panel-title">
                             <i class="fa fa-area-chart"></i>
@@ -301,7 +301,9 @@
                     </div>
                     <div id="collapseListGroup1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading1">
                         <ul class="list-group">
-                            <li class="list-group-item <#if pageName == "report">active</#if>">
+                            <li class="list-group-item <#if pageName == "indexPage">active</#if>">
+                                <a href="${request.contextPath}/report/indexPage"><span>${I18n.menu_data_report}</span></a></li>
+                            <#--<li class="list-group-item <#if pageName == "report">active</#if>">
                                 <a href="${request.contextPath}/user/userPage"><span>${I18n.SPORT_REPORT_QUERY}</span></a></li>
                             <li class="list-group-item <#if pageName == "jobgroup">active</#if>">
                                 <a href="${request.contextPath}/user/userPage"><span>${I18n.SPORT_REPORT_SUMMARY}</span></a></li>
@@ -316,10 +318,10 @@
                             <li class="list-group-item <#if pageName == "joblog">active</#if>">
                                 <a href="${request.contextPath}/user/userPage"><span>${I18n.MG_REPORT_QUERY}</span></a></li>
                             <li class="list-group-item <#if pageName == "jobgroup">active</#if>">
-                                <a href="${request.contextPath}/user/userPage"><span>${I18n.MG_REPORT_SUMMARY}</span></a></li>
+                                <a href="${request.contextPath}/user/userPage"><span>${I18n.MG_REPORT_SUMMARY}</span></a></li>-->
                         </ul>
                     </div>
-                </div>-->
+                </div>
                 <div class="panel panel-primary leftMenu">
                     <div class="panel-heading" id="collapseListGroupHeading2" data-toggle="collapse"
                          data-target="#collapseListGroup2" role="tab">

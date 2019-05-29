@@ -13,195 +13,241 @@ $(function () {
     rangesConf[I18n.daterangepicker_ranges_recent_month] = [moment().subtract(1, 'months').startOf('day'), moment().endOf('day')];
 
     $('#filterTime').daterangepicker({
-        autoApply:false,
-        singleDatePicker:false,
-        showDropdowns:false,        // 是否显示年月选择条件
-        timePicker: true, 			// 是否显示小时和分钟选择条件
-        timePickerIncrement: 10, 	// 时间的增量，单位为分钟
-        timePicker24Hour : true,
-        opens : 'left', //日期选择框的弹出位置
+        autoApply: false,
+        singleDatePicker: false,
+        showDropdowns: false,
+        timePicker: true,
+        timePickerIncrement: 10,
+        timePicker24Hour: true,
+        alwaysShowCalendars: true,
+        opens: 'left',
         ranges: rangesConf,
-        locale : {
+        locale: {
             format: 'YYYY-MM-DD HH:mm:ss',
-            separator : ' - ',
-            customRangeLabel : I18n.daterangepicker_custom_name ,
-            applyLabel : I18n.system_ok ,
-            cancelLabel : I18n.system_cancel ,
-            fromLabel : I18n.daterangepicker_custom_starttime ,
-            toLabel : I18n.daterangepicker_custom_endtime ,
-            daysOfWeek : I18n.daterangepicker_custom_daysofweek.split(',') ,        // '日', '一', '二', '三', '四', '五', '六'
-            monthNames : I18n.daterangepicker_custom_monthnames.split(',') ,        // '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
-            firstDay : 1
+            separator: ' - ',
+            customRangeLabel: I18n.daterangepicker_custom_name,
+            applyLabel: I18n.system_ok,
+            cancelLabel: I18n.system_cancel,
+            fromLabel: I18n.daterangepicker_custom_starttime,
+            toLabel: I18n.daterangepicker_custom_endtime,
+            daysOfWeek: I18n.daterangepicker_custom_daysofweek.split(','),        // '日', '一', '二', '三', '四', '五', '六'
+            monthNames: I18n.daterangepicker_custom_monthnames.split(','),        // '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
+            firstDay: 1
         },
-        startDate: rangesConf[I18n.daterangepicker_ranges_recent_week][0] ,
+        startDate: rangesConf[I18n.daterangepicker_ranges_recent_week][0],
         endDate: rangesConf[I18n.daterangepicker_ranges_recent_week][1]
     }, function (start, end, label) {
         freshChartDate(start, end);
     });
     freshChartDate(rangesConf[I18n.daterangepicker_ranges_recent_week][0], rangesConf[I18n.daterangepicker_ranges_recent_week][1]);
 
-    /**
-     * fresh Chart Date
-     *
-     * @param startDate
-     * @param endDate
-     */
     function freshChartDate(startDate, endDate) {
-        $.ajax({
-            type : 'POST',
-            url : base_url + '/chartInfo',
-            data : {
-                'startDate':startDate.format('YYYY-MM-DD HH:mm:ss'),
-                'endDate':endDate.format('YYYY-MM-DD HH:mm:ss')
-            },
-            dataType : "json",
-            success : function(data){
-                if (data.code == 200) {
-                    lineChartInit(data)
-                    pieChartInit(data);
-                } else {
-                    layer.open({
-                        title: I18n.system_tips ,
-                        btn: [ I18n.system_ok ],
-                        content: (data.msg || I18n.job_dashboard_report_loaddata_fail ),
-                        icon: '2'
-                    });
-                }
-            }
-        });
-    }
-
-    /**
-     * line Chart Init
-     */
-    function lineChartInit(data) {
-        var option = {
-               title: {
-                   text: I18n.job_dashboard_date_report
-               },
-               tooltip : {
-                   trigger: 'axis',
-                   axisPointer: {
-                       type: 'cross',
-                       label: {
-                           backgroundColor: '#6a7985'
-                       }
-                   }
-               },
-               legend: {
-                   data:[I18n.joblog_status_suc, I18n.joblog_status_fail, I18n.joblog_status_running]
-               },
-               toolbox: {
-                   feature: {
-                       /*saveAsImage: {}*/
-                   }
-               },
-               grid: {
-                   left: '3%',
-                   right: '4%',
-                   bottom: '3%',
-                   containLabel: true
-               },
-               xAxis : [
-                   {
-                       type : 'category',
-                       boundaryGap : false,
-                       data : data.content.triggerDayList
-                   }
-               ],
-               yAxis : [
-                   {
-                       type : 'value'
-                   }
-               ],
-               series : [
-                   {
-                       name:I18n.joblog_status_suc,
-                       type:'line',
-                       stack: 'Total',
-                       areaStyle: {normal: {}},
-                       data: data.content.triggerDayCountSucList
-                   },
-                   {
-                       name:I18n.joblog_status_fail,
-                       type:'line',
-                       stack: 'Total',
-                       label: {
-                           normal: {
-                               show: true,
-                               position: 'top'
-                           }
-                       },
-                       areaStyle: {normal: {}},
-                       data: data.content.triggerDayCountFailList
-                   },
-                   {
-                       name:I18n.joblog_status_running,
-                       type:'line',
-                       stack: 'Total',
-                       areaStyle: {normal: {}},
-                       data: data.content.triggerDayCountRunningList
-                   }
-               ],
-                color:['#00A65A', '#c23632', '#F39C12']
+        var param = {
+            'beginTime': startDate.format('YYYY-MM-DD HH:mm:ss'),
+            'endTime': endDate.format('YYYY-MM-DD HH:mm:ss')
         };
-
-        var lineChart = echarts.init(document.getElementById('lineChart'));
-        lineChart.setOption(option);
+        $.post(base_url + "/report/initChart", JSON.stringify(param), function (data, status) {
+            if (data.result === 0) {
+                freshPlatformChart(data);
+                freshCustomerCharts(data);
+                freshMoneyCharts(data);
+            } else {
+                layer.open({
+                    title: I18n.system_tips,
+                    btn: [I18n.system_ok],
+                    content: (data.error_msg || I18n.report_loaddata_fail),
+                    icon: '2'
+                });
+            }
+        })
     }
 
-    /**
-     * pie Chart Init
-     */
-    function pieChartInit(data) {
+    function freshPlatformChart(data) {
         var option = {
-            title : {
-                text: I18n.job_dashboard_rate_report ,
-                /*subtext: 'subtext',*/
-                x:'center'
-            },
-            tooltip : {
-                trigger: 'item',
-                formatter: "{b} : {c} ({d}%)"
+            color: ['#7B0687', '#F1ED76'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
             },
             legend: {
-                orient: 'vertical',
-                left: 'left',
-                data: [I18n.joblog_status_suc, I18n.joblog_status_fail, I18n.joblog_status_running ]
+                data: ['打码量', '平台亏盈']
             },
-            series : [
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                left: 'right',
+                top: 'center',
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            calculable: true,
+            xAxis: [
                 {
-                    //name: '分布比例',
-                    type: 'pie',
-                    radius : '55%',
-                    center: ['50%', '60%'],
-                    data:[
-                        {
-                            name:I18n.joblog_status_suc,
-                            value:data.content.triggerCountSucTotal
-                        },
-                        {
-                            name:I18n.joblog_status_fail,
-                            value:data.content.triggerCountFailTotal
-                        },
-                        {
-                            name:I18n.joblog_status_running,
-                            value:data.content.triggerCountRunningTotal
-                        }
-                    ],
-                    itemStyle: {
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
+                    type: 'category',
+                    axisTick: {show: false},
+                    data: ['2012', '2013', '2014', '2015', '2016']
                 }
             ],
-            color:['#00A65A', '#c23632', '#F39C12']
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '打码量',
+                    type: 'bar',
+                    barGap: 0,
+                    data: [320, 332, 301, 334, 390]
+                },
+                {
+                    name: '平台亏盈',
+                    type: 'bar',
+                    data: [220, 182, 191, 234, 290]
+                }
+            ]
         };
-        var pieChart = echarts.init(document.getElementById('pieChart'));
-        pieChart.setOption(option);
+        var clumnChart = echarts.init(document.getElementById('columnChart'));
+        clumnChart.setOption(option);
     }
+
+    function freshCustomerCharts(data) {
+        var cusOption = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            legend: {
+                data: ['注册会员', '有效会员', '存款会员', '取款会员', '登录会员']
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '注册会员',
+                    type: 'line',
+                    stack: '总量',
+                    areaStyle: {},
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name: '有效会员',
+                    type: 'line',
+                    stack: '总量',
+                    areaStyle: {},
+                    data: [220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name: '存款会员',
+                    type: 'line',
+                    stack: '总量',
+                    areaStyle: {},
+                    data: [150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                    name: '取款会员',
+                    type: 'line',
+                    stack: '总量',
+                    areaStyle: {normal: {}},
+                    data: [320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name: '登录会员',
+                    type: 'line',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    areaStyle: {normal: {}},
+                    data: [820, 932, 901, 934, 1290, 1330, 1320]
+                }
+            ]
+        };
+        var cusChart = echarts.init(document.getElementById('cusChart'));
+        cusChart.setOption(cusOption);
+    }
+
+    function freshMoneyCharts(data) {
+        var moneyOption = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['出款金额', '入款金额']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '出款金额',
+                    type: 'line',
+                    stack: '总量',
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name: '入款金额',
+                    type: 'line',
+                    stack: '总量',
+                    data: [220, 182, 191, 234, 290, 330, 310]
+                }
+            ]
+        };
+        var moneyChart = echarts.init(document.getElementById('moneyChart'));
+        moneyChart.setOption(moneyOption);
+    }
+
 
 });
